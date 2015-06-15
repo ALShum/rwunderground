@@ -1,3 +1,5 @@
+#'
+#'
 get_api_key = function() {
   env = Sys.getenv('WUNDERGROUNDID')
   if(!identical(env, "")) return(env)
@@ -17,6 +19,8 @@ get_api_key = function() {
   return(key)
 }
 
+#'
+#'
 set_api_key = function(key) {
   if(identical(key, "")) {
     stop("Invalid key!", call. = FALSE)
@@ -26,6 +30,8 @@ set_api_key = function(key) {
   return(key)
 }
 
+#'
+#'
 has_api_key = function() {
   !identical(get_api_key, "")
 }
@@ -37,6 +43,8 @@ base_url = function() {
 }
 
 #http://api.wunderground.com/history
+#' add in better error handling
+#link = paste0(base_url(), "/history_20140101/", "q/", "VABB.json")
 get_request = function(link, date, location) {
   #http headers
   http_response = GET(link)
@@ -52,4 +60,23 @@ get_request = function(link, date, location) {
   
   #actual data
   weather = req_data[[3]]
+}
+
+#' parses history request
+#' 
+parse_history = function(JSON_req, UTC=TRUE) {
+  parse_entry = function(entry) {
+    if(UTC) date = entry[[2]]
+    else date = entry[[1]]
+    entry = entry[-c(1:2)]
+    
+    df = data.frame(entry)
+    df$date = date$pretty
+    
+    return(df)
+  }
+  
+  
+  lists = lapply(JSON_req, parse_entry)
+  do.call(rbind, lists)
 }
