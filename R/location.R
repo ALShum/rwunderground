@@ -1,8 +1,11 @@
 #https://raw.githubusercontent.com/jpatokal/openflights/master/data/airports.dat
 list_airports = function() {
-  airport_data = read.csv(system.file("data/airports.dat", package = "rwunderground"), header=F, stringAsFactors=F)
+  airport_data = read.csv(system.file("data/airports.dat", package = "rwunderground"), header=F)
   airport_data = airport_data[,c(2:6, 12)]
   names(airport_data) = c("airport_name", "city", "country", "IATA", "ICAO", "region")
+  airport_data[airport_data$ICAO == "\\N", ]$ICAO = NA
+  airport_data[airport_data$IATA == "", ]$IATA = NA
+  airport_data = airport_data %>% filter(!is.na(IATA) | !is.na(ICAO))
   
   return(airport_data)
 }
@@ -24,9 +27,11 @@ lookup_airport = function(location, region = NULL) {
     airports = airports[found_region, ]
   }
   
-  found = c(grep(location, airports$airport_name, ignore.case=TRUE),
+  found = unique(
+          c(grep(location, airports$airport_name, ignore.case=TRUE),
             grep(location, airports$city, ignore.case=TRUE),
             grep(location, airports$country, ignore.case=TRUE))
+          )
   
   return(airports[found, ])
 }
