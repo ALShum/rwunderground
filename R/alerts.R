@@ -1,3 +1,5 @@
+## TODO: what if multiple alerts?
+
 #' Weather Alerts for United States and Europe
 #'
 #' @param Location location object set by set_location
@@ -7,9 +9,16 @@
 #' @param message if TRUE print out requested URL
 #' @return A string containing alert type, message, start time and expiration.
 #' @export 
-alerts = function(location, key = get_api_key(), raw = FALSE, raw_JSON = FALSE, message = TRUE) {
+alerts = function(location, 
+                  key = get_api_key(), 
+                  raw = FALSE, 
+                  raw_JSON = FALSE, 
+                  message = TRUE) {
+  
   URL = build_url(key = key, request_type = "alerts", location = location)
   req = httr::GET(URL)
+  httr::stop_for_status(req)
+  
   parsed_req = httr::content(req, type = "application/json")
   
   if(message) {

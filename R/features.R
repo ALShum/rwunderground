@@ -1,15 +1,8 @@
-almanac = function(location, key = get_api_key(), raw = FALSE) {
-  URL = build_url(key = key, request_type = "almanac", location = location)
-  req = httr::GET(URL)
-  parsed_req = httr::content(req, type = "application/json")
-  if(raw) {
-    return(parsed_req)
-  }
-}
-
 astronomy = function(location, key = get_api_key(), raw = FALSE) {
   URL = build_url(key = key, request_type = "astronomy", location = location)
   req = httr::GET(URL)
+  httr::stop_for_status(req)
+  
   parsed_req = httr::content(req, type = "application/json")
   if(raw) {
     return(parsed_req)
