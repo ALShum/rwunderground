@@ -118,6 +118,7 @@ set_location = function(zip_code = NULL,
     return(paste0("autoip.json?geo_ip=", autoip))
   }
   else {
+    ##TODO
     return("autoip")
   }
 }

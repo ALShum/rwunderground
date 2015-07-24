@@ -9,6 +9,10 @@ build_url = function(key = get_api_key(), request_type, location) {
 }
 
 stop_for_error = function(httr_parsed_req) {
+  if(is.null(httr_parsed_req$response)) {
+    stop("Unknown error: Server failed to provide response status")
+  }
+  
   if(is.null(httr_parsed_req$response$error)) {
     return(invisible(TRUE))
   } else {
