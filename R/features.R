@@ -19,17 +19,6 @@ geolookup = function(location, key = get_api_key()) {
   
 }
 
-history = function(location, key = get_api_key()) {
-  URL = build_url(key = key, request_type = "history", location = location)
-  req = httr::GET(URL)
-  if(raw) {
-    return(parsed_req)
-  }
-  
-  parsed_req = httr::content(req, type = "application/json")
-  
-}
-
 hourly = function(location, key = get_api_key()) {
   URL = build_url(key = key, request_type = "hourly", location = location)
   req = httr::GET(URL)
