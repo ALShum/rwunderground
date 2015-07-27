@@ -60,11 +60,14 @@ lookup_pws = function(name, region = NULL) {
 is_valid_territory = function(name) {
   name = tolower(name)
   states = list_states()
+  countries = list_countries()
   
   if(name %in% tolower(states$abbr)) return(TRUE)
   if(name %in% tolower(states$name)) return(TRUE)
   if(name %in% tolower(states$country.name)) return(TRUE)
   if(name %in% tolower(states$iso2c)) return(TRUE)
+  if(name %in% tolower(countries$country.name)) return(TRUE)
+  if(name %in% tolower(countries$iso2c)) return(TRUE)
   
   return(FALSE)
 }

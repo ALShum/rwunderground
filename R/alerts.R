@@ -39,7 +39,7 @@ alerts = function(location,
   }
   
   zone = parsed_req$query_zone
-  alerts = parsed_req$alerts[[1]]
+  alerts = parsed_req$alerts
   if(is.null(zone) | is.null(alerts)) {
     stop("Unable to parse zone or alert information from JSON")
   }
@@ -48,30 +48,36 @@ alerts = function(location,
   
   #Europe
   if(zone == "999") {
-    if(is.null(alerts$wtype_meteoalarm_name) | 
-       is.null(alerts$level_meteoalarm_description) | 
-       is.null(alerts$date) |
-       is.null(alerts$expires)) {
-      warning("alerts:: unknown formatting for alerts JSON")
-    }
-    alert_status = paste0("Type: ", alerts$wtype_meteoalarm_name, "\n",
-                          alerts$level_meteoalarm_description, "\n",
-                          "Start: ", alerts$date, "\r\n",
-                          "Expires: ", alerts$expires)
+    alert_status = sapply(alerts, function(x){
+      if(is.null(x$wtype_meteoalarm_name) | 
+         is.null(x$level_meteoalarm_description) | 
+         is.null(x$date) |
+         is.null(x$expires)) {
+        warning("alerts:: unknown formatting for alerts JSON")
+      }
+      
+      paste0("Type: ", alerts$wtype_meteoalarm_name, "\n",
+             alerts$level_meteoalarm_description, "\n",
+             "Start: ", alerts$date, "\r\n",
+             "Expires: ", alerts$expires)
+    })
   } 
   
   #USA
   else {
-    if(is.null(alerts$description) | 
-       is.null(alerts$message) | 
-       is.null(alerts$date) |
-       is.null(alerts$expires)) {
-      warning("alerts:: unknown formatting for alerts JSON")
-    }
-    alert_status = paste0("Type: ", alerts$description, "\n",
-                          alerts$message, "\n",
-                          "Start: ", alerts$date, "\n",
-                          "Expires: ", alerts$expires)
+    alert_status = sapply(alerts, function(x){
+      if(is.null(x$description) | 
+         is.null(x$message) | 
+         is.null(x$date) |
+         is.null(x$expires)) {
+        warning("alerts:: unknown formatting for alerts JSON")
+      }
+      
+      paste0("Type: ", x$description, "\n",
+             x$message, "\n",
+             "Start: ", x$date, "\n",
+             "Expires: ", x$expires)
+    })
   }
   
   return(alert_status)

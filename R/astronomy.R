@@ -1,0 +1,33 @@
+astronomy = function(location,
+                     key = get_api_key(), 
+                     raw = FALSE,
+                     message = TRUE) {
+  
+  URL = build_url(key = key, request_type = "astronomy", location = location)
+  req = httr::GET(URL)
+  httr::stop_for_status(req)
+  
+  parsed_req = httr::content(req, type = "application/json")
+  
+  if(message) {
+    print(paste0("Requesting: ", URL))
+  }
+  if(raw) {
+    return(parsed_req)
+  }
+  stop_for_error(parsed_req)
+  
+  if(!(c("moon_phase", "sun_phase") %in% names(parsed_req))) {
+    stop(paste0("Unable to parse astronomy JSON for this location: ", location))
+  } 
+  
+  moon = parsed_req$moon_phase
+  sun = parsed_req$sun_phase
+  return(data.frame(location = location,
+                    moon_Phase = moon$phaseOfMoon,
+                    pct_visible = moon$percentIlluminated,
+                    moon_rise = paste(moon$sunrise$hour, moon$sunrise$minute, sep = ":"),
+                    moon_set = paste(moon$sunset$hour, moon$sunset$minute, sep = ":"),
+                    sun_rise = paste(sun$sunrise$hour, sun$sunrise$minute, sep = ":"),
+                    sun_set = paste(sun$sunset$hour, sun$sunset$minute, sep = ":")))
+}
