@@ -1,6 +1,9 @@
-forecast = function(location, 
-                    date_fmt = "pretty",  ## TODO
-                    metric,
+#next 3 days
+
+forecast3day = function(location, 
+                    date_fmt = "pretty",  ## TODO 
+                    col_names = "pretty", ## TODO: (orig names)
+                    metric = TRUE,
                     key = get_api_key(), 
                     raw = FALSE, 
                     message = TRUE) {
@@ -22,10 +25,39 @@ forecast = function(location,
   if(!("forecast" %in% names(parsed_req))) {
     stop(paste0("Unable to parse forecast JSON for this location: ", location))
   }
+  
+  if(metric) {
+    tempCol = "celsius"
+    amtCol = "mm"
+    amtCol2 = "cm"
+    spdCol = "kph"
+  } else {
+    tempCol = "fahrenheit"
+    amtCol = "in"
+    amtCol2 = "in"
+    spdCol = "mph"
+  }
+  
   fcast = parsed_req$forecast$simpleforecast$forecastday
-  df = lapply(fcast, function(x){
-    
+  df = lapply(fcast, function(x) {
+    list(date = x$date$pretty,
+        temp_high = as.numeric(x$high[[tempCol]]),
+        temp_low = as.numeric(x$low[[tempCol]]),
+        cond = x$conditions,  ## TODO: multiple conditions?
+        p_precip = x$pop,
+        rain_allday = x$qpf_allday[[amtCol]],
+        rain_day = x$qpf_day[[amtCol]],
+        rain_night = x$qpf_night[[amtCol]],
+        snow_allday = x$snow_allday[[amtCol2]],
+        snow_day = x$snow_day[[amtCol2]],
+        snow_night = x$snow_night[[amtCol2]],
+        max_wind = paste(x$maxwind[[spdCol]], x$maxwind$dir, sep = " "),
+        ave_wind = paste(x$avewind[[spdCol]], x$avewind$dir, sep = " "),
+        max_humid = x$maxhumidity,
+        min_humid = x$minhumidity,
+        ave_humidity = x$avehumidity
+    )
   })
   
-  return(df)
+  data.frame(do.call(rbind, df))
 } 
