@@ -17,14 +17,14 @@ astronomy = function(location,
   }
   stop_for_error(parsed_req)
   
-  if(!(c("moon_phase", "sun_phase") %in% names(parsed_req))) {
+  if(!all(c("moon_phase", "sun_phase") %in% names(parsed_req))) {
     stop(paste0("Unable to parse astronomy JSON for this location: ", location))
   } 
   
   moon = parsed_req$moon_phase
   sun = parsed_req$sun_phase
   return(data.frame(location = location,
-                    moon_Phase = moon$phaseOfMoon,
+                    moon_phase = moon$phaseofMoon,
                     pct_visible = moon$percentIlluminated,
                     moon_rise = paste(moon$sunrise$hour, moon$sunrise$minute, sep = ":"),
                     moon_set = paste(moon$sunset$hour, moon$sunset$minute, sep = ":"),

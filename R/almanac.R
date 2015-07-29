@@ -31,7 +31,7 @@ almanac = function(location,
   almanac = parsed_req$almanac
   
   #checks to make sure almanac is structured correctly
-  if(!all(c("airport_code, temp_high, temp_low") %in% names(almanac))) {
+  if(!all(c("airport_code", "temp_high", "temp_low") %in% names(almanac))) {
     stop(paste0("Invalid structure for alamanac for this location: "), location)
   }
   

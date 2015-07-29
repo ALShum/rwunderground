@@ -7,7 +7,7 @@ get_api_key = function() {
   if(!interactive()) {
     stop("Please set env var WUNDERGROUNDID to your weather underground API key", call. = FALSE)
   }
-  message("Please enter your weather undderground API key and press enter:")
+  message("Please enter your weather underground API key and press enter:")
   key = readline(": ")
   
   if(identical(key, "")) {

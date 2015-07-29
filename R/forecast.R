@@ -3,7 +3,7 @@
 forecast3day = function(location, 
                     date_fmt = "pretty",  ## TODO 
                     col_names = "pretty", ## TODO: (orig names)
-                    metric = TRUE,
+                    use_metric = TRUE,
                     key = get_api_key(), 
                     raw = FALSE, 
                     message = TRUE) {
@@ -26,7 +26,7 @@ forecast3day = function(location,
     stop(paste0("Unable to parse forecast JSON for this location: ", location))
   }
   
-  if(metric) {
+  if(use_metric) {
     tempCol = "celsius"
     amtCol = "mm"
     amtCol2 = "cm"
@@ -69,7 +69,7 @@ forecast3day = function(location,
 forecast10day = function(location, 
                          date_fmt = "pretty",  ## TODO 
                          col_names = "pretty", ## TODO: (orig names)
-                         metric = TRUE,
+                         use_metric = TRUE,
                          key = get_api_key(), 
                          raw = FALSE, 
                          message = TRUE) {
@@ -92,7 +92,7 @@ forecast10day = function(location,
     stop(paste0("Unable to parse forecast JSON for this location: ", location))
   }
   
-  if(metric) {
+  if(use_metric) {
     tempCol = "celsius"
     amtCol = "mm"
     amtCol2 = "cm"

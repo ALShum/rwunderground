@@ -1,3 +1,5 @@
+## TODO
+
 conditions = function(location, key = get_api_key(), raw = FALSE) {
   URL = build_url(key = key, request_type = "conditions", location = location)
   req = httr::GET(URL)

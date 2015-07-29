@@ -1,12 +1,13 @@
 history = function(location, 
+                   daily_summary = TRUE,
                    date_fmt = "pretty",  ## TODO 
                    col_names = "pretty", ## TODO: (orig names)
-                   metric = TRUE,
+                   use_metric = TRUE,
                    key = get_api_key(), 
                    raw = FALSE, 
                    message = TRUE) {
-  
-  URL = build_url(key = key, request_type = "forecast", location = location)
+  ##TODO:: SPECIFY DATE
+  URL = build_url(key = key, request_type = "history", location = location)
   req = httr::GET(URL)
   httr::stop_for_status(req)
   
@@ -20,5 +21,16 @@ history = function(location,
   }
   stop_for_error(parsed_req)
   
-  
+  ## TODO:: Check for errors
+  hist = parsed_req$history
+
+  if(daily_summary) {
+
+  } else {
+
+  }
+}
+
+parse_history = function(history_list) {
+
 }
