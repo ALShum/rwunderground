@@ -14,32 +14,11 @@ geolookup = function(location, key = get_api_key()) {
   if(raw) {
     return(parsed_req)
   }
-  
+
   parsed_req = httr::content(req, type = "application/json")
-  
+
 }
 
-hourly = function(location, key = get_api_key()) {
-  URL = build_url(key = key, request_type = "hourly", location = location)
-  req = httr::GET(URL)
-  if(raw) {
-    return(parsed_req)
-  }
-  
-  parsed_req = httr::content(req, type = "application/json")
-  
-}
-
-hourly10day = function(location, key = get_api_key()) {
-  URL = build_url(key = key, request_type = "hourly10day", location = location)
-  req = httr::GET(URL)
-  if(raw) {
-    return(parsed_req)
-  }
-  
-  parsed_req = httr::content(req, type = "application/json")
-  
-}
 
 planner = function(location, key = get_api_key()) {
   URL = build_url(key = key, request_type = "planner", location = location)
@@ -48,9 +27,9 @@ planner = function(location, key = get_api_key()) {
   if(raw) {
     return(parsed_req)
   }
-  
+
   parsed_req = httr::content(req, type = "application/json")
-  
+
 }
 
 rawtide = function(location, key = get_api_key()) {
@@ -59,9 +38,9 @@ rawtide = function(location, key = get_api_key()) {
   if(raw) {
     return(parsed_req)
   }
-  
+
   parsed_req = httr::content(req, type = "application/json")
-  
+
 }
 
 satellite = function(location, key = get_api_key()) {
@@ -70,9 +49,9 @@ satellite = function(location, key = get_api_key()) {
   if(raw) {
     return(parsed_req)
   }
-  
+
   parsed_req = httr::content(req, type = "application/json")
-  
+
 }
 
 tide = function(location, key = get_api_key()) {
@@ -81,9 +60,9 @@ tide = function(location, key = get_api_key()) {
   if(raw) {
     return(parsed_req)
   }
-  
+
   parsed_req = httr::content(req, type = "application/json")
-  
+
 }
 
 webcam = function(location, key = get_api_key()) {
@@ -92,9 +71,9 @@ webcam = function(location, key = get_api_key()) {
   if(raw) {
     return(parsed_req)
   }
-  
+
   parsed_req = httr::content(req, type = "application/json")
-  
+
 }
 
 yesterday = function(location, key = get_api_key()) {
@@ -103,7 +82,7 @@ yesterday = function(location, key = get_api_key()) {
   if(raw) {
     return(parsed_req)
   }
-  
+
   parsed_req = httr::content(req, type = "application/json")
-  
+
 }
