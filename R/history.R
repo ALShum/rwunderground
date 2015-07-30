@@ -1,4 +1,5 @@
 history = function(location, 
+                   date = "20150101",
                    daily_summary = TRUE,
                    date_fmt = "pretty",  ## TODO 
                    col_names = "pretty", ## TODO: (orig names)
@@ -6,8 +7,8 @@ history = function(location,
                    key = get_api_key(), 
                    raw = FALSE, 
                    message = TRUE) {
-  ##TODO:: SPECIFY DATE
-  URL = build_url(key = key, request_type = "history", location = location)
+
+  URL = build_url(key = key, request_type = "history", date = date, location = location)
   req = httr::GET(URL)
   httr::stop_for_status(req)
   

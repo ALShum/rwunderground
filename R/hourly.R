@@ -27,36 +27,75 @@ hourly = function(location,
     
   hourly_forecast = parsed_req$hourly_forecast
 
+  df = lapply(hourly_forecast, function(x) {
+    list(date = x$FCTTIME$pretty,
+         temp = as.numeric(x$temp[[units]]),
+         dew_pt = as.numeric(x$dewpoint[[units]]),
+         cond = x$condition,
+         wind_spd = as.numeric(x$wspd[[units]]),
+         wind_dir = x$wdir$dir,
+         uvi = as.numeric(x$uvi),
+         humidity = as.numeric(x$humidity),
+         windchill = as.numeric(x$windchill[[units]]),
+         heatindex = as.numeric(x$heatindex[[units]]),
+         feelslike = as.numeric(x$feelslike[[units]]),
+         rain = as.numeric(x$qpf[[units]]),
+         snow = as.numeric(x$snow[[units]]),
+         pop = as.numeric(x$pop),
+         mslp = as.numeric(x$mslp[[units]])
+         )
+  })
+
+  return(data.frame(do.call(rbind, df)))
+}
+
+hourly10day = function(location,
+                  date_fmt = "pretty",  ## TODO 
+                  use_metric = TRUE,
+                  key = get_api_key(),
+                  raw = FALSE,
+                  message = TRUE) {
+
+  URL = build_url(key = key, request_type = "hourly10day", location = location)
+  req = httr::GET(URL)
+  httr::stop_for_status(req)
+
+  parsed_req = httr::content(req, type = "application/json")
+
+  if(message) {
+    print(paste0("Requesting: ", URL))
+  }
+  if(raw) {
+    return(parsed_req)
+  }
+  stop_for_error(parsed_req)
+
+  if(use_metric) {
+    units = "metric"
+  } else {
+    units = "english"
+  }
+    
+  hourly_forecast = parsed_req$hourly_forecast
+
   df = lapply(hourly_forecast, function(x){
     list(date = x$FCTTIME$pretty,
          temp = as.numeric(x$temp[[units]]),
          dew_pt = as.numeric(x$dewpoint[[units]]),
          cond = x$condition,
-         wind_spd = x$wspd[[units]],
+         wind_spd = as.numeric(x$wspd[[units]]),
          wind_dir = x$wdir$dir,
-         uvi = x$uvi,
-         humidity = x$humidity,
-         windchill = x$windchill[[units]],
+         uvi = as.numeric(x$uvi),
+         humidity = as.numeric(x$humidity),
+         windchill = as.numeric(x$windchill[[units]]),
+         heatindex = as.numeric(x$heatindex[[units]]),
+         feelslike = as.numeric(x$feelslike[[units]]),
+         rain = as.numeric(x$qpf[[units]]),
+         snow = as.numeric(x$snow[[units]]),
+         pop = as.numeric(x$pop),
+         mslp = as.numeric(x$mslp[[units]])
          )
-    
   })
-}
 
-
-
-
-
-
-
-
-
-hourly10day = function(location, key = get_api_key()) {
-  URL = build_url(key = key, request_type = "hourly10day", location = location)
-  req = httr::GET(URL)
-  if(raw) {
-    return(parsed_req)
-  }
-
-  parsed_req = httr::content(req, type = "application/json")
-
+  return(data.frame(do.call(rbind, df)))
 }
