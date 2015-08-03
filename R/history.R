@@ -114,7 +114,7 @@ history_daily = function(location,
   		 max_humid = as.numeric(x$maxhumidity),
   		 min_humid = as.numeric(x$minhumidity),
   		 max_dew_pt = as.numeric(x[[paste0("maxdewpt", suffix)]]),
-  		 min_dew_pt = as.numeric(x[[paste0("mindewpt", suffix)]],
+  		 min_dew_pt = as.numeric(x[[paste0("mindewpt", suffix)]]),
   		 max_pressure = as.numeric(x[[paste0("maxpressure", suffix)]]),
   		 min_pressure = as.numeric(x[[paste0("minpressure", suffix)]]),
   		 max_wind_spd = as.numeric(x[[paste0("maxwspd", suffix)]]),
@@ -134,12 +134,12 @@ history_daily = function(location,
   		 since_jul_heating = as.numeric(x$since1julheatingdegreedays),
   		 since_jul_heating_normal = as.numeric(x$since1julheatingdegreedaysnormal),
   		 cooling_degree_normal = as.numeric(x$coolingdegreedaysnormal),
-  		 mtd_cooling_day,
-  		 mtd_cooling_day_normal,
-  		 since_sep_cooling,
-  		 since_sep_cooling_normal,
-  		 since_jan_cooling,
-  		 since_jan_cooling_normal
+  		 mtd_cooling_day = as.numeric(x$monthtodatecoolingdegreedays),
+  		 mtd_cooling_day_normal = as.numeric(x$monthtodatecoolingdegreedaysnormal),
+  		 since_sep_cooling = as.numeric(x$since1sepcoolingdegreedays),
+  		 since_sep_cooling_normal = as.numeric(x$since1sepcoolingdegreedaysnormal),
+  		 since_jan_cooling = as.numeric(x$since1jancoolingdegreedays),
+  		 since_jan_cooling_normal = as.numeric(x$since1jancoolingdegreedaysnormal)
   		)
   })
 
