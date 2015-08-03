@@ -8,32 +8,9 @@ current_hurricane = function(location, key = get_api_key(), raw = FALSE) {
   }
 }
 
-geolookup = function(location, key = get_api_key()) {
-  URL = build_url(key = key, request_type = "geolookup", location = location)
-  req = httr::GET(URL)
-  if(raw) {
-    return(parsed_req)
-  }
-
-  parsed_req = httr::content(req, type = "application/json")
-
-}
-
-
 planner = function(location, key = get_api_key()) {
   URL = build_url(key = key, request_type = "planner", location = location)
   ##TODO
-  req = httr::GET(URL)
-  if(raw) {
-    return(parsed_req)
-  }
-
-  parsed_req = httr::content(req, type = "application/json")
-
-}
-
-rawtide = function(location, key = get_api_key()) {
-  URL = build_url(key = key, request_type = "rawtide", location = location)
   req = httr::GET(URL)
   if(raw) {
     return(parsed_req)
@@ -54,17 +31,6 @@ satellite = function(location, key = get_api_key()) {
 
 }
 
-tide = function(location, key = get_api_key()) {
-  URL = build_url(key = key, request_type = "tide", location = location)
-  req = httr::GET(URL)
-  if(raw) {
-    return(parsed_req)
-  }
-
-  parsed_req = httr::content(req, type = "application/json")
-
-}
-
 webcam = function(location, key = get_api_key()) {
   URL = build_url(key = key, request_type = "webcam", location = location)
   req = httr::GET(URL)
@@ -73,7 +39,5 @@ webcam = function(location, key = get_api_key()) {
   }
 
   parsed_req = httr::content(req, type = "application/json")
-
-
 
 }
