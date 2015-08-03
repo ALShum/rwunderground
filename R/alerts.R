@@ -1,5 +1,3 @@
-## TODO: what if multiple alerts?
-
 #' Weather Alerts for United States and Europe
 #'
 #' @param Location location object set by set_location
@@ -43,7 +41,7 @@ alerts = function(location,
   
   #Europe
   if(zone == "999") {
-    alert_status = sapply(alerts, function(x){
+    alert_status = sapply(alerts, function(x) {
       if(is.null(x$wtype_meteoalarm_name) | 
          is.null(x$level_meteoalarm_description) | 
          is.null(x$date) |
@@ -60,7 +58,7 @@ alerts = function(location,
   
   #USA
   else {
-    alert_status = sapply(alerts, function(x){
+    alert_status = sapply(alerts, function(x) {
       if(is.null(x$description) | 
          is.null(x$message) | 
          is.null(x$date) |
