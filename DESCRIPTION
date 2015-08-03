@@ -1,9 +1,15 @@
 Package: rwunderground
 Type: Package
-Title: What the package does (short line)
-Version: 1.0
-Date: 2015-06-12
-Author: Who wrote it
-Maintainer: Who to complain to <yourfault@somewhere.net>
-Description: More about what it does (maybe more than one line)
-License: What license is it under?
+Title: R interface to weather underground API
+Version: 0.0.1
+Date: 2015-08-01
+Author: Alex Shum <alex@ALShum.com>
+Maintainer: Alex Shum <alex@ALShum.com>
+Description: Tools for getting historical weather information and forecasts from weather underground API.
+License: GPL (>= 2)
+Imports:
+  httr
+  jsonlite
+Suggests:
+  dplyr
+
