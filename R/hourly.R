@@ -1,3 +1,16 @@
+#' Hourly forecast for the next 24 hours.
+#' 
+#' @param location location set by set_location
+#' @param date_fmt date format to return
+#' @param use_metric Metric or imperial units
+#' @param key weather underground API key
+#' @param raw if TRUE return raw httr object
+#' @param message if TRUE print out requested URL
+#' @return data.frame with date, temperature, dew point,
+#'         condition, wind speed and direction, UV index,
+#'         humidity, windchill, heat index, real feel,
+#'         rain, snow, pop, mslp
+#' @export 
 hourly = function(location,
                   date_fmt = "pretty",  ## TODO 
                   use_metric = TRUE,
@@ -39,6 +52,19 @@ hourly = function(location,
   return(data.frame(do.call(rbind, df)))
 }
 
+#' Hourly forecast for the next 10 days.
+#' 
+#' @param location location set by set_location
+#' @param date_fmt date format to return
+#' @param use_metric Metric or imperial units
+#' @param key weather underground API key
+#' @param raw if TRUE return raw httr object
+#' @param message if TRUE print out requested URL
+#' @return data.frame with date, temperature, dew point,
+#'         condition, wind speed and direction, UV index,
+#'         humidity, windchill, heat index, real feel,
+#'         rain, snow, pop, mslp
+#' @export 
 hourly10day = function(location,
                   date_fmt = "pretty",  ## TODO 
                   use_metric = TRUE,

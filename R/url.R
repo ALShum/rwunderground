@@ -1,7 +1,18 @@
+#' Base URL for wunderground API
+#'
+#' @return base wunderground URL
+#' @export 
 base_url = function() {
   return("http://api.wunderground.com/api")
 }
 
+#' Build wunderground request URL
+#'
+#' @param key wunderground API key 
+#' @param request_type request type TODO::list all request_types
+#' @param date Date, only applicable for history requests 
+#' @param location location set by set_location 
+#' @export 
 build_url = function(key = get_api_key(), 
                      request_type, 
                      date, 
@@ -20,6 +31,9 @@ build_url = function(key = get_api_key(),
   return(URL)
 }
 
+#' Detect and stop for any wunderground request errors 
+#' 
+#' @param httr_parsed_req httr request object 
 stop_for_error = function(httr_parsed_req) {
   if(is.null(httr_parsed_req$response)) {
     stop("Unknown error: Server failed to provide response status")
@@ -34,6 +48,15 @@ stop_for_error = function(httr_parsed_req) {
   }
 }
 
+#' wunderground requests
+#'
+#' @param request_type Request type TODO::list all types 
+#' @param location locations set of set_location
+#' @param date Date, only applicable for history requests
+#' @param key wunderground API key
+#' @param message if TRUE print out requested URL
+#' @return httr request object 
+#' @export
 wunderground_request = function(request_type,
                                 location, 
                                 date = NULL,

@@ -1,3 +1,18 @@
+#' Weather data for yesterday
+#' 
+#' @param location location set by set_location
+#' @param date_fmt date format to return
+#' @param use_metric Metric or imperial units
+#' @param key weather underground API key
+#' @param raw if TRUE return raw httr object
+#' @param message if TRUE print out requested URL
+#' @param summary If TRUE return daily summary otherwise hourly data
+#' @return data.frame with date, temperature, dew point,
+#'         humidity, wind speed, gust and direction, 
+#'         visibility, pressure, wind chill, heat index,
+#'         precipitation, condition, fog, rain, snow,
+#'         hail, thunder, tornado
+#' @export 
 yesterday = function(location, 
                    	 use_metric = TRUE, 
                      key = get_api_key(), 

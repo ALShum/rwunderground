@@ -1,3 +1,15 @@
+#' Average and record high and low temperatures for current date going back
+#' as far as weather underground has data or from the national weather service
+#' going back 30 years.
+#' 
+#' @param location location set by set_location
+#' @param use_metric Metric or imperial units
+#' @param key weather underground API key
+#' @param raw if TRUE return raw httr object
+#' @param message if TRUE print out requested URL
+#' @return Data frame with columns: location, airport, 
+#'         avg_high, record high, avg_low, record low.
+#' @export 
 almanac = function(location, 
                    use_metric = TRUE, 
                    key = get_api_key(), 

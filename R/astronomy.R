@@ -1,3 +1,12 @@
+#' Moon phase, sunrise and sunset times for today.
+#' 
+#' @param location location set by set_location
+#' @param key weather underground API key
+#' @param raw if TRUE return raw httr object
+#' @param message if TRUE print out requested URL
+#' @return data.frame with: location, moon phase, percent visible,
+#'         moon rise and set times, sun rise and set times.
+#' @export 
 astronomy = function(location,
                      key = get_api_key(), 
                      raw = FALSE,

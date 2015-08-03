@@ -1,6 +1,6 @@
 #' Weather Alerts for United States and Europe
 #'
-#' @param Location location object set by set_location
+#' @param location location set by set_location
 #' @param key weather underground API key
 #' @param raw if TRUE return raw httr object
 #' @param raw_JSON if TRUE return entire alert as JSON

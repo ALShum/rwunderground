@@ -1,8 +1,17 @@
-#next 3 days
-
+#' Forecast for the next 3 days.
+#' 
+#' @param location location set by set_location
+#' @param date_fmt date format to return
+#' @param use_metric Metric or imperial units
+#' @param key weather underground API key
+#' @param raw if TRUE return raw httr object
+#' @param message if TRUE print out requested URL
+#' @return data.frame with date, high and low temp,
+#'         conditions, precipitation, rain, snow,
+#'         max and avg wind speed, max/min and avg humidity
+#' @export 
 forecast3day = function(location, 
                     date_fmt = "pretty",  ## TODO 
-                    col_names = "pretty", ## TODO: (orig names)
                     use_metric = TRUE,
                     key = get_api_key(), 
                     raw = FALSE, 
@@ -57,10 +66,18 @@ forecast3day = function(location,
   data.frame(do.call(rbind, df))
 } 
 
-
-
-
-
+#' Forecast for the next 10 days.
+#' 
+#' @param location location set by set_location
+#' @param date_fmt date format to return
+#' @param use_metric Metric or imperial units
+#' @param key weather underground API key
+#' @param raw if TRUE return raw httr object
+#' @param message if TRUE print out requested URL
+#' @return data.frame with date, high and low temp,
+#'         conditions, precipitation, rain, snow,
+#'         max and avg wind speed, max/min and avg humidity
+#' @export 
 forecast10day = function(location, 
                          date_fmt = "pretty",  ## TODO 
                          col_names = "pretty", ## TODO: (orig names)

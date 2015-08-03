@@ -93,14 +93,14 @@ is_valid_zip_code = function(code) {
 #' This is a wrapper function that will validate and format location strings
 #' for requesting data from weather underground.
 #' 
-#' @param 
-#' @param
-#' @param 
-#' @param 
-#' @param 
-#' @param 
-#' @param 
-#' @return 
+#' @param zip_code 
+#' @param territory 
+#' @param city 
+#' @param airport_code
+#' @param PWS_id
+#' @param lat_long
+#' @param autoip
+#' @return formatted and validated location string
 #' @export
 set_location = function(zip_code = NULL,  
                         territory = NULL, city = NULL,

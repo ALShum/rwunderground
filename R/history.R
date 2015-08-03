@@ -1,6 +1,21 @@
+#' Hourly weather data for specified date. 
+#' 
+#' @param location location set by set_location
+#' @param date Date as YYYYMMDD format
+#' @param date_fmt date format to return
+#' @param col_names date format to return
+#' @param use_metric Metric or imperial units
+#' @param key weather underground API key
+#' @param raw if TRUE return raw httr object
+#' @param message if TRUE print out requested URL
+#' @return data.frame with date, temperature, dew point,
+#'         humidity, wind speed, gust and direction, 
+#'         visibility, pressure, wind chill, heat index,
+#'         precipitation, condition, fog, rain, snow,
+#'         hail, thunder, tornado
+#' @export 
 history = function(location, 
                    date = "20150101",
-                   daily_summary = TRUE,
                    date_fmt = "pretty",  ## TODO 
                    col_names = "pretty", ## TODO: (orig names)
                    use_metric = TRUE,
@@ -48,9 +63,20 @@ history = function(location,
   return(data.frame(do.call(rbind, df)))
 }
 
+#' Summarized weather data for specified date. 
+#' 
+#' @param location location set by set_location
+#' @param date Date as YYYYMMDD format
+#' @param date_fmt date format to return
+#' @param col_names date format to return
+#' @param use_metric Metric or imperial units
+#' @param key weather underground API key
+#' @param raw if TRUE return raw httr object
+#' @param message if TRUE print out requested URL
+#' @return data.frame 
+#' @export 
 history_daily = function(location, 
                    date = "20150101",
-                   daily_summary = TRUE,
                    date_fmt = "pretty",  ## TODO 
                    col_names = "pretty", ## TODO: (orig names)
                    use_metric = TRUE,
