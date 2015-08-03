@@ -4,20 +4,15 @@ almanac = function(location,
                    raw = FALSE, 
                    message = TRUE) {
   
-  URL = build_url(key = key, request_type = "almanac", location = location)
-  req = httr::GET(URL)
-  httr::stop_for_status(req)
-  
-  parsed_req = httr::content(req, type = "application/json")
-  
-  if(message) {
-    print(paste0("Requesting: ", URL))
-  }
+  parsed_req = wunderground_request(request_type = "almanac",
+                                    location = location, 
+                                    key = key,
+                                    message = message)
   if(raw) {
     return(parsed_req)
   }
   stop_for_error(parsed_req)
-  
+
   #null almanac
   if(is.null(parsed_req$almanac)) {
     stop(paste0("Unable to parse almanac information from JSON: ", location))
@@ -36,12 +31,8 @@ almanac = function(location,
   }
   
   #Celsius or F
-  if(use_metric) {
-    tempCol = "C"
-  } else {
-    tempCol = "F"
-  }
-  
+  tempCol = ifelse(use_metric, "C", "F")
+
   return(data.frame(location = location, 
                     airport = almanac$airport_code,
                     avg_high = almanac$temp_high$normal[[tempCol]],

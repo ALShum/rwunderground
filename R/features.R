@@ -74,15 +74,6 @@ webcam = function(location, key = get_api_key()) {
 
   parsed_req = httr::content(req, type = "application/json")
 
-}
 
-yesterday = function(location, key = get_api_key()) {
-  URL = build_url(key = key, request_type = "yesterday", location = location)
-  req = httr::GET(URL)
-  if(raw) {
-    return(parsed_req)
-  }
-
-  parsed_req = httr::content(req, type = "application/json")
 
 }
