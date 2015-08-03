@@ -72,6 +72,11 @@ is_valid_territory = function(name) {
   return(FALSE)
 }
 
+#' Checks if airport code is valid 
+#' 
+#' @param name Airport code either IATA or ICAO
+#' @return TRUE if valid otherwise FALSE
+#' @export
 is_valid_airport = function(name) {
   name = tolower(name)
   airports = list_airports()
@@ -139,6 +144,3 @@ set_location = function(zip_code = NULL,
     return("autoip")
   }
 }
-
-
-
