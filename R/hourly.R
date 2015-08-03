@@ -5,28 +5,18 @@ hourly = function(location,
                   raw = FALSE,
                   message = TRUE) {
 
-  URL = build_url(key = key, request_type = "hourly", location = location)
-  req = httr::GET(URL)
-  httr::stop_for_status(req)
-
-  parsed_req = httr::content(req, type = "application/json")
-
-  if(message) {
-    print(paste0("Requesting: ", URL))
-  }
+  parsed_req = wunderground_request(request_type = "hourly",
+                                    location = location, 
+                                    key = key,
+                                    message = message)
   if(raw) {
     return(parsed_req)
   }
   stop_for_error(parsed_req)
 
-  if(use_metric) {
-    units = "metric"
-  } else {
-    units = "english"
-  }
-    
   hourly_forecast = parsed_req$hourly_forecast
 
+  units = ifelse(use_metric, "metric", "english")    
   df = lapply(hourly_forecast, function(x) {
     list(date = x$FCTTIME$pretty,
          temp = as.numeric(x$temp[[units]]),
@@ -56,28 +46,18 @@ hourly10day = function(location,
                   raw = FALSE,
                   message = TRUE) {
 
-  URL = build_url(key = key, request_type = "hourly10day", location = location)
-  req = httr::GET(URL)
-  httr::stop_for_status(req)
-
-  parsed_req = httr::content(req, type = "application/json")
-
-  if(message) {
-    print(paste0("Requesting: ", URL))
-  }
+  parsed_req = wunderground_request(request_type = "hourly10day",
+                                    location = location, 
+                                    key = key,
+                                    message = message)
   if(raw) {
     return(parsed_req)
   }
   stop_for_error(parsed_req)
-
-  if(use_metric) {
-    units = "metric"
-  } else {
-    units = "english"
-  }
     
   hourly_forecast = parsed_req$hourly_forecast
 
+  units = ifelse(use_metric, "metric", "english")    
   df = lapply(hourly_forecast, function(x){
     list(date = x$FCTTIME$pretty,
          temp = as.numeric(x$temp[[units]]),
