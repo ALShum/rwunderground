@@ -2,7 +2,7 @@
 % Please edit documentation in R/url.R
 \name{wunderground_request}
 \alias{wunderground_request}
-\title{wunderground requests}
+\title{wunderground api requests}
 \usage{
 wunderground_request(request_type, location, date = NULL,
   key = get_api_key(), message = TRUE)
@@ -22,6 +22,6 @@ wunderground_request(request_type, location, date = NULL,
 httr request object
 }
 \description{
-wunderground requests
+wunderground api requests
 }
 

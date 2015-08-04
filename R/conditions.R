@@ -13,6 +13,6 @@ conditions = function(location,
   }
   stop_for_error(parsed_req)
 
-
-  cond = parsed_req
+  cond = parsed_req$current_observation
+  
 }

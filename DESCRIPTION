@@ -7,9 +7,4 @@ Author: Alex Shum <alex@ALShum.com>
 Maintainer: Alex Shum <alex@ALShum.com>
 Description: Tools for getting historical weather information and forecasts from weather underground API.
 License: GPL (>= 2)
-Imports:
-  httr
-  jsonlite
-Suggests:
-  dplyr
-
+Suggests: testthat

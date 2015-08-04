@@ -1,5 +1,13 @@
+#' Tidal information for a location within the USA.
+#' Tidal information only available for US cities.  Units are in feet.
+#'
+#' @param location location set by set_location
+#' @param key weather underground API key
+#' @param raw if TRUE return raw httr object
+#' @param message if TRUE print out requested URL
+#' @return data.frame with date, height and type
+#' @export
 tide = function(location, 
-                use_metric = TRUE, 
                 key = get_api_key(), 
                 raw = FALSE, 
                 message = TRUE) {
@@ -13,15 +21,44 @@ tide = function(location,
   }
   stop_for_error(parsed_req)
 
+  ##TODO:: check for structure
   tide = parsed_req$tide
-  
+
+  tide_info = tide$tideInfo[[1]]
+  if(all(tide_info == "")) stop(paste0("Tide info not available for: ", location))
+  if(length(tide$tideSummary) == 0) stop(paste0("Tide info not available for: ", location))
+  if(message) {
+    print(paste0(tide_info$tideSite, ": ", tide_info$lat, "/", tide_info$lon))  
+  }
+
+  ## TODO:: summary stats unused (min/max tide for day)
+  tide_summary_stats = tide$tideSummaryStats
+  tide_summary = tide$tideSummary
+
+  df = lapply(tide_summary, function(x) {
+    list(
+      date = x$date$pretty, ##TODO date_fmt
+      height = as.numeric(x$data$height),
+      type = x$data$type
+    )
+  })
+
+  data.frame(do.call(rbind, df))
 }
 
+#' Raw Tidal data with data every 5 minutes for US locations 
+#' Tidal information only available for US cities.  Units are in feet.
+#'
+#' @param location location set by set_location
+#' @param key weather underground API key
+#' @param raw if TRUE return raw httr object
+#' @param message if TRUE print out requested URL
+#' @return data.frame with time (epoch) and height
+#' @export
 rawtide = function(location, 
-                use_metric = TRUE, 
-                key = get_api_key(), 
-                raw = FALSE, 
-                message = TRUE) {
+                   key = get_api_key(), 
+                   raw = FALSE, 
+                   message = TRUE) {
   
   parsed_req = wunderground_request(request_type = "rawtide",
                                     location = location, 
@@ -32,6 +69,24 @@ rawtide = function(location,
   }
   stop_for_error(parsed_req)
 
-  tide = parsed_req$tide
+  ## TODO:: check for structure
+  rawtide = parsed_req$rawtide
 
+  tide_info = tide$tideInfo[[1]]
+  if(all(tide_info == "")) stop(paste0("Tide info not available for: ", location))
+  if(length(tide$rawTideObs) == 0) stop(paste0("Tide info not available for: ", location))
+  if(message) {
+    print(paste0(tide_info$tideSite, ": ", tide_info$lat, "/", tide_info$lon))  
+  }
+
+  ## TODO:: summary stats unused (min/max tide for day)
+  rawtide_summary_stats = rawtide$rawTideStats
+  rawtide_summary = rawtide$rawTideObs
+
+  df = lapply(rawtide_summary, function(x) {
+    list(
+      date = x$epoch,
+      height = x$height
+    )
+  })
 }

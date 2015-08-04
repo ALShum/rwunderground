@@ -48,7 +48,7 @@ stop_for_error = function(httr_parsed_req) {
   }
 }
 
-#' wunderground requests
+#' wunderground api requests
 #'
 #' @param request_type Request type TODO::list all types 
 #' @param location locations set of set_location
