@@ -21,9 +21,9 @@ build_url = function(key = get_api_key(),
   location = paste0(location, ".json")
 
   #check to make sure request_type supports adding in a date
-  if(!is.null(date) & request_type != "history") {
+  if(!is.null(date) & !(request_type %in% c("history", "planner"))) {
     warning("Ignoring date as it is not used in this request.")
-  } else if(!is.null(date) & request_type == "history") {
+  } else if(!is.null(date) & (request_type %in% c("history", "planner"))) {
     request_type = paste(request_type, date, sep = "_")
   } 
     
