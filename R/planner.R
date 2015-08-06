@@ -1,4 +1,6 @@
-
+#' 
+#' 
+#' 
 planner = function(location, 
                    date_fmt = "pretty", ##TODO
                    use_metric = TRUE,
@@ -45,5 +47,27 @@ planner = function(location,
     dewpt_low_avg = as.numeric(planner$dewpoint_low$avg[[units_deg]]),
     dewpt_low_max = as.numeric(planner$dewpoint_low$max[[units_deg]]),
     cond = planner$cond
+  )
+
+  chance_of = planner$chance_of
+  chance = list(
+    chance_humid = chance_of$chanceofhumidday$percentage,
+    chance_temp_ovr60 = chance_of$tempoversixty$percentage,
+    chance_part_cloudy = chance_of$chanceofpartlycloudyday$percentage,
+    chance_wind_day = chance_of$chanceofwindyday$percentage,
+    chance_sun_cloud_day = chance_of$chanceofsunnycloudyday$percentage,
+    chance_precip = chance_of$chanceofprecip$percentage,
+    chance_rain = chance_of$chanceofrainday$percentage,
+    chance_swelter = chance_of$chanceofsultryday$percentage,
+    chance_cloud = chance_of$chanceofcloudyday$percentage,
+    chance_thunder = chance_of$chanceofthunderday$percentage,
+    chance_temp_90 = chance_of$tempoverninety$percentage,
+    chance_tornado = chance_of$chanceoftornadoday$percentage,
+    chance_fog = chance_of$chanceoffogday$percentage,
+    chance_snow_ground = chance_of$chanceofsnowonground$percentage,
+    chance_temp_below_freeze = chance_of$tempbelowfreezing$percentage,
+    chance_temp_ovr_freeze = chance_of$tempoverfreezing$percentage,
+    chance_hail = chance_of$chanceofhailday$percentage,
+    chance_of_snow = chance_of$chanceofsnowday$percentage
   )
 }
