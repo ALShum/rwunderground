@@ -5,11 +5,11 @@ In order to use this library please [register](http://www.wunderground.com/weath
 The free-tier should be sufficient if you aren't calling the API more than a thousand times per day.  This package
 has functions that follow the [online api](http://www.wunderground.com/weather/api/d/docs).
 
-# Install
+## Install
 
 To install please use `devtools`.  If you don't have devtools install using `install.packages("devtools")`.  Once devtools is installed to install `rwunderground` using devtools: `devtools::install_github("ALShum/rwunderground")`.
 
-# Setup
+## Setup
 
 Once you have your API key as indicated above you can set the key in R using: `rwunderground::set_api_key("YOUR KEY")`.
 
