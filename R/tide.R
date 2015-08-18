@@ -5,7 +5,7 @@
 #' @param key weather underground API key
 #' @param raw if TRUE return raw httr object
 #' @param message if TRUE print out requested URL
-#' @return data.frame with date, height and type
+#' @return tbl_df with date, height and type
 #' @export
 tide = function(location, 
                 key = get_api_key(), 
@@ -38,12 +38,12 @@ tide = function(location,
   df = lapply(tide_summary, function(x) {
     list(
       date = x$date$pretty, ##TODO date_fmt
-      height = as.numeric(x$data$height),
+      height = as.numeric(gsub("ft", "", x$data$height)),
       type = x$data$type
     )
   })
 
-  data.frame(do.call(rbind, df))
+  dplyr::filter(dplyr::bind_rows(lapply(df, data.frame, stringsAsFactors = FALSE)), !is.na(height))
 }
 
 #' Raw Tidal data with data every 5 minutes for US locations 
@@ -53,7 +53,7 @@ tide = function(location,
 #' @param key weather underground API key
 #' @param raw if TRUE return raw httr object
 #' @param message if TRUE print out requested URL
-#' @return data.frame with time (epoch) and height
+#' @return tbl_df with time (epoch) and height
 #' @export
 rawtide = function(location, 
                    key = get_api_key(), 
@@ -72,9 +72,9 @@ rawtide = function(location,
   ## TODO:: check for structure
   rawtide = parsed_req$rawtide
 
-  tide_info = tide$tideInfo[[1]]
+  tide_info = rawtide$tideInfo[[1]]
   if(all(tide_info == "")) stop(paste0("Tide info not available for: ", location))
-  if(length(tide$rawTideObs) == 0) stop(paste0("Tide info not available for: ", location))
+  if(length(rawtide$rawTideObs) == 0) stop(paste0("Tide info not available for: ", location))
   if(message) {
     print(paste0(tide_info$tideSite, ": ", tide_info$lat, "/", tide_info$lon))  
   }
@@ -83,10 +83,13 @@ rawtide = function(location,
   rawtide_summary_stats = rawtide$rawTideStats
   rawtide_summary = rawtide$rawTideObs
 
+  tz = rawtide$tideInfo[[1]]$tzname
   df = lapply(rawtide_summary, function(x) {
     list(
-      date = x$epoch,
+      date = as.POSIXct(x$epoch, origin = '1970-01-01 00:00.00 UTC', tz = tz),
       height = x$height
     )
   })
+
+  dplyr::bind_rows(lapply(df, data.frame, stringsAsFactors = FALSE))
 }
