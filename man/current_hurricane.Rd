@@ -4,7 +4,8 @@
 \alias{current_hurricane}
 \title{Current hurricane - within the US only}
 \usage{
-current_hurricane(key = get_api_key(), raw = FALSE, message = TRUE)
+current_hurricane(key = get_api_key(), use_metric = TRUE, raw = FALSE,
+  message = TRUE)
 }
 \arguments{
 \item{key}{weather underground API key}

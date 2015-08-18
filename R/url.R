@@ -54,7 +54,7 @@ stop_for_error = function(httr_parsed_req) {
 #' @param location locations set of set_location
 #' @param date Date, only applicable for history requests
 #' @param key wunderground API key
-#' @param message if TRUE print out requested URL
+#' @param message if TRUE print out requested 
 #' @return httr request object 
 #' @export
 wunderground_request = function(request_type,
@@ -66,6 +66,7 @@ wunderground_request = function(request_type,
                   request_type = request_type, 
                   date = date,
                   location = location)
+  if(request_type == "currenthurricane") URL = gsub("/q", "", URL)
   req = httr::GET(URL)
   httr::stop_for_status(req)
   

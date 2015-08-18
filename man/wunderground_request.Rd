@@ -16,7 +16,7 @@ wunderground_request(request_type, location, date = NULL,
 
 \item{key}{wunderground API key}
 
-\item{message}{if TRUE print out requested URL}
+\item{message}{if TRUE print out requested}
 }
 \value{
 httr request object
