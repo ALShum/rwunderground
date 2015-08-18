@@ -6,7 +6,7 @@
 #' @param key weather underground API key
 #' @param raw if TRUE return raw httr object
 #' @param message if TRUE print out requested URL
-#' @return data.frame with date, temperature, dew point,
+#' @return tbl_df with date, temperature, dew point,
 #'         condition, wind speed and direction, UV index,
 #'         humidity, windchill, heat index, real feel,
 #'         rain, snow, pop, mslp
@@ -49,7 +49,7 @@ hourly = function(location,
          )
   })
 
-  return(data.frame(do.call(rbind, df)))
+  dplyr::bind_rows(lapply(df, data.frame, stringsAsFactors = FALSE))
 }
 
 #' Hourly forecast for the next 10 days.
@@ -60,7 +60,7 @@ hourly = function(location,
 #' @param key weather underground API key
 #' @param raw if TRUE return raw httr object
 #' @param message if TRUE print out requested URL
-#' @return data.frame with date, temperature, dew point,
+#' @return tbl_df with date, temperature, dew point,
 #'         condition, wind speed and direction, UV index,
 #'         humidity, windchill, heat index, real feel,
 #'         rain, snow, pop, mslp
@@ -103,5 +103,5 @@ hourly10day = function(location,
          )
   })
 
-  return(data.frame(do.call(rbind, df)))
+  dplyr::bind_rows(lapply(df, data.frame, stringsAsFactors = FALSE))
 }

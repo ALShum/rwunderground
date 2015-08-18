@@ -5,7 +5,7 @@
 #' @param key weather underground API key
 #' @param raw if TRUE return raw httr object
 #' @param message if TRUE print out requested URL
-#' @return data.frame of nearby weather stations with:
+#' @return tbl_df of nearby weather stations with:
 #'         type, city, state, country, id, lat, lon and
 #'         dist (in either mi or km)
 #' @export
@@ -48,7 +48,8 @@ geolookup = function(location,
       lon = as.numeric(x$lon)
     )
   })
-  airport_df = data.frame(do.call(rbind, airport_df))
+  airport_df = dplyr::bind_rows(lapply(airport_df, data.frame, stringsAsFactors = FALSE))
+
   airport_df$dist = NA
 
   pws_df = lapply(pws, function(x) {
@@ -63,7 +64,7 @@ geolookup = function(location,
       dist = x[[paste0("distance_", units)]]
     )
   })
-  pws_df = data.frame(do.call(rbind, pws_df))
+  pws_df = dplyr::bind_rows(lapply(pws_df, data.frame, stringsAsFactors = FALSE))
 
-  rbind(airport_df, pws_df)
+  dplyr::filter(dplyr::rbind_list(airport_df, pws_df), !is.na(dist))
 }

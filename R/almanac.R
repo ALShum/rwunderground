@@ -7,7 +7,7 @@
 #' @param key weather underground API key
 #' @param raw if TRUE return raw httr object
 #' @param message if TRUE print out requested URL
-#' @return Data frame with columns: location, airport, 
+#' @return tbl_df with columns: location, airport, 
 #'         avg_high, record high, avg_low, record low.
 #' @export 
 almanac = function(location, 
@@ -45,11 +45,12 @@ almanac = function(location,
   #Celsius or F
   tempCol = ifelse(use_metric, "C", "F")
 
-  return(data.frame(location = location, 
+  return(dplyr::tbl_df(data.frame(location = location, 
                     airport = almanac$airport_code,
                     avg_high = almanac$temp_high$normal[[tempCol]],
                     rcd_high = almanac$temp_high$record[[tempCol]],
                     avg_low = almanac$temp_low$normal[[tempCol]],
-                    rcd_low = almanac$temp_low$record[[tempCol]])
+                    rcd_low = almanac$temp_low$record[[tempCol]],
+                      stringsAsFactors=FALSE))
          )
 }

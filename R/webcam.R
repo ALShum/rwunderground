@@ -5,7 +5,7 @@
 #' @param key weather underground API key
 #' @param raw if TRUE return raw httr object
 #' @param message if TRUE print out requested URL
-#' @return data.frame of weather stations including:
+#' @return tbl_df of weather stations including:
 #' 		   handle, id, city, state, country, tz, lat,
 #'		   lon, last updated, image URL and cam URL.
 #' @export
@@ -40,6 +40,6 @@ webcam = function(location,
   	)
   })
 
-  data.frame(do.call(rbind, df))
+  dplyr::bind_rows(lapply(df, data.frame, stringsAsFactors = FALSE))
 }
 

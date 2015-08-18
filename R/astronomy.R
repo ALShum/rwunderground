@@ -4,7 +4,7 @@
 #' @param key weather underground API key
 #' @param raw if TRUE return raw httr object
 #' @param message if TRUE print out requested URL
-#' @return data.frame with: location, moon phase, percent visible,
+#' @return tbl_df with: location, moon phase, percent visible,
 #'         moon rise and set times, sun rise and set times.
 #' @export 
 astronomy = function(location,
@@ -27,11 +27,12 @@ astronomy = function(location,
   
   moon = parsed_req$moon_phase
   sun = parsed_req$sun_phase
-  return(data.frame(location = location,
+  return(dplyr::tbl_df(data.frame(location = location,
                     moon_phase = moon$phaseofMoon,
                     pct_visible = moon$percentIlluminated,
                     moon_rise = paste(moon$sunrise$hour, moon$sunrise$minute, sep = ":"),
                     moon_set = paste(moon$sunset$hour, moon$sunset$minute, sep = ":"),
                     sun_rise = paste(sun$sunrise$hour, sun$sunrise$minute, sep = ":"),
-                    sun_set = paste(sun$sunset$hour, sun$sunset$minute, sep = ":")))
+                    sun_set = paste(sun$sunset$hour, sun$sunset$minute, sep = ":"),
+                      stringsAsFactors=FALSE)))
 }

@@ -7,7 +7,7 @@
 #' @param raw if TRUE return raw httr object
 #' @param message if TRUE print out requested URL
 #' @param summary If TRUE return daily summary otherwise hourly data
-#' @return data.frame with date, temperature, dew point,
+#' @return tbl_df with date, temperature, dew point,
 #'         humidity, wind speed, gust and direction, 
 #'         visibility, pressure, wind chill, heat index,
 #'         precipitation, condition, fog, rain, snow,
@@ -33,40 +33,40 @@ yesterday = function(location,
   suffix = ifelse(use_metric, "m", "i")
   if(summary) {
     ds = hist$dailysummary[[1]]
-    df = list(date = ds$date$pretty, ## TODO:: date 
+    df = data.frame(date = ds$date$pretty, ## TODO:: date 
        fog = as.numeric(ds$fog),
        rain = as.numeric(ds$rain),
        snow = as.numeric(ds$snow),
-       snow_fall = as.numeric(x[[paste0("snowfall", suffix)]]),
-       mtd_snow = as.numeric(x[[paste0("monthtodatesnowfall", suffix)]]),
-       since_jul_snow = as.numeric(x[[paste0("since1julsnowfall", suffix)]]),
-       snow_depth = as.numeric(x[[paste0("snowdepth", suffix)]]),
+       snow_fall = as.numeric(ds[[paste0("snowfall", suffix)]]),
+       mtd_snow = as.numeric(ds[[paste0("monthtodatesnowfall", suffix)]]),
+       since_jul_snow = as.numeric(ds[[paste0("since1julsnowfall", suffix)]]),
+       snow_depth = as.numeric(ds[[paste0("snowdepth", suffix)]]),
        hail = as.numeric(ds$hail),
        thunder = as.numeric(ds$thunder),
        tornado = as.numeric(ds$tornado),
-       mean_temp = as.numeric(x[[paste0("meantemp", suffix)]]),
-       mean_dewp = as.numeric(x[[paste0("meandewpt", suffix)]]),
-       mean_pressure = as.numeric(x[[paste0("meanpressure", suffix)]]),
-       mean_wind_spd = as.numeric(x[[paste0("meanwindspd", suffix)]]),
+       mean_temp = as.numeric(ds[[paste0("meantemp", suffix)]]),
+       mean_dewp = as.numeric(ds[[paste0("meandewpt", suffix)]]),
+       mean_pressure = as.numeric(ds[[paste0("meanpressure", suffix)]]),
+       mean_wind_spd = as.numeric(ds[[paste0("meanwindspd", suffix)]]),
        mean_wind_dir = as.numeric(ds$meanwdird),
-       mean_visib = as.numeric(x[[paste0("meanvis", suffix)]]),
+       mean_visib = as.numeric(ds[[paste0("meanvis", suffix)]]),
        humid = as.numeric(ds$humidity),
-       max_temp = as.numeric(x[[paste0("maxtemp", suffix)]]),
-       min_temp = as.numeric(x[[paste0("mintemp", suffix)]]),
+       max_temp = as.numeric(ds[[paste0("maxtemp", suffix)]]),
+       min_temp = as.numeric(ds[[paste0("mintemp", suffix)]]),
        max_humid = as.numeric(ds$maxhumidity),
        min_humid = as.numeric(ds$minhumidity),
-       max_dew_pt = as.numeric(x[[paste0("maxdewpt", suffix)]]),
-       min_dew_pt = as.numeric(x[[paste0("mindewpt", suffix)]]),
-       max_pressure = as.numeric(x[[paste0("maxpressure", suffix)]]),
-       min_pressure = as.numeric(x[[paste0("minpressure", suffix)]]),
-       max_wind_spd = as.numeric(x[[paste0("maxwspd", suffix)]]),
-       min_wind_spd = as.numeric(x[[paste0("minwspd", suffix)]]),
-       max_vis = as.numeric(x[[paste0("maxvis", suffix)]]),
-       min_vis = as.numeric(x[[paste0("minvis", suffix)]]),
+       max_dew_pt = as.numeric(ds[[paste0("maxdewpt", suffix)]]),
+       min_dew_pt = as.numeric(ds[[paste0("mindewpt", suffix)]]),
+       max_pressure = as.numeric(ds[[paste0("maxpressure", suffix)]]),
+       min_pressure = as.numeric(ds[[paste0("minpressure", suffix)]]),
+       max_wind_spd = as.numeric(ds[[paste0("maxwspd", suffix)]]),
+       min_wind_spd = as.numeric(ds[[paste0("minwspd", suffix)]]),
+       max_vis = as.numeric(ds[[paste0("maxvis", suffix)]]),
+       min_vis = as.numeric(ds[[paste0("minvis", suffix)]]),
        gdegree = as.numeric(ds$gdegreedays),
        heating_days = as.numeric(ds$heatingdegreedays),
        cooling_days = as.numeric(ds$coolingdegreedays),
-       precip = as.numeric(x[[paste0("precip", suffix)]]),
+       precip = as.numeric(ds[[paste0("precip", suffix)]]),
        precip_source = ds$precipsource,
        heating_day_normal = as.numeric(ds$heatingdegreedaysnormal),
        mtd_heating_degree = as.numeric(ds$monthtodateheatingdegreedays),
@@ -84,7 +84,7 @@ yesterday = function(location,
        since_jan_cooling_normal = as.numeric(ds$since1jancoolingdegreedaysnormal)
     )
 
-    return(as.data.frame(df))
+    return(dplyr::tbl_df(df))
   } 
 
   df = lapply(hist$observations, function(x) {
@@ -110,5 +110,5 @@ yesterday = function(location,
       )
   })
 
-  return(data.frame(do.call(rbind, df)))
+  dplyr::bind_rows(lapply(df, data.frame, stringsAsFactors=FALSE))
 }

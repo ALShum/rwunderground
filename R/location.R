@@ -1,19 +1,35 @@
 #https://raw.githubusercontent.com/jpatokal/openflights/master/data/airports.dat
+#list_airports = function() {
+#  airport_data = read.csv(system.file("data/airports.dat", package = "rwunderground"), header=F, stringsAsFactor = FALSE)
+#  airport_data = airport_data[,c(2:6, 12)]
+#  names(airport_data) = c("airport_name", "city", "country", "IATA", "ICAO", "region")
+#  airport_data[airport_data$ICAO == "\\N", ]$ICAO = NA
+#  airport_data[airport_data$IATA == "", ]$IATA = NA
+#  airport_data = dplyr::filter(airport_data, !is.na(IATA) | !is.na(ICAO))
+#  
+#  return(airport_data)
+#}
+#' Returns a data.frame of valid airport codes (ICAO and IATA).
+#'
+#' @return data.frame of airport codes with country and city
+#' @export
 list_airports = function() {
-  airport_data = read.csv(system.file("data/airports.dat", package = "rwunderground"), header=F, stringsAsFactor = FALSE)
-  airport_data = airport_data[,c(2:6, 12)]
-  names(airport_data) = c("airport_name", "city", "country", "IATA", "ICAO", "region")
-  airport_data[airport_data$ICAO == "\\N", ]$ICAO = NA
-  airport_data[airport_data$IATA == "", ]$IATA = NA
-  airport_data = dplyr::filter(airport_data, !is.na(IATA) | !is.na(ICAO))
-  
+  airport_data = read.csv(system.file("data/airport_data.csv", package = "rwunderground"), header=T, stringsAsFactor = FALSE)
   return(airport_data)
 }
 
+#' Returns a data.frame of valid states with abbreviations and regions
+#'
+#' @return data.frame of states with abbreviation and region
+#' @export
 list_states = function() {
-  return(data.frame(abbr = state.abb, name = state.name))
+  return(data.frame(abbr = state.abb, name = state.name, region = state.region))
 }
 
+#' Returns a data.frame of valid countries with iso abbreviations and region
+#'
+#' @return data.frame of valid country names with iso codes
+#' @export
 list_countries = function() {
   country_data = countrycode::countrycode_data[, c("country.name", "iso2c", "region")]
   country_data = dplyr::filter(country_data, !is.na(region))
@@ -21,10 +37,13 @@ list_countries = function() {
   return(country_data)
 }
 
-list_zipcodes = function() {
-  
-}
-
+#' Lookup airport code (IATA and ICAO code).
+#' weatherunderground API might not recognize the IATA/ICAO code for smaller airports.
+#' 
+#' @param location location string 
+#' @param region region string
+#' @return data.frame of matching airport name and IATA/ICAO codes
+#' @export
 lookup_airport = function(location, region = NULL) {
   airports = list_airports()
   if(!is.null(region)) {
@@ -41,6 +60,13 @@ lookup_airport = function(location, region = NULL) {
   return(airports[found, ])
 }
 
+#' Lookup ISO country code
+#' weatherunderground API doesn't recognize iso codes uniformly for every country.name
+#' 
+#' @param name 
+#' @param region
+#' @return
+#' @export 
 lookup_country_code = function(name, region = NULL) {
   countries = list_countries()
   if(!is.null(region)) {
@@ -53,10 +79,11 @@ lookup_country_code = function(name, region = NULL) {
   return(countries[found, ])
 }
 
-lookup_pws = function(name, region = NULL) {
-  
-}
-
+#' Checks if country/state is a valid one
+#' 
+#' @param name Name of state or country 
+#' @return TRUE if valid state or country otherwise FALSE 
+#' @export 
 is_valid_territory = function(name) {
   name = tolower(name)
   states = list_states()
@@ -87,12 +114,6 @@ is_valid_airport = function(name) {
   return(FALSE)
 }
 
-is_valid_zip_code = function(code) {
-  zip = list_zipcodes()
-  
-  return(FALSE) 
-}
-
 #' Specifies location of request
 #' 
 #' This is a wrapper function that will validate and format location strings
@@ -120,6 +141,8 @@ set_location = function(zip_code = NULL,
   
   if(!is.null(territory) & !is.null(city)) {
     if(!is_valid_territory(territory)) warning("set_location: Invalid state/country")
+    territory = gsub(" ", "_", territory)
+    city = gsub(" ", "_", city)
     return(paste(territory, city, sep = "/"))
   }
   else if(!is.null(zip_code)) {

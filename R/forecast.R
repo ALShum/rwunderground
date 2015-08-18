@@ -6,7 +6,7 @@
 #' @param key weather underground API key
 #' @param raw if TRUE return raw httr object
 #' @param message if TRUE print out requested URL
-#' @return data.frame with date, high and low temp,
+#' @return tbl_df with date, high and low temp,
 #'         conditions, precipitation, rain, snow,
 #'         max and avg wind speed, max/min and avg humidity
 #' @export 
@@ -63,7 +63,7 @@ forecast3day = function(location,
     )
   })
   
-  data.frame(do.call(rbind, df))
+  dplyr::bind_rows(lapply(df, data.frame, stringsAsFactors = FALSE))
 } 
 
 #' Forecast for the next 10 days.
@@ -74,7 +74,7 @@ forecast3day = function(location,
 #' @param key weather underground API key
 #' @param raw if TRUE return raw httr object
 #' @param message if TRUE print out requested URL
-#' @return data.frame with date, high and low temp,
+#' @return tbl_df with date, high and low temp,
 #'         conditions, precipitation, rain, snow,
 #'         max and avg wind speed, max/min and avg humidity
 #' @export 
@@ -131,6 +131,6 @@ forecast10day = function(location,
          ave_humidity = x$avehumidity
     )
   })
-  
-  data.frame(do.call(rbind, df))
+
+  dplyr::bind_rows(lapply(df, data.frame, stringsAsFactors = FALSE))
 }
