@@ -1,4 +1,15 @@
-#
+#' Weather summary based on historical information between the specified dates
+#'
+#' @param location location set by set_location
+#' @param date_fmt date format to return
+#' @param use_metric Metric or imperial units
+#' @param start_date Start date as MMDD
+#' @param end_date End date as MMDD
+#' @param key weather underground API key
+#' @param raw if TRUE return raw httr object
+#' @param message if TRUE print out requested URL
+#' @return tbl_df
+#' @export
 planner = function(location, 
                    date_fmt = "pretty", ##TODO
                    use_metric = TRUE,
@@ -22,12 +33,12 @@ planner = function(location,
   planner = parsed_req$trip
 
   if(message) {
-    print(date$trip$title)
+    print(planner$title)
   }
   units_deg = ifelse(metric, "C", "F")
   units_len = ifelse(metric, "cm", "in")
 
-  df = list(
+  df = data.frame(
     airport = planner$airport_code,
     temp_high_min = as.numeric(planner$temp_high$min[[units_deg]]),
     temp_high_avg = as.numeric(planner$temp_high$avg[[units_deg]]),
@@ -44,11 +55,12 @@ planner = function(location,
     dewpt_low_min = as.numeric(planner$dewpoint_low$min[[units_deg]]),
     dewpt_low_avg = as.numeric(planner$dewpoint_low$avg[[units_deg]]),
     dewpt_low_max = as.numeric(planner$dewpoint_low$max[[units_deg]]),
-    cond = planner$cond
+    cloud = planner$cloud_cover,
+      stringsAsFactors = FALSE
   )
 
   chance_of = planner$chance_of
-  chance = list(
+  chance = data.frame(
     chance_humid = chance_of$chanceofhumidday$percentage,
     chance_temp_ovr60 = chance_of$tempoversixty$percentage,
     chance_part_cloudy = chance_of$chanceofpartlycloudyday$percentage,
@@ -66,6 +78,10 @@ planner = function(location,
     chance_temp_below_freeze = chance_of$tempbelowfreezing$percentage,
     chance_temp_ovr_freeze = chance_of$tempoverfreezing$percentage,
     chance_hail = chance_of$chanceofhailday$percentage,
-    chance_of_snow = chance_of$chanceofsnowday$percentage
+    chance_of_snow = chance_of$chanceofsnowday$percentage,
+      stringsAsFactors = FALSE
   )
+
+  
+  return(tbl_df(data.frame(df, chance)))
 }
