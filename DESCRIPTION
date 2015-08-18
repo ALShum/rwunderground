@@ -9,6 +9,7 @@ Description: Tools for getting historical weather information and forecasts from
 License: GPL (>= 2)
 Imports: 
 	httr,
-	dplyr
+	dplyr,
+	countrycode
 Suggests: 
 	testthat
