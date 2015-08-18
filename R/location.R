@@ -63,9 +63,9 @@ lookup_airport = function(location, region = NULL) {
 #' Lookup ISO country code
 #' weatherunderground API doesn't recognize iso codes uniformly for every country.name
 #' 
-#' @param name 
-#' @param region
-#' @return
+#' @param name Name of country 
+#' @param region Geographic region 
+#' @return data.frame of country codes
 #' @export 
 lookup_country_code = function(name, region = NULL) {
   countries = list_countries()

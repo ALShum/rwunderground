@@ -1,6 +1,4 @@
-#' 
-#' 
-#' 
+#
 planner = function(location, 
                    date_fmt = "pretty", ##TODO
                    use_metric = TRUE,
