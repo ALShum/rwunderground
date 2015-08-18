@@ -15,7 +15,7 @@ Once you have your API key as indicated above you can set the key in R using: `r
 
 ## Locations
 Locations can be specified by the airport code, zip code, personal weather station ID or simply by specifying
-state and city (if in US) or country and city (if outside US).  
+state and city (if in US) or country and city (if outside US).  You can use the `set_location` function which will validate locations.
 
 ### Locations by country/state/city
 Setting the location to Honolulu, HI:
@@ -24,8 +24,29 @@ Setting the location to Honolulu, HI:
 Setting the location to Mombasa, Kenya: 
 `set_location(territory = "Kenya", city = "Mombasa")`.
 
-### Locations by airport
+Setting the location to San Diego, California:
+`set_location(territory = "California", city = "San Diego")`
 
+As alluded above, `set_location` will attempt to validate and make sure the locations are formatted correctly.  If you have trust in your own geography and spelling skills then you can simple replace the `set_location` function with a string formatted as `"territory/city"` such as: `"Hawaii/Honolulu"` or `"Kenya/Mombasa"`.
+
+### Locations by airport
+Locations can be specified by airport codes.
+
+Setting the location to Seattle/Tacoma airport:
+`set_location(airport_code = "SEA")`
+
+If you don't know the airport code you can look them up using `lookup_airport`:
+`lookup_airport("seattle")`.  This will lookup IATA and ICAO airport codes.
 
 ### Locations by zip code
+`set_location(zip_code = "96813")`
 
+### Other
+If no argument is provided to set_location then by default the nearest weather station will be used.  You can also specify location based on lat/lon or personal weather station ID.
+
+## History
+After a location is set, weather history is available using `history`.
+
+To request the weather for Honolulu, HI on January 31, 2015:
+`history(set_location(territory = "Hawaii", city = "Honolulu"), date = 20150131)`
+Note that dates must be in YYYYMMDD
