@@ -2,12 +2,12 @@
 
 This is an R interface to weather underground's [API](http://www.wunderground.com/weather/api).  
 In order to use this library please [register](http://www.wunderground.com/weather/api/d/login.html) for an API key.
-The free-tier should be sufficient if you aren't calling the API more than a thousand times per day.  This package
+The free-tier should be sufficient if you aren't calling the API more than a 500 times per day.  This package
 has functions that follow the [online api](http://www.wunderground.com/weather/api/d/docs).
 
 ## Install
 
-To install please use `devtools`.  If you don't have devtools install using `install.packages("devtools")`.  Once devtools is installed to install `rwunderground` using devtools: `devtools::install_github("ALShum/rwunderground")`.
+To install please use `devtools`.  If you don't have devtools install using `install.packages("devtools")`.  Afterwards install `rwunderground` using devtools: `devtools::install_github("ALShum/rwunderground")`.
 
 ## Setup
 
