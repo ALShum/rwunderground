@@ -17,7 +17,7 @@ webcam(location, key = get_api_key(), raw = FALSE, message = TRUE)
 \item{message}{if TRUE print out requested URL}
 }
 \value{
-data.frame of weather stations including:
+tbl_df of weather stations including:
 		   handle, id, city, state, country, tz, lat,
 		   lon, last updated, image URL and cam URL.
 }

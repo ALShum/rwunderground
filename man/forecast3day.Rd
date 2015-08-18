@@ -21,7 +21,7 @@ forecast3day(location, date_fmt = "pretty", use_metric = TRUE,
 \item{message}{if TRUE print out requested URL}
 }
 \value{
-data.frame with date, high and low temp,
+tbl_df with date, high and low temp,
         conditions, precipitation, rain, snow,
         max and avg wind speed, max/min and avg humidity
 }

@@ -17,7 +17,7 @@ rawtide(location, key = get_api_key(), raw = FALSE, message = TRUE)
 \item{message}{if TRUE print out requested URL}
 }
 \value{
-data.frame with time (epoch) and height
+tbl_df with time (epoch) and height
 }
 \description{
 Raw Tidal data with data every 5 minutes for US locations

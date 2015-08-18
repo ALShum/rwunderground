@@ -21,7 +21,7 @@ hourly(location, date_fmt = "pretty", use_metric = TRUE,
 \item{message}{if TRUE print out requested URL}
 }
 \value{
-data.frame with date, temperature, dew point,
+tbl_df with date, temperature, dew point,
         condition, wind speed and direction, UV index,
         humidity, windchill, heat index, real feel,
         rain, snow, pop, mslp

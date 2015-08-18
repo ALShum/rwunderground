@@ -21,7 +21,7 @@ forecast10day(location, date_fmt = "pretty", col_names = "pretty",
 \item{message}{if TRUE print out requested URL}
 }
 \value{
-data.frame with date, high and low temp,
+tbl_df with date, high and low temp,
         conditions, precipitation, rain, snow,
         max and avg wind speed, max/min and avg humidity
 }

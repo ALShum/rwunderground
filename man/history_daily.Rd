@@ -26,7 +26,7 @@ history_daily(location, date = "20150101", date_fmt = "pretty",
 \item{message}{if TRUE print out requested URL}
 }
 \value{
-data.frame
+tbl_df of summarized weather
 }
 \description{
 Summarized weather data for specified date.

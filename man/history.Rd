@@ -26,7 +26,7 @@ history(location, date = "20150101", date_fmt = "pretty",
 \item{message}{if TRUE print out requested URL}
 }
 \value{
-data.frame with date, temperature, dew point,
+tbl_df with date, temperature, dew point,
         humidity, wind speed, gust and direction,
         visibility, pressure, wind chill, heat index,
         precipitation, condition, fog, rain, snow,

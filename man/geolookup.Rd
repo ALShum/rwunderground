@@ -19,7 +19,7 @@ geolookup(location, use_metric = TRUE, key = get_api_key(), raw = FALSE,
 \item{message}{if TRUE print out requested URL}
 }
 \value{
-data.frame of nearby weather stations with:
+tbl_df of nearby weather stations with:
         type, city, state, country, id, lat, lon and
         dist (in either mi or km)
 }

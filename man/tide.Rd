@@ -17,7 +17,7 @@ tide(location, key = get_api_key(), raw = FALSE, message = TRUE)
 \item{message}{if TRUE print out requested URL}
 }
 \value{
-data.frame with date, height and type
+tbl_df with date, height and type
 }
 \description{
 Tidal information for a location within the USA.

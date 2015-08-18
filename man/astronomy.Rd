@@ -16,7 +16,7 @@ astronomy(location, key = get_api_key(), raw = FALSE, message = TRUE)
 \item{message}{if TRUE print out requested URL}
 }
 \value{
-data.frame with: location, moon phase, percent visible,
+tbl_df with: location, moon phase, percent visible,
         moon rise and set times, sun rise and set times.
 }
 \description{

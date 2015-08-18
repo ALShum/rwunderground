@@ -23,7 +23,7 @@ yesterday(location, use_metric = TRUE, key = get_api_key(), raw = FALSE,
 \item{date_fmt}{date format to return}
 }
 \value{
-data.frame with date, temperature, dew point,
+tbl_df with date, temperature, dew point,
         humidity, wind speed, gust and direction,
         visibility, pressure, wind chill, heat index,
         precipitation, condition, fog, rain, snow,
