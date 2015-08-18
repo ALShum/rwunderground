@@ -48,5 +48,28 @@ If no argument is provided to set_location then by default the nearest weather s
 After a location is set, weather history is available using `history`.
 
 To request the weather for Honolulu, HI on January 31, 2015:
+
 `history(set_location(territory = "Hawaii", city = "Honolulu"), date = 20150131)`
-Note that dates must be in YYYYMMDD
+
+Note that dates must be in YYYYMMDD.
+
+## Forecast
+Forecast weather data is available using `forecast3day` and `forecast10day`.  Hourly forecasts are also available using `hourly` and  `hourly10day`.  The forecast functions do a daily summary forecast and the hourly functions do hourly forecasts.
+
+To get the 10 day forecast and 10 day hourly forecast for Honolulu, Hawaii:
+
+`forecast10day(set_location(territory = "Hawaii", city = "Honolulu"))`
+`hourly10day(set_location(territory = "Hawaii", city = "Honolulu"))`
+
+
+## Tide information
+Tide high/low forecasts are available using `tide` and hourly tide forecasts available using `rawtide`.
+
+To get the high/low tide information for Honolulu, Hawaii:
+
+`tide(set_location(territory = "Hawaii", city = "Honolulu"))`
+`rawtide(set_location(territory = "Hawaii", city = "Honolulu"))`
+
+## Almanac
+
+
