@@ -12,4 +12,6 @@ Imports:
 	dplyr,
 	countrycode
 Suggests: 
-	testthat
+	testthat,
+    knitr
+VignetteBuilder: knitr

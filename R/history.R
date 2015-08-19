@@ -152,3 +152,53 @@ history_daily = function(location,
 
   return(dplyr::tbl_df(df))
 }
+
+#' Hourly weather data for specified date range. 
+#' 
+#' @param location location set by set_location
+#' @param date Date as YYYYMMDD format
+#' @param date_fmt date format to return
+#' @param col_names date format to return
+#' @param use_metric Metric or imperial units
+#' @param key weather underground API key
+#' @param raw if TRUE return raw httr object
+#' @param message if TRUE print out requested URL
+#' @return tbl_df with date, temperature, dew point,
+#'         humidity, wind speed, gust and direction, 
+#'         visibility, pressure, wind chill, heat index,
+#'         precipitation, condition, fog, rain, snow,
+#'         hail, thunder, tornado
+#' @export 
+history_range = function(location, 
+                   date_start = "20150101",
+                   date_end = "20150131",
+                   date_fmt = "pretty",  ## TODO 
+                   col_names = "pretty", ## TODO: (orig names)
+                   use_metric = TRUE,
+                   key = get_api_key(), 
+                   raw = FALSE,
+                   message = TRUE) {
+  
+  date_start = as.Date(date_start, "%Y%m%d")
+  date_end = as.Date(date_end, "%Y%m%d")
+  date_range = format(seq.Date(date_start, date_end, "day"),
+                      format = "%Y%m%d")
+
+  history_list = 
+  lapply(date_range, function(x) {
+    history(location = location, 
+            date = x, 
+            date_fmt = date_fmt,
+            col_names = col_names,
+            use_metric = use_metric,
+            raw = raw,
+            key = key,
+            message = message)
+  })
+
+  if(raw) {
+    return(history_list)
+  }
+
+  dplyr::rbind_all(history_list)
+}
