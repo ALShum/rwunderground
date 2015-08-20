@@ -28,6 +28,7 @@ astronomy = function(location,
   moon = parsed_req$moon_phase
   sun = parsed_req$sun_phase
   return(dplyr::tbl_df(data.frame(location = location,
+                    date = Sys.Date(),
                     moon_phase = moon$phaseofMoon,
                     pct_visible = moon$percentIlluminated,
                     moon_rise = paste(moon$sunrise$hour, moon$sunrise$minute, sep = ":"),
