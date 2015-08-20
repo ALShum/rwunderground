@@ -22,6 +22,11 @@ conditions = function(location,
   }
   stop_for_error(parsed_req)
 
+  #checks for structure
+  if(!("current_observation" %in% names(parsed_req))) {
+    stop(paste0("Unable to  parse conditions for this location: ", location))
+  }
+
   cond = parsed_req$current_observation
 
   if(message) {
