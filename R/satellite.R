@@ -20,7 +20,10 @@ satellite = function(location,
   }
   stop_for_error(parsed_req)
 
-  ##TODO :: CHECK FOR STRUCTURE
+  if(!("satellite" %in% names(parsed_req))) {
+    stop(paste0("Unable to parse satellite information from JSON for: ", location))
+  }
+
   satellite = parsed_req$satellite
   return(c(satellite$image_url,
   		   satellite$image_url_ir4,

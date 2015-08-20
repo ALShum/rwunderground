@@ -19,6 +19,10 @@ current_hurricane = function(key = get_api_key(),
   }
   stop_for_error(parsed_req)
 
+  if(!("currenthurricane" %in% names(parsed_req))) {
+    stop("Cannot parse hurricane information")
+  }
+
   hurricane = parsed_req$currenthurricane
 
   if(use_metric) {
@@ -30,7 +34,7 @@ current_hurricane = function(key = get_api_key(),
   } #spd also available but not used: Kts
 
   df = lapply(hurricane, function(x) {
-    list(
+    data.frame(
       name = x$stormInfo$stormName_Nice,
       lat = as.numeric(x$Current$lat),
       lon = as.numeric(x$Current$lon),
@@ -49,9 +53,10 @@ current_hurricane = function(key = get_api_key(),
       pressure = ifelse(is.null(x$Current$Pressure[[pres]]),
         NA,
         as.numeric(x$Current$Pressure[[pres]])
-      )
+      ),
+        stringsAsFactors = FALSE
     )
   })
 
-  dplyr::bind_rows(lapply(df, data.frame, stringsAsFactors = FALSE))
+  dplyr::bind_rows(df)
 }

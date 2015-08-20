@@ -1,14 +1,3 @@
-#https://raw.githubusercontent.com/jpatokal/openflights/master/data/airports.dat
-#list_airports = function() {
-#  airport_data = read.csv(system.file("data/airports.dat", package = "rwunderground"), header=F, stringsAsFactor = FALSE)
-#  airport_data = airport_data[,c(2:6, 12)]
-#  names(airport_data) = c("airport_name", "city", "country", "IATA", "ICAO", "region")
-#  airport_data[airport_data$ICAO == "\\N", ]$ICAO = NA
-#  airport_data[airport_data$IATA == "", ]$IATA = NA
-#  airport_data = dplyr::filter(airport_data, !is.na(IATA) | !is.na(ICAO))
-#  
-#  return(airport_data)
-#}
 #' Returns a data.frame of valid airport codes (ICAO and IATA).
 #'
 #' @return data.frame of airport codes with country and city

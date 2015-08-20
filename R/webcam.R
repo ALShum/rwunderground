@@ -23,9 +23,14 @@ webcam = function(location,
   }
   stop_for_error(parsed_req)
 
+  #check 
+  if(!("webcams" %in% names(parsed_req))) {
+    stop(paste0("Unable to parse webcam JSON for this location: ", location))
+  } 
+
   webcams = parsed_req$webcams
   df = lapply(webcams, function(x) {
-  	list(
+    data.frame(
    	  handle = x$handle,
   	  station_id = x$assoc_station_id,
   	  city = x$city,
@@ -36,10 +41,11 @@ webcam = function(location,
   	  lon = as.numeric(x$lon),
   	  updated = x$updated,
   	  cur_img = x$CURRENTIMAGEURL,
-  	  cam_url = x$CAMURL
+  	  cam_url = x$CAMURL,
+        stringsAsFactors = FALSE
   	)
   })
 
-  dplyr::bind_rows(lapply(df, data.frame, stringsAsFactors = FALSE))
+  dplyr::bind_rows(df)
 }
 

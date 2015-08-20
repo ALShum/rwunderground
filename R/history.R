@@ -17,7 +17,6 @@
 history = function(location, 
                    date = "20150101",
                    date_fmt = "pretty",  ## TODO 
-                   col_names = "pretty", ## TODO: (orig names)
                    use_metric = TRUE,
                    key = get_api_key(), 
                    raw = FALSE, 
@@ -33,7 +32,10 @@ history = function(location,
   }
   stop_for_error(parsed_req)
 
-  ## TODO:: Check for errors
+  if(!("history" %in% names(parsed_req))) {
+    stop(paste0("Cannot parse history data for: ", location))
+  }
+
   hist = parsed_req$history
 
   suffix = ifelse(use_metric, "m", "i")
@@ -78,7 +80,6 @@ history = function(location,
 history_daily = function(location, 
                    date = "20150101",
                    date_fmt = "pretty",  ## TODO 
-                   col_names = "pretty", ## TODO: (orig names)
                    use_metric = TRUE,
                    key = get_api_key(), 
                    raw = FALSE, 
@@ -94,7 +95,10 @@ history_daily = function(location,
   }
   stop_for_error(parsed_req)
 
-  ## TODO:: Check for errors
+  if(!("history" %in% names(parsed_req))) {
+    stop(paste0("Cannot parse history data for: ", location))
+  }
+  
   hist = parsed_req$history
 
   suffix = ifelse(use_metric, "m", "i")
@@ -171,11 +175,10 @@ history_daily = function(location,
 #' @export 
 history_range = function(location, 
                    date_start = "20150101",
-                   date_end = "20150131",
+                   date_end = "20150105",
                    limit = FALSE, #rate limit 
                    no_api = FALSE, #get data from URL instead of API
                    date_fmt = "pretty",  ## TODO 
-                   col_names = "pretty", ## TODO: (orig names)
                    use_metric = TRUE,
                    key = get_api_key(), 
                    raw = FALSE,
@@ -191,7 +194,6 @@ history_range = function(location,
     history(location = location, 
             date = x, 
             date_fmt = date_fmt,
-            col_names = col_names,
             use_metric = use_metric,
             raw = raw,
             key = key,

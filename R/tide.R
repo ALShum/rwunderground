@@ -21,7 +21,10 @@ tide = function(location,
   }
   stop_for_error(parsed_req)
 
-  ##TODO:: check for structure
+  if(!("tide" %in% names(parsed_req))) {
+    stop(paste0("Cannot parse tide information from JSON for: ", location))
+  }
+
   tide = parsed_req$tide
 
   tide_info = tide$tideInfo[[1]]
@@ -36,14 +39,15 @@ tide = function(location,
   tide_summary = tide$tideSummary
 
   df = lapply(tide_summary, function(x) {
-    list(
+    data.frame(
       date = x$date$pretty, ##TODO date_fmt
       height = as.numeric(gsub("ft", "", x$data$height)),
-      type = x$data$type
+      type = x$data$type,
+        stringsAsFactors = FALSE
     )
   })
 
-  dplyr::filter(dplyr::bind_rows(lapply(df, data.frame, stringsAsFactors = FALSE)), !is.na(height))
+  dplyr::filter(dplyr::bind_rows(df), !is.na(height))
 }
 
 #' Raw Tidal data with data every 5 minutes for US locations 
@@ -69,7 +73,10 @@ rawtide = function(location,
   }
   stop_for_error(parsed_req)
 
-  ## TODO:: check for structure
+  if(!("rawtide" %in% names(parsed_req))) {
+    stop(paste0("Cannot parse tide information from JSON for: ", location))
+  }
+
   rawtide = parsed_req$rawtide
 
   tide_info = rawtide$tideInfo[[1]]
@@ -85,11 +92,12 @@ rawtide = function(location,
 
   tz = rawtide$tideInfo[[1]]$tzname
   df = lapply(rawtide_summary, function(x) {
-    list(
+    data.frame(
       date = as.POSIXct(x$epoch, origin = '1970-01-01 00:00.00 UTC', tz = tz),
-      height = x$height
+      height = x$height,
+        stringsAsFactors = FALSE
     )
   })
 
-  dplyr::bind_rows(lapply(df, data.frame, stringsAsFactors = FALSE))
+  dplyr::bind_rows(df)
 }

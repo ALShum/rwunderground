@@ -27,11 +27,15 @@ hourly = function(location,
   }
   stop_for_error(parsed_req)
 
+  if(!("hourly_forecast" %in% names(parsed_req))) {
+    stop(paste0("Cannot parse hourly forecast for: ", location))
+  }
+
   hourly_forecast = parsed_req$hourly_forecast
 
   units = ifelse(use_metric, "metric", "english")    
   df = lapply(hourly_forecast, function(x) {
-    list(date = x$FCTTIME$pretty,
+    data.frame(date = x$FCTTIME$pretty,
          temp = as.numeric(x$temp[[units]]),
          dew_pt = as.numeric(x$dewpoint[[units]]),
          cond = x$condition,
@@ -45,11 +49,12 @@ hourly = function(location,
          rain = as.numeric(x$qpf[[units]]),
          snow = as.numeric(x$snow[[units]]),
          pop = as.numeric(x$pop),
-         mslp = as.numeric(x$mslp[[units]])
+         mslp = as.numeric(x$mslp[[units]]),
+          stringsAsFactors = FALSE
          )
   })
 
-  dplyr::bind_rows(lapply(df, data.frame, stringsAsFactors = FALSE))
+  dplyr::bind_rows(df)
 }
 
 #' Hourly forecast for the next 10 days.
@@ -80,12 +85,16 @@ hourly10day = function(location,
     return(parsed_req)
   }
   stop_for_error(parsed_req)
-    
+  
+  if(!("hourly_forecast" %in% names(parsed_req))) {
+    stop(paste0("Cannot parse hourly forecast for: ", location))
+  }
+
   hourly_forecast = parsed_req$hourly_forecast
 
   units = ifelse(use_metric, "metric", "english")    
   df = lapply(hourly_forecast, function(x){
-    list(date = x$FCTTIME$pretty,
+    data.frame(date = x$FCTTIME$pretty,
          temp = as.numeric(x$temp[[units]]),
          dew_pt = as.numeric(x$dewpoint[[units]]),
          cond = x$condition,
@@ -99,9 +108,10 @@ hourly10day = function(location,
          rain = as.numeric(x$qpf[[units]]),
          snow = as.numeric(x$snow[[units]]),
          pop = as.numeric(x$pop),
-         mslp = as.numeric(x$mslp[[units]])
+         mslp = as.numeric(x$mslp[[units]]),
+          stringsAsFactors = FALSE
          )
   })
 
-  dplyr::bind_rows(lapply(df, data.frame, stringsAsFactors = FALSE))
+  dplyr::bind_rows(df)
 }

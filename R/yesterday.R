@@ -29,6 +29,10 @@ yesterday = function(location,
   }
   stop_for_error(parsed_req)
 
+  if(!("history" %in% names(parsed_req))) {
+    stop(paste0("Cannot parse yesterday's weather information for: ", location))
+  }
+
   hist = parsed_req$history
   suffix = ifelse(use_metric, "m", "i")
   if(summary) {
@@ -88,7 +92,7 @@ yesterday = function(location,
   } 
 
   df = lapply(hist$observations, function(x) {
-    list(date = x$date$pretty, ## TODO:: date 
+    data.frame(date = x$date$pretty, ## TODO:: date 
        temp = as.numeric(x[[paste0("temp", suffix)]]),
        dew_pt = as.numeric(x[[paste0("dewpt", suffix)]]),
        hum = as.numeric(x$hum),
@@ -106,9 +110,10 @@ yesterday = function(location,
        snow = as.numeric(x$snow),
        hail = as.numeric(x$hail),
        thunder = as.numeric(x$thunder),
-       tornado = as.numeric(x$tornado)
+       tornado = as.numeric(x$tornado),
+        stringsAsFactors = FALSE
       )
   })
 
-  dplyr::bind_rows(lapply(df, data.frame, stringsAsFactors=FALSE))
+  dplyr::bind_rows(df)
 }

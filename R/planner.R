@@ -29,14 +29,17 @@ planner = function(location,
   }
   stop_for_error(parsed_req)
 
-  ##TODO check for structure
+  if(!("trip" %in% names(parsed_req))) {
+    stop(paste0("Cannot parse historical information for: ", location))
+  }  
+
   planner = parsed_req$trip
 
   if(message) {
     print(planner$title)
   }
-  units_deg = ifelse(metric, "C", "F")
-  units_len = ifelse(metric, "cm", "in")
+  units_deg = ifelse(use_metric, "C", "F")
+  units_len = ifelse(use_metric, "cm", "in")
 
   df = data.frame(
     airport = planner$airport_code,
@@ -83,5 +86,5 @@ planner = function(location,
   )
 
   
-  return(tbl_df(data.frame(df, chance)))
+  return(dplyr::tbl_df(data.frame(df, chance)))
 }

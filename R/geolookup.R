@@ -24,6 +24,10 @@ geolookup = function(location,
   }
   stop_for_error(parsed_req)
 
+  if(!("location" %in% names(parsed_req))) {
+    stop(paste0("Cannot parse geography information for: ", location))
+  }
+
   loc = parsed_req$location
   if(message) {
     print(paste0(loc$country_iso3166, ", ", loc$state, " ", loc$city))
@@ -31,29 +35,28 @@ geolookup = function(location,
     print(paste0("lat/long: ", loc$lat, "/", loc$lon))
   }
 
-  ##TODO::check for structure
   ws = loc$nearby_weather_stations
   airport = ws$airport$station
   pws = ws$pws$station
 
   units = ifelse(use_metric, "km", "mi")
   airport_df = lapply(airport, function(x) {
-    list(
+    data.frame(
       type = "airport",
       city = x$city,
       state = x$state,
       country = x$country,
       id = x$icao,
       lat = as.numeric(x$lat),
-      lon = as.numeric(x$lon)
+      lon = as.numeric(x$lon),
+        stringsAsFactors = FALSE
     )
   })
-  airport_df = dplyr::bind_rows(lapply(airport_df, data.frame, stringsAsFactors = FALSE))
-
+  airport_df = dplyr::bind_rows(airport_df)
   airport_df$dist = NA
 
   pws_df = lapply(pws, function(x) {
-    list(
+    data.frame(
       type = "pws",
       city = x$city,
       state = x$state,
@@ -61,10 +64,11 @@ geolookup = function(location,
       id = x$id,
       lat = as.numeric(x$lat),
       lon = as.numeric(x$lon),
-      dist = x[[paste0("distance_", units)]]
+      dist = x[[paste0("distance_", units)]],
+        stringsAsFactors = FALSE
     )
   })
-  pws_df = dplyr::bind_rows(lapply(pws_df, data.frame, stringsAsFactors = FALSE))
+  pws_df = dplyr::bind_rows(pws_df)
 
-  dplyr::filter(dplyr::rbind_list(airport_df, pws_df), !is.na(dist))
+  dplyr::filter(dplyr::rbind_list(airport_df, pws_df), !is.na(lat) | !is.na(lon))
 }
