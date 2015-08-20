@@ -119,7 +119,7 @@ forecast10day = function(location,
   
   fcast = parsed_req$forecast$simpleforecast$forecastday
   df = lapply(fcast, function(x) {
-    data.frame(date = x$date$pretty,
+    data.frame(date = x$date$pretty, ##todo
          temp_high = as.numeric(x$high[[tempCol]]),
          temp_low = as.numeric(x$low[[tempCol]]),
          cond = x$conditions,  ## TODO: multiple conditions?

@@ -4,14 +4,11 @@
 \alias{planner}
 \title{Weather summary based on historical information between the specified dates}
 \usage{
-planner(location, date_fmt = "pretty", use_metric = TRUE,
-  start_date = "0501", end_date = "0531", key = get_api_key(),
-  raw = FALSE, message = TRUE)
+planner(location, use_metric = TRUE, start_date = "0501",
+  end_date = "0531", key = get_api_key(), raw = FALSE, message = TRUE)
 }
 \arguments{
 \item{location}{location set by set_location}
-
-\item{date_fmt}{date format to return}
 
 \item{use_metric}{Metric or imperial units}
 

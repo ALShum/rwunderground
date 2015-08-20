@@ -6,7 +6,7 @@
 as far as weather underground has data or from the national weather service
 going back 30 years.}
 \usage{
-almanac(location, use_metric = TRUE, key = get_api_key(), raw = FALSE,
+almanac(location, use_metric = FALSE, key = get_api_key(), raw = FALSE,
   message = TRUE)
 }
 \arguments{

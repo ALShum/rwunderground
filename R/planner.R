@@ -1,7 +1,6 @@
 #' Weather summary based on historical information between the specified dates
 #'
 #' @param location location set by set_location
-#' @param date_fmt date format to return
 #' @param use_metric Metric or imperial units
 #' @param start_date Start date as MMDD
 #' @param end_date End date as MMDD
@@ -11,7 +10,6 @@
 #' @return tbl_df
 #' @export
 planner = function(location, 
-                   date_fmt = "pretty", ##TODO
                    use_metric = TRUE,
                    start_date = "0501",
                    end_date = "0531",

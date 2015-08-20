@@ -35,7 +35,7 @@ hourly = function(location,
 
   units = ifelse(use_metric, "metric", "english")    
   df = lapply(hourly_forecast, function(x) {
-    data.frame(date = x$FCTTIME$pretty,
+    data.frame(date = x$FCTTIME$pretty, ##date fmt
          temp = as.numeric(x$temp[[units]]),
          dew_pt = as.numeric(x$dewpoint[[units]]),
          cond = x$condition,
@@ -94,7 +94,7 @@ hourly10day = function(location,
 
   units = ifelse(use_metric, "metric", "english")    
   df = lapply(hourly_forecast, function(x){
-    data.frame(date = x$FCTTIME$pretty,
+    data.frame(date = x$FCTTIME$pretty, ##date fmt
          temp = as.numeric(x$temp[[units]]),
          dew_pt = as.numeric(x$dewpoint[[units]]),
          cond = x$condition,

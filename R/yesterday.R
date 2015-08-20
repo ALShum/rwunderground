@@ -14,6 +14,7 @@
 #'         hail, thunder, tornado
 #' @export 
 yesterday = function(location, 
+                     date_fmt = "pretty",  ## TODO 
                    	 use_metric = TRUE, 
                      key = get_api_key(), 
                      raw = FALSE, 

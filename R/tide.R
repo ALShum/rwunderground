@@ -2,12 +2,14 @@
 #' Tidal information only available for US cities.  Units are in feet.
 #'
 #' @param location location set by set_location
+#' @param date_fmt date format to return
 #' @param key weather underground API key
 #' @param raw if TRUE return raw httr object
 #' @param message if TRUE print out requested URL
 #' @return tbl_df with date, height and type
 #' @export
 tide = function(location, 
+                date_fmt = "pretty",  ## TODO 
                 key = get_api_key(), 
                 raw = FALSE, 
                 message = TRUE) {
@@ -54,12 +56,14 @@ tide = function(location,
 #' Tidal information only available for US cities.  Units are in feet.
 #'
 #' @param location location set by set_location
+#' @param date_fmt date format to return
 #' @param key weather underground API key
 #' @param raw if TRUE return raw httr object
 #' @param message if TRUE print out requested URL
 #' @return tbl_df with time (epoch) and height
 #' @export
 rawtide = function(location, 
+                   date_fmt = "pretty",  ## TODO 
                    key = get_api_key(), 
                    raw = FALSE, 
                    message = TRUE) {

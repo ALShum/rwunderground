@@ -4,16 +4,14 @@
 \alias{history_range}
 \title{Hourly weather data for specified date range.}
 \usage{
-history_range(location, date_start = "20150101", date_end = "20150131",
-  date_fmt = "pretty", col_names = "pretty", use_metric = TRUE,
+history_range(location, date_start = "20150101", date_end = "20150105",
+  limit = FALSE, no_api = FALSE, date_fmt = "pretty", use_metric = TRUE,
   key = get_api_key(), raw = FALSE, message = TRUE)
 }
 \arguments{
 \item{location}{location set by set_location}
 
 \item{date_fmt}{date format to return}
-
-\item{col_names}{date format to return}
 
 \item{use_metric}{Metric or imperial units}
 
@@ -24,6 +22,8 @@ history_range(location, date_start = "20150101", date_end = "20150131",
 \item{message}{if TRUE print out requested URL}
 
 \item{date}{Date as YYYYMMDD format}
+
+\item{col_names}{date format to return}
 }
 \value{
 tbl_df with date, temperature, dew point,

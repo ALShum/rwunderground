@@ -4,8 +4,8 @@
 \alias{forecast10day}
 \title{Forecast for the next 10 days.}
 \usage{
-forecast10day(location, date_fmt = "pretty", col_names = "pretty",
-  use_metric = TRUE, key = get_api_key(), raw = FALSE, message = TRUE)
+forecast10day(location, date_fmt = "pretty", use_metric = TRUE,
+  key = get_api_key(), raw = FALSE, message = TRUE)
 }
 \arguments{
 \item{location}{location set by set_location}

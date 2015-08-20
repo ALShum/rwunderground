@@ -4,10 +4,12 @@
 \alias{current_hurricane}
 \title{Current hurricane - within the US only}
 \usage{
-current_hurricane(key = get_api_key(), use_metric = TRUE, raw = FALSE,
-  message = TRUE)
+current_hurricane(date_fmt = "pretty", key = get_api_key(),
+  use_metric = TRUE, raw = FALSE, message = TRUE)
 }
 \arguments{
+\item{date_fmt}{date format to return}
+
 \item{key}{weather underground API key}
 
 \item{raw}{if TRUE return raw httr object}

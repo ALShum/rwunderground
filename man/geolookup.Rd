@@ -4,7 +4,7 @@
 \alias{geolookup}
 \title{Lists nearby weather stations for a given location}
 \usage{
-geolookup(location, use_metric = TRUE, key = get_api_key(), raw = FALSE,
+geolookup(location, use_metric = FALSE, key = get_api_key(), raw = FALSE,
   message = TRUE)
 }
 \arguments{

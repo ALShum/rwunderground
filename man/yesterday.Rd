@@ -4,11 +4,13 @@
 \alias{yesterday}
 \title{Weather data for yesterday}
 \usage{
-yesterday(location, use_metric = TRUE, key = get_api_key(), raw = FALSE,
-  message = TRUE, summary = FALSE)
+yesterday(location, date_fmt = "pretty", use_metric = TRUE,
+  key = get_api_key(), raw = FALSE, message = TRUE, summary = FALSE)
 }
 \arguments{
 \item{location}{location set by set_location}
+
+\item{date_fmt}{date format to return}
 
 \item{use_metric}{Metric or imperial units}
 
@@ -19,8 +21,6 @@ yesterday(location, use_metric = TRUE, key = get_api_key(), raw = FALSE,
 \item{message}{if TRUE print out requested URL}
 
 \item{summary}{If TRUE return daily summary otherwise hourly data}
-
-\item{date_fmt}{date format to return}
 }
 \value{
 tbl_df with date, temperature, dew point,

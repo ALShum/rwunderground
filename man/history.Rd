@@ -5,8 +5,7 @@
 \title{Hourly weather data for specified date.}
 \usage{
 history(location, date = "20150101", date_fmt = "pretty",
-  col_names = "pretty", use_metric = TRUE, key = get_api_key(),
-  raw = FALSE, message = TRUE)
+  use_metric = TRUE, key = get_api_key(), raw = FALSE, message = TRUE)
 }
 \arguments{
 \item{location}{location set by set_location}
@@ -15,8 +14,6 @@ history(location, date = "20150101", date_fmt = "pretty",
 
 \item{date_fmt}{date format to return}
 
-\item{col_names}{date format to return}
-
 \item{use_metric}{Metric or imperial units}
 
 \item{key}{weather underground API key}
@@ -24,6 +21,8 @@ history(location, date = "20150101", date_fmt = "pretty",
 \item{raw}{if TRUE return raw httr object}
 
 \item{message}{if TRUE print out requested URL}
+
+\item{col_names}{date format to return}
 }
 \value{
 tbl_df with date, temperature, dew point,

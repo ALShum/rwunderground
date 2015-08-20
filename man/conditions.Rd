@@ -2,12 +2,12 @@
 % Please edit documentation in R/conditions.R
 \name{conditions}
 \alias{conditions}
-\title{Conditions including current temperature, weather condition,
+\title{Current conditions including current temperature, weather condition,
 humidity, wind, feels-like, temperature, barometric pressure,
 and visibility.}
 \usage{
-conditions(location, date_fmt = "pretty", use_metric = TRUE,
-  key = get_api_key(), raw = FALSE, message = TRUE)
+conditions(location, use_metric = FALSE, key = get_api_key(), raw = FALSE,
+  message = TRUE)
 }
 \arguments{
 \item{location}{location set by set_location}
@@ -22,7 +22,7 @@ conditions(location, date_fmt = "pretty", use_metric = TRUE,
 tbl_df with conditions
 }
 \description{
-Conditions including current temperature, weather condition,
+Current conditions including current temperature, weather condition,
 humidity, wind, feels-like, temperature, barometric pressure,
 and visibility.
 }
