@@ -1,4 +1,4 @@
-#' Conditions including current temperature, weather condition, 
+#' Current conditions including current temperature, weather condition, 
 #' humidity, wind, feels-like, temperature, barometric pressure, 
 #' and visibility.
 #'
@@ -9,8 +9,7 @@
 #' @return tbl_df with conditions
 #' @export 
 conditions = function(location, 
-                      date_fmt = "pretty",
-                      use_metric = TRUE,
+                      use_metric = FALSE,
                       key = get_api_key(), 
                       raw = FALSE,
                       message = TRUE) {
@@ -28,7 +27,7 @@ conditions = function(location,
   if(message) {
     print(paste0('Conditions for: ', cond$display_location$full))
     print(paste0('Observed at: ', cond$observation_location$full))
-    print(paste0('Station id: ', cond$estimated))
+    print(paste0('Station id: ', cond$station_id))
     print(paste0('Time: ', cond$observation_time))
   }
 
