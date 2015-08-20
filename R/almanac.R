@@ -46,6 +46,7 @@ almanac = function(location,
   tempCol = ifelse(use_metric, "C", "F")
 
   return(dplyr::tbl_df(data.frame(location = location, 
+                    date = Sys.Date(),
                     airport = almanac$airport_code,
                     avg_high = almanac$temp_high$normal[[tempCol]],
                     rcd_high = almanac$temp_high$record[[tempCol]],
