@@ -26,7 +26,7 @@ alerts = function(location,
     return(parsed_req$alerts)
   }
   
-  #check for empty alert
+  #checks for empty alert
   if(length(parsed_req$alerts) == 0) {
     return(paste0("No alerts found at this location: ", location))
   }

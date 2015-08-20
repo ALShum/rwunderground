@@ -21,6 +21,7 @@ astronomy = function(location,
   }
   stop_for_error(parsed_req)
 
+  #checks for structure
   if(!all(c("moon_phase", "sun_phase") %in% names(parsed_req))) {
     stop(paste0("Unable to parse astronomy JSON for this location: ", location))
   } 

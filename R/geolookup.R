@@ -10,7 +10,7 @@
 #'         dist (in either mi or km)
 #' @export
 geolookup = function(location, 
-                     use_metric = TRUE,
+                     use_metric = FALSE,
                      key = get_api_key(), 
                      raw = FALSE, 
                      message = TRUE) {

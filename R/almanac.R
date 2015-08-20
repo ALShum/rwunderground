@@ -11,7 +11,7 @@
 #'         avg_high, record high, avg_low, record low.
 #' @export 
 almanac = function(location, 
-                   use_metric = TRUE, 
+                   use_metric = FALSE, 
                    key = get_api_key(), 
                    raw = FALSE, 
                    message = TRUE) {
