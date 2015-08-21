@@ -44,6 +44,26 @@ If you don't know the airport code you can look them up using `lookup_airport`:
 ### Other
 If no argument is provided to set_location then by default the nearest weather station will be used.  You can also specify location based on lat/lon or personal weather station ID.
 
+## Package Functionality Summary
+
+### Main Functions
+* `history`, `history_daily`, `history_range`: weather history functions
+* `forecast3day`, `forecast10day`: daily summary forecasts
+* `hourly`, `hourly10day`: hourly forecasts
+* `tide`, `rawtide`: tide forecasts
+* `planner`: Historical weather summary for date range
+
+### Additional API Functions
+* `alerts`: Weather alerts
+* `almanac`: historical weather records for current date
+* `astronomy`: sunrise/sunset and moonrise/moonset
+* `conditions`: current weather conditions
+* `geolookup`: weather station lookup
+* `hurricane`: current hurricane information
+* `satellite`: satellite image URLs
+* `webcam`: live webcam image URLS
+* `yesterday`: historical weather information for yesterday
+
 ## History
 After a location is set, weather history is available using `history`.
 
@@ -60,7 +80,6 @@ To get the 10 day forecast and 10 day hourly forecast for Honolulu, Hawaii:
 
 `forecast10day(set_location(territory = "Hawaii", city = "Honolulu"))`
 `hourly10day(set_location(territory = "Hawaii", city = "Honolulu"))`
-
 
 ## Tide information
 Tide high/low forecasts are available using `tide` and hourly tide forecasts available using `rawtide`.
