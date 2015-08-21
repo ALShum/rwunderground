@@ -12,8 +12,7 @@ To install please use `devtools`.  If you don't have devtools install using `ins
 Once you have your API key as indicated above you can set the key in R using: `rwunderground::set_api_key("YOUR KEY")`.  You only have to do this once as the key should save in your local .Renviron file.
 
 ## Locations
-Locations can be specified by the airport code, zip code, personal weather station ID or simply by specifying
-state and city (if in US) or country and city (if outside US).  You can use the `set_location` function which will validate locations.
+For any of the API functions you must first specify a location -- the first argument of all the API functions for locations.  Locations can be specified by the airport code, zip code, personal weather station ID or simply by specifying state and city (if in US) or country and city (if outside US).  The `set_location` function will validate locations and format things correctly or you can use a (correctly formatted) string.
 
 ### Locations by country/state/city
 Setting the location to Honolulu, HI:
