@@ -5,17 +5,14 @@ In order to use this library please [register](http://www.wunderground.com/weath
 The free-tier should be sufficient if you aren't calling the API more than a 500 times per day.  This package
 has functions that follow the [online api](http://www.wunderground.com/weather/api/d/docs).
 
-## Install
+## Install and Setup
 
 To install please use `devtools`.  If you don't have devtools install using `install.packages("devtools")`.  Afterwards install `rwunderground` using devtools: `devtools::install_github("ALShum/rwunderground")`.
 
-## Setup
-
-Once you have your API key as indicated above you can set the key in R using: `rwunderground::set_api_key("YOUR KEY")`.
+Once you have your API key as indicated above you can set the key in R using: `rwunderground::set_api_key("YOUR KEY")`.  You only have to do this once as the key should save in your local .Renviron file.
 
 ## Locations
-Locations can be specified by the airport code, zip code, personal weather station ID or simply by specifying
-state and city (if in US) or country and city (if outside US).  You can use the `set_location` function which will validate locations.
+For any of the API functions you must first specify a location -- the first argument of all the API functions for locations.  Locations can be specified by the airport code, zip code, personal weather station ID or simply by specifying state and city (if in US) or country and city (if outside US).  The `set_location` function will validate locations and format things correctly or you can use a (correctly formatted) string.
 
 ### Locations by country/state/city
 Setting the location to Honolulu, HI:
@@ -44,6 +41,26 @@ If you don't know the airport code you can look them up using `lookup_airport`:
 ### Other
 If no argument is provided to set_location then by default the nearest weather station will be used.  You can also specify location based on lat/lon or personal weather station ID.
 
+## Package Functionality Summary
+
+### Main Functions
+* `history`, `history_daily`, `history_range`: weather history functions
+* `forecast3day`, `forecast10day`: daily summary forecasts
+* `hourly`, `hourly10day`: hourly forecasts
+* `planner`: Historical weather summary for date range
+
+### Additional API Functions
+* `alerts`: Weather alerts
+* `almanac`: historical weather records for current date
+* `astronomy`: sunrise/sunset and moonrise/moonset
+* `conditions`: current weather conditions
+* `geolookup`: weather station lookup
+* `hurricane`: current hurricane information
+* `satellite`: satellite image URLs
+* `tide`, `rawtide`: tide forecasts
+* `webcam`: live webcam image URLS
+* `yesterday`: historical weather information for yesterday
+
 ## History
 After a location is set, weather history is available using `history`.
 
@@ -61,6 +78,7 @@ To get the 10 day forecast and 10 day hourly forecast for Honolulu, Hawaii:
 `forecast10day(set_location(territory = "Hawaii", city = "Honolulu"))`
 `hourly10day(set_location(territory = "Hawaii", city = "Honolulu"))`
 
+## Planner
 
 ## Tide information
 Tide high/low forecasts are available using `tide` and hourly tide forecasts available using `rawtide`.
@@ -69,7 +87,3 @@ To get the high/low tide information for Honolulu, Hawaii:
 
 `tide(set_location(territory = "Hawaii", city = "Honolulu"))`
 `rawtide(set_location(territory = "Hawaii", city = "Honolulu"))`
-
-## Almanac
-
-
