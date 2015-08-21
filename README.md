@@ -5,13 +5,11 @@ In order to use this library please [register](http://www.wunderground.com/weath
 The free-tier should be sufficient if you aren't calling the API more than a 500 times per day.  This package
 has functions that follow the [online api](http://www.wunderground.com/weather/api/d/docs).
 
-## Install
+## Install and Setup
 
 To install please use `devtools`.  If you don't have devtools install using `install.packages("devtools")`.  Afterwards install `rwunderground` using devtools: `devtools::install_github("ALShum/rwunderground")`.
 
-## Setup
-
-Once you have your API key as indicated above you can set the key in R using: `rwunderground::set_api_key("YOUR KEY")`.
+Once you have your API key as indicated above you can set the key in R using: `rwunderground::set_api_key("YOUR KEY")`.  You only have to do this once as the key should save in your local .Renviron file.
 
 ## Locations
 Locations can be specified by the airport code, zip code, personal weather station ID or simply by specifying
@@ -50,7 +48,6 @@ If no argument is provided to set_location then by default the nearest weather s
 * `history`, `history_daily`, `history_range`: weather history functions
 * `forecast3day`, `forecast10day`: daily summary forecasts
 * `hourly`, `hourly10day`: hourly forecasts
-* `tide`, `rawtide`: tide forecasts
 * `planner`: Historical weather summary for date range
 
 ### Additional API Functions
@@ -61,6 +58,7 @@ If no argument is provided to set_location then by default the nearest weather s
 * `geolookup`: weather station lookup
 * `hurricane`: current hurricane information
 * `satellite`: satellite image URLs
+* `tide`, `rawtide`: tide forecasts
 * `webcam`: live webcam image URLS
 * `yesterday`: historical weather information for yesterday
 
@@ -81,6 +79,8 @@ To get the 10 day forecast and 10 day hourly forecast for Honolulu, Hawaii:
 `forecast10day(set_location(territory = "Hawaii", city = "Honolulu"))`
 `hourly10day(set_location(territory = "Hawaii", city = "Honolulu"))`
 
+## Planner
+
 ## Tide information
 Tide high/low forecasts are available using `tide` and hourly tide forecasts available using `rawtide`.
 
@@ -88,7 +88,3 @@ To get the high/low tide information for Honolulu, Hawaii:
 
 `tide(set_location(territory = "Hawaii", city = "Honolulu"))`
 `rawtide(set_location(territory = "Hawaii", city = "Honolulu"))`
-
-## Almanac
-
-
