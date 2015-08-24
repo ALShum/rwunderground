@@ -108,13 +108,13 @@ is_valid_airport = function(name) {
 #' This is a wrapper function that will validate and format location strings
 #' for requesting data from weather underground.
 #' 
-#' @param zip_code 
-#' @param territory 
-#' @param city 
-#' @param airport_code
-#' @param PWS_id
-#' @param lat_long
-#' @param autoip
+#' @param zip_code zip code
+#' @param territory state if in US, otherwise country
+#' @param city city name 
+#' @param airport_code IATA/ICAO airport code 
+#' @param PWS_id personal weather station ID 
+#' @param lat_long latitude and longitude
+#' @param autoip location based on IP
 #' @return formatted and validated location string
 #' @export
 set_location = function(zip_code = NULL,  

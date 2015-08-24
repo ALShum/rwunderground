@@ -191,6 +191,10 @@ history_range = function(location,
                    raw = FALSE,
                    message = TRUE) {
   
+  if(no_api) {
+    
+  }
+
   date_start = as.Date(date_start, "%Y%m%d")
   date_end = as.Date(date_end, "%Y%m%d")
   date_range = format(seq.Date(date_start, date_end, "day"),
@@ -204,7 +208,7 @@ history_range = function(location,
       which(x == date_range) %% limit == 0) {
 
       if(message) {
-        print("Waiting to bypass API rate limit.")
+        print("Waiting to not exceed API rate limit.")
       }
       Sys.sleep(60)
     }

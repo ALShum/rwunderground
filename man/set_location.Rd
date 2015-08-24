@@ -8,19 +8,19 @@ set_location(zip_code = NULL, territory = NULL, city = NULL,
   airport_code = NULL, PWS_id = NULL, lat_long = NULL, autoip = NULL)
 }
 \arguments{
-\item{zip_code}{}
+\item{zip_code}{zip code}
 
-\item{territory}{}
+\item{territory}{state if in US, otherwise country}
 
-\item{city}{}
+\item{city}{city name}
 
-\item{airport_code}{}
+\item{airport_code}{IATA/ICAO airport code}
 
-\item{PWS_id}{}
+\item{PWS_id}{personal weather station ID}
 
-\item{lat_long}{}
+\item{lat_long}{latitude and longitude}
 
-\item{autoip}{}
+\item{autoip}{location based on IP}
 }
 \value{
 formatted and validated location string

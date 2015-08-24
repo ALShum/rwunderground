@@ -5,7 +5,7 @@
 \title{Hourly weather data for specified date range.}
 \usage{
 history_range(location, date_start = "20150101", date_end = "20150105",
-  limit = FALSE, no_api = FALSE, use_metric = TRUE, key = get_api_key(),
+  limit = 10, no_api = FALSE, use_metric = TRUE, key = get_api_key(),
   raw = FALSE, message = TRUE)
 }
 \arguments{
@@ -15,7 +15,8 @@ history_range(location, date_start = "20150101", date_end = "20150105",
 
 \item{date_end}{end date}
 
-\item{limit}{rate limit requests}
+\item{limit}{Maximum number of API requests per minute,
+NULL to have no limits}
 
 \item{no_api}{bypass API and use URL requests}
 
