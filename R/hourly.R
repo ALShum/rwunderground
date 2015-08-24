@@ -54,7 +54,9 @@ hourly = function(location,
          )
   })
 
-  dplyr::bind_rows(df)
+  encode_NA(
+    dplyr::bind_rows(df)
+  )
 }
 
 #' Hourly forecast for the next 10 days.
@@ -113,5 +115,7 @@ hourly10day = function(location,
          )
   })
 
-  dplyr::bind_rows(df)
+  encode_NA(
+    dplyr::bind_rows(df)    
+  )
 }

@@ -134,10 +134,6 @@ set_location = function(zip_code = NULL,
     city = gsub(" ", "_", city)
     return(paste(territory, city, sep = "/"))
   }
-  else if(!is.null(zip_code)) {
-    if(!is_valid_zip_code(zip_code)) warning("set_location: Invalid zipcode")
-    return(as.character(zip_code))
-  }
   else if(!is.null(airport_code)) {
     if(!is_valid_airport(airport_code)) warning("set_location: Invalid airport code")
     return(airport_code)

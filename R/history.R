@@ -62,7 +62,9 @@ history = function(location,
   		)
   })
 
-  dplyr::bind_rows(lapply(df, data.frame, stringsAsFactors = FALSE))
+  encode_NA(
+    dplyr::bind_rows(lapply(df, data.frame, stringsAsFactors = FALSE))
+  )
 }
 
 #' Summarized weather data for specified date. 

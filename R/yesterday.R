@@ -89,7 +89,9 @@ yesterday = function(location,
        since_jan_cooling_normal = as.numeric(ds$since1jancoolingdegreedaysnormal)
     )
 
-    return(dplyr::tbl_df(df))
+    return(
+      dplyr::tbl_df(df)
+    )
   } 
 
   df = lapply(hist$observations, function(x) {
@@ -116,5 +118,7 @@ yesterday = function(location,
       )
   })
 
-  dplyr::bind_rows(df)
+  encode_NA(
+    dplyr::bind_rows(df)
+  )
 }
