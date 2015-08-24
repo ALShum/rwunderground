@@ -3,7 +3,7 @@
 #' @return data.frame of airport codes with country and city
 #' @export
 list_airports = function() {
-  airport_data = read.csv(system.file("data/airport_data.csv", package = "rwunderground"), header=T, stringsAsFactor = FALSE)
+  airport_data = read.csv(system.file("extdata/airport_data.csv", package = "rwunderground"), header=T, stringsAsFactor = FALSE)
   return(airport_data)
 }
 
