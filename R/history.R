@@ -168,7 +168,8 @@ history_daily = function(location,
 #' @param location location set by set_location
 #' @param date_start start date 
 #' @param date_end end date
-#' @param limit rate limit requests
+#' @param limit Maximum number of API requests per minute, 
+#'              NULL to have no limits
 #' @param no_api bypass API and use URL requests
 #' @param use_metric Metric or imperial units
 #' @param key weather underground API key
@@ -183,7 +184,7 @@ history_daily = function(location,
 history_range = function(location, 
                    date_start = "20150101",
                    date_end = "20150105",
-                   limit = FALSE, #rate limit 
+                   limit = 10,
                    no_api = FALSE, #get data from URL instead of API
                    use_metric = TRUE,
                    key = get_api_key(), 
@@ -197,6 +198,16 @@ history_range = function(location,
 
   history_list = 
   lapply(date_range, function(x) {
+    if(!is.null(limit) &
+      length(date_range) > limit & 
+      which(x == date_range) > 0 & 
+      which(x == date_range) %% limit == 0) {
+
+      if(message) {
+        print("Waiting to bypass API rate limit.")
+      }
+      Sys.sleep(60)
+    }
     history(location = location, 
             date = x, 
             use_metric = use_metric,
