@@ -34,7 +34,7 @@ tide = function(location,
     print(paste0(tide_info$tideSite, ": ", tide_info$lat, "/", tide_info$lon))  
   }
 
-  ## TODO:: summary stats unused (min/max tide for day)
+  ## summary stats unused (min/max tide for day)
   tide_summary_stats = tide$tideSummaryStats
   tide_summary = tide$tideSummary
 
@@ -86,7 +86,7 @@ rawtide = function(location,
     print(paste0(tide_info$tideSite, ": ", tide_info$lat, "/", tide_info$lon))  
   }
 
-  ## TODO:: summary stats unused (min/max tide for day)
+  ## summary stats unused (min/max tide for day)
   rawtide_summary_stats = rawtide$rawTideStats
   rawtide_summary = rawtide$rawTideObs
 

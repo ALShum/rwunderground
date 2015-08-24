@@ -46,7 +46,7 @@ forecast3day = function(location,
         date = as.POSIXct(as.numeric(x$date$epoch), origin = "1970-01-01", tz = x$date$tz_short),
         temp_high = as.numeric(x$high[[tempCol]]),
         temp_low = as.numeric(x$low[[tempCol]]),
-        cond = x$conditions,  ## TODO: multiple conditions?
+        cond = x$conditions,  ## multiple conditions unhandled
         p_precip = x$pop,
         rain_allday = x$qpf_allday[[amtCol]],
         rain_day = ifelse(is.null(x$qpf_day[[amtCol]]),
@@ -120,7 +120,7 @@ forecast10day = function(location,
          date = as.POSIXct(as.numeric(x$date$epoch), origin = "1970-01-01", tz = x$date$tz_short),
          temp_high = as.numeric(x$high[[tempCol]]),
          temp_low = as.numeric(x$low[[tempCol]]),
-         cond = x$conditions,  ## TODO: multiple conditions?
+         cond = x$conditions,  ## multiple conditions unhandled
          p_precip = x$pop,
          rain_allday = x$qpf_allday[[amtCol]],
          rain_day = ifelse(is.null(x$qpf_day[[amtCol]]),

@@ -42,7 +42,6 @@ almanac = function(location,
     stop(paste0("Invalid structure for alamanac for this location: "), location)
   }
   
-  #Celsius or F
   tempCol = ifelse(use_metric, "C", "F")
 
   return(dplyr::tbl_df(data.frame(location = location, 
