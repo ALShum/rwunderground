@@ -85,7 +85,7 @@ wunderground_request = function(request_type,
 
 #' Processes data.frames and replaces wunderground's -9999/-999 to NAs 
 #'
-#' @param data.frame the data.frame to process
+#' @param df the data.frame to process
 #' @return data.frame with correctly encoded NAs
 #' 
 encode_NA = function(df) {
@@ -94,4 +94,3 @@ encode_NA = function(df) {
 
   df
 }
-

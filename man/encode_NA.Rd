@@ -7,7 +7,7 @@
 encode_NA(df)
 }
 \arguments{
-\item{data.frame}{the data.frame to process}
+\item{df}{the data.frame to process}
 }
 \value{
 data.frame with correctly encoded NAs
