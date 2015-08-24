@@ -2,7 +2,6 @@
 #' 
 #' @param location location set by set_location
 #' @param date Date as YYYYMMDD format
-#' @param date_fmt date format to return
 #' @param col_names date format to return
 #' @param use_metric Metric or imperial units
 #' @param key weather underground API key
@@ -16,8 +15,7 @@
 #' @export 
 history = function(location, 
                    date = "20150101",
-                   date_fmt = "pretty",  ## TODO 
-                   use_metric = TRUE,
+                   use_metric = FALSE,
                    key = get_api_key(), 
                    raw = FALSE, 
                    message = TRUE) {
@@ -40,7 +38,12 @@ history = function(location,
 
   suffix = ifelse(use_metric, "m", "i")
   df = lapply(hist$observations, function(x) {
-  	list(date = x$date$pretty, ## TODO:: date 
+  	list(
+       date = as.POSIXct(
+          paste0(x$date$year, "-", x$date$mon, "-",
+            x$date$mday, " ", x$date$hour, ":", x$date$min),
+          tz = x$date$tzname
+       ),
   		 temp = as.numeric(x[[paste0("temp", suffix)]]),
   		 dew_pt = as.numeric(x[[paste0("dewpt", suffix)]]),
   		 hum = as.numeric(x$hum),
@@ -71,7 +74,6 @@ history = function(location,
 #' 
 #' @param location location set by set_location
 #' @param date Date as YYYYMMDD format
-#' @param date_fmt date format to return
 #' @param col_names date format to return
 #' @param use_metric Metric or imperial units
 #' @param key weather underground API key
@@ -81,7 +83,6 @@ history = function(location,
 #' @export 
 history_daily = function(location, 
                    date = "20150101",
-                   date_fmt = "pretty",  ## TODO 
                    use_metric = TRUE,
                    key = get_api_key(), 
                    raw = FALSE, 
@@ -105,7 +106,12 @@ history_daily = function(location,
 
   suffix = ifelse(use_metric, "m", "i")
   ds = hist$dailysummary[[1]]
-  df = data.frame(date = ds$date$pretty, ## TODO:: date 
+  df = data.frame(
+     date = as.POSIXct(
+        paste0(ds$date$year, "-", ds$date$mon, "-",
+          ds$date$mday, " ", ds$date$hour, ":", ds$date$min),
+        tz = ds$date$tzname
+     ),
 		 fog = as.numeric(ds$fog),
 		 rain = as.numeric(ds$rain),
 		 snow = as.numeric(ds$snow),
@@ -163,7 +169,6 @@ history_daily = function(location,
 #' 
 #' @param location location set by set_location
 #' @param date Date as YYYYMMDD format
-#' @param date_fmt date format to return
 #' @param col_names date format to return
 #' @param use_metric Metric or imperial units
 #' @param key weather underground API key
@@ -180,7 +185,6 @@ history_range = function(location,
                    date_end = "20150105",
                    limit = FALSE, #rate limit 
                    no_api = FALSE, #get data from URL instead of API
-                   date_fmt = "pretty",  ## TODO 
                    use_metric = TRUE,
                    key = get_api_key(), 
                    raw = FALSE,
@@ -195,7 +199,6 @@ history_range = function(location,
   lapply(date_range, function(x) {
     history(location = location, 
             date = x, 
-            date_fmt = date_fmt,
             use_metric = use_metric,
             raw = raw,
             key = key,

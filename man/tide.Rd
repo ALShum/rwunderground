@@ -5,13 +5,10 @@
 \title{Tidal information for a location within the USA.
 Tidal information only available for US cities.  Units are in feet.}
 \usage{
-tide(location, date_fmt = "pretty", key = get_api_key(), raw = FALSE,
-  message = TRUE)
+tide(location, key = get_api_key(), raw = FALSE, message = TRUE)
 }
 \arguments{
 \item{location}{location set by set_location}
-
-\item{date_fmt}{date format to return}
 
 \item{key}{weather underground API key}
 

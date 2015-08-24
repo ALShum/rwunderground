@@ -1,13 +1,11 @@
-#' Current hurricane - within the US only
-#' 
-#' @param date_fmt date format to return
+#' Current hurricane - within the US only.
+#' Note: all times in eastern
 #' @param key weather underground API key
 #' @param raw if TRUE return raw httr object
 #' @param message if TRUE print out requested URL
 #' @return Hurricane info
 #' @export
-current_hurricane = function(date_fmt = "pretty",  ## TODO 
-                             key = get_api_key(), 
+current_hurricane = function(key = get_api_key(), 
                              use_metric = TRUE,
                              raw = FALSE,
                              message = TRUE) {
@@ -38,9 +36,9 @@ current_hurricane = function(date_fmt = "pretty",  ## TODO
   df = lapply(hurricane, function(x) {
     data.frame(
       name = x$stormInfo$stormName_Nice,
+      time = as.POSIXct(as.numeric(x$Current$Time$epoch), origin = "1970-01-01", tz = "EST"),
       lat = as.numeric(x$Current$lat),
       lon = as.numeric(x$Current$lon),
-      time = x$Current$Time$pretty,  ##TODO date fmt
       saffirsimpsoncat = as.numeric(x$Current$SaffirSimpsonCategory),
       wind_spd = as.numeric(x$Current$WindSpeed[[spd]]),
       wind_gust = ifelse(is.null(x$Current$WindGust[[spd]]),

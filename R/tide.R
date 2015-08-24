@@ -2,14 +2,12 @@
 #' Tidal information only available for US cities.  Units are in feet.
 #'
 #' @param location location set by set_location
-#' @param date_fmt date format to return
 #' @param key weather underground API key
 #' @param raw if TRUE return raw httr object
 #' @param message if TRUE print out requested URL
 #' @return tbl_df with date, height and type
 #' @export
 tide = function(location, 
-                date_fmt = "pretty",  ## TODO 
                 key = get_api_key(), 
                 raw = FALSE, 
                 message = TRUE) {
@@ -42,7 +40,7 @@ tide = function(location,
 
   df = lapply(tide_summary, function(x) {
     data.frame(
-      date = x$date$pretty, ##TODO date_fmt
+      date = as.POSIXct(as.numeric(x$date$epoch), origin = "1970-01-01", tz = x$date$tzname),
       height = as.numeric(gsub("ft", "", x$data$height)),
       type = x$data$type,
         stringsAsFactors = FALSE
@@ -56,14 +54,12 @@ tide = function(location,
 #' Tidal information only available for US cities.  Units are in feet.
 #'
 #' @param location location set by set_location
-#' @param date_fmt date format to return
 #' @param key weather underground API key
 #' @param raw if TRUE return raw httr object
 #' @param message if TRUE print out requested URL
 #' @return tbl_df with time (epoch) and height
 #' @export
 rawtide = function(location, 
-                   date_fmt = "pretty",  ## TODO 
                    key = get_api_key(), 
                    raw = FALSE, 
                    message = TRUE) {
@@ -97,7 +93,7 @@ rawtide = function(location,
   tz = rawtide$tideInfo[[1]]$tzname
   df = lapply(rawtide_summary, function(x) {
     data.frame(
-      date = as.POSIXct(x$epoch, origin = '1970-01-01 00:00.00 UTC', tz = tz),
+      date = as.POSIXct(x$epoch, origin = '1970-01-01', tz = tz),
       height = x$height,
         stringsAsFactors = FALSE
     )

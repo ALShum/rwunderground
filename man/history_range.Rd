@@ -5,13 +5,11 @@
 \title{Hourly weather data for specified date range.}
 \usage{
 history_range(location, date_start = "20150101", date_end = "20150105",
-  limit = FALSE, no_api = FALSE, date_fmt = "pretty", use_metric = TRUE,
-  key = get_api_key(), raw = FALSE, message = TRUE)
+  limit = FALSE, no_api = FALSE, use_metric = TRUE, key = get_api_key(),
+  raw = FALSE, message = TRUE)
 }
 \arguments{
 \item{location}{location set by set_location}
-
-\item{date_fmt}{date format to return}
 
 \item{use_metric}{Metric or imperial units}
 

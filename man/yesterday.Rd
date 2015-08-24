@@ -4,13 +4,11 @@
 \alias{yesterday}
 \title{Weather data for yesterday}
 \usage{
-yesterday(location, date_fmt = "pretty", use_metric = TRUE,
-  key = get_api_key(), raw = FALSE, message = TRUE, summary = FALSE)
+yesterday(location, use_metric = TRUE, key = get_api_key(), raw = FALSE,
+  message = TRUE, summary = FALSE)
 }
 \arguments{
 \item{location}{location set by set_location}
-
-\item{date_fmt}{date format to return}
 
 \item{use_metric}{Metric or imperial units}
 

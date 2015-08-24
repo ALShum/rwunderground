@@ -4,15 +4,13 @@
 \alias{history_daily}
 \title{Summarized weather data for specified date.}
 \usage{
-history_daily(location, date = "20150101", date_fmt = "pretty",
-  use_metric = TRUE, key = get_api_key(), raw = FALSE, message = TRUE)
+history_daily(location, date = "20150101", use_metric = TRUE,
+  key = get_api_key(), raw = FALSE, message = TRUE)
 }
 \arguments{
 \item{location}{location set by set_location}
 
 \item{date}{Date as YYYYMMDD format}
-
-\item{date_fmt}{date format to return}
 
 \item{use_metric}{Metric or imperial units}
 

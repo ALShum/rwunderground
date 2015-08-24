@@ -2,14 +2,13 @@
 % Please edit documentation in R/hurricane.R
 \name{current_hurricane}
 \alias{current_hurricane}
-\title{Current hurricane - within the US only}
+\title{Current hurricane - within the US only.
+Note: all times in eastern}
 \usage{
-current_hurricane(date_fmt = "pretty", key = get_api_key(),
-  use_metric = TRUE, raw = FALSE, message = TRUE)
+current_hurricane(key = get_api_key(), use_metric = TRUE, raw = FALSE,
+  message = TRUE)
 }
 \arguments{
-\item{date_fmt}{date format to return}
-
 \item{key}{weather underground API key}
 
 \item{raw}{if TRUE return raw httr object}
@@ -20,6 +19,7 @@ current_hurricane(date_fmt = "pretty", key = get_api_key(),
 Hurricane info
 }
 \description{
-Current hurricane - within the US only
+Current hurricane - within the US only.
+Note: all times in eastern
 }
 

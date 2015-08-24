@@ -1,18 +1,16 @@
 #' Forecast for the next 3 days.
 #' 
 #' @param location location set by set_location
-#' @param date_fmt date format to return
 #' @param use_metric Metric or imperial units
 #' @param key weather underground API key
 #' @param raw if TRUE return raw httr object
 #' @param message if TRUE print out requested URL
-#' @return tbl_df with date, high and low temp,
+#' @return tbl_df with date (in posix format), high and low temp,
 #'         conditions, precipitation, rain, snow,
 #'         max and avg wind speed, max/min and avg humidity
 #' @export 
 forecast3day = function(location, 
-                    date_fmt = "pretty",  ## TODO 
-                    use_metric = TRUE,
+                    use_metric = FALSE,
                     key = get_api_key(), 
                     raw = FALSE, 
                     message = TRUE) {
@@ -44,7 +42,8 @@ forecast3day = function(location,
   
   fcast = parsed_req$forecast$simpleforecast$forecastday
   df = lapply(fcast, function(x) {
-    data.frame(date = x$date$pretty,
+    data.frame(
+        date = as.POSIXct(as.numeric(x$date$epoch), origin = "1970-01-01", tz = x$date$tz_short),
         temp_high = as.numeric(x$high[[tempCol]]),
         temp_low = as.numeric(x$low[[tempCol]]),
         cond = x$conditions,  ## TODO: multiple conditions?
@@ -76,18 +75,16 @@ forecast3day = function(location,
 #' Forecast for the next 10 days.
 #' 
 #' @param location location set by set_location
-#' @param date_fmt date format to return
 #' @param use_metric Metric or imperial units
 #' @param key weather underground API key
 #' @param raw if TRUE return raw httr object
 #' @param message if TRUE print out requested URL
-#' @return tbl_df with date, high and low temp,
+#' @return tbl_df with date (in posix format), high and low temp,
 #'         conditions, precipitation, rain, snow,
 #'         max and avg wind speed, max/min and avg humidity
 #' @export 
 forecast10day = function(location, 
-                         date_fmt = "pretty",  ## TODO 
-                         use_metric = TRUE,
+                         use_metric = FALSE,
                          key = get_api_key(), 
                          raw = FALSE, 
                          message = TRUE) {
@@ -119,7 +116,8 @@ forecast10day = function(location,
   
   fcast = parsed_req$forecast$simpleforecast$forecastday
   df = lapply(fcast, function(x) {
-    data.frame(date = x$date$pretty, ##todo
+    data.frame(
+         date = as.POSIXct(as.numeric(x$date$epoch), origin = "1970-01-01", tz = x$date$tz_short),
          temp_high = as.numeric(x$high[[tempCol]]),
          temp_low = as.numeric(x$low[[tempCol]]),
          cond = x$conditions,  ## TODO: multiple conditions?

@@ -5,13 +5,10 @@
 \title{Raw Tidal data with data every 5 minutes for US locations
 Tidal information only available for US cities.  Units are in feet.}
 \usage{
-rawtide(location, date_fmt = "pretty", key = get_api_key(), raw = FALSE,
-  message = TRUE)
+rawtide(location, key = get_api_key(), raw = FALSE, message = TRUE)
 }
 \arguments{
 \item{location}{location set by set_location}
-
-\item{date_fmt}{date format to return}
 
 \item{key}{weather underground API key}
 

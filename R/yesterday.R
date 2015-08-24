@@ -1,7 +1,6 @@
 #' Weather data for yesterday
 #' 
 #' @param location location set by set_location
-#' @param date_fmt date format to return
 #' @param use_metric Metric or imperial units
 #' @param key weather underground API key
 #' @param raw if TRUE return raw httr object
@@ -14,7 +13,6 @@
 #'         hail, thunder, tornado
 #' @export 
 yesterday = function(location, 
-                     date_fmt = "pretty",  ## TODO 
                    	 use_metric = TRUE, 
                      key = get_api_key(), 
                      raw = FALSE, 
@@ -38,7 +36,11 @@ yesterday = function(location,
   suffix = ifelse(use_metric, "m", "i")
   if(summary) {
     ds = hist$dailysummary[[1]]
-    df = data.frame(date = ds$date$pretty, ## TODO:: date 
+    df = data.frame( 
+       date = as.POSIXct(
+         paste0(ds$date$year, "-", ds$date$mon, "-", ds$date$mday, " ",
+          ds$date$hour, ":", ds$date$min), tz = ds$date$tzname
+       ),
        fog = as.numeric(ds$fog),
        rain = as.numeric(ds$rain),
        snow = as.numeric(ds$snow),
@@ -95,7 +97,11 @@ yesterday = function(location,
   } 
 
   df = lapply(hist$observations, function(x) {
-    data.frame(date = x$date$pretty, ## TODO:: date 
+    data.frame(
+       date = as.POSIXct(
+         paste0(x$date$year, "-", x$date$mon, "-", x$date$mday, " ",
+          x$date$hour, ":", x$date$min), tz = x$date$tzname
+       ),
        temp = as.numeric(x[[paste0("temp", suffix)]]),
        dew_pt = as.numeric(x[[paste0("dewpt", suffix)]]),
        hum = as.numeric(x$hum),

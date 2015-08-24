@@ -1,7 +1,6 @@
 #' Hourly forecast for the next 24 hours.
 #' 
 #' @param location location set by set_location
-#' @param date_fmt date format to return
 #' @param use_metric Metric or imperial units
 #' @param key weather underground API key
 #' @param raw if TRUE return raw httr object
@@ -12,7 +11,6 @@
 #'         rain, snow, pop, mslp
 #' @export 
 hourly = function(location,
-                  date_fmt = "pretty",  ## TODO 
                   use_metric = TRUE,
                   key = get_api_key(),
                   raw = FALSE,
@@ -35,7 +33,9 @@ hourly = function(location,
 
   units = ifelse(use_metric, "metric", "english")    
   df = lapply(hourly_forecast, function(x) {
-    data.frame(date = x$FCTTIME$pretty, ##date fmt
+    data.frame(
+         date = as.POSIXct(as.numeric(x$FCTTIME$epoch),
+          origin = "1970-01-01", tz = strsplit(x$FCTTIME$pretty, split = " ")[[1]][3]),
          temp = as.numeric(x$temp[[units]]),
          dew_pt = as.numeric(x$dewpoint[[units]]),
          cond = x$condition,
@@ -62,7 +62,6 @@ hourly = function(location,
 #' Hourly forecast for the next 10 days.
 #' 
 #' @param location location set by set_location
-#' @param date_fmt date format to return
 #' @param use_metric Metric or imperial units
 #' @param key weather underground API key
 #' @param raw if TRUE return raw httr object
@@ -73,7 +72,6 @@ hourly = function(location,
 #'         rain, snow, pop, mslp
 #' @export 
 hourly10day = function(location,
-                  date_fmt = "pretty",  ## TODO 
                   use_metric = TRUE,
                   key = get_api_key(),
                   raw = FALSE,
@@ -96,7 +94,9 @@ hourly10day = function(location,
 
   units = ifelse(use_metric, "metric", "english")    
   df = lapply(hourly_forecast, function(x){
-    data.frame(date = x$FCTTIME$pretty, ##date fmt
+    data.frame(
+         date = as.POSIXct(as.numeric(x$FCTTIME$epoch),
+          origin = "1970-01-01", tz = strsplit(x$FCTTIME$pretty, split = " ")[[1]][3]),
          temp = as.numeric(x$temp[[units]]),
          dew_pt = as.numeric(x$dewpoint[[units]]),
          cond = x$condition,

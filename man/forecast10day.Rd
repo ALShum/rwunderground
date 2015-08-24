@@ -4,13 +4,11 @@
 \alias{forecast10day}
 \title{Forecast for the next 10 days.}
 \usage{
-forecast10day(location, date_fmt = "pretty", use_metric = TRUE,
-  key = get_api_key(), raw = FALSE, message = TRUE)
+forecast10day(location, use_metric = FALSE, key = get_api_key(),
+  raw = FALSE, message = TRUE)
 }
 \arguments{
 \item{location}{location set by set_location}
-
-\item{date_fmt}{date format to return}
 
 \item{use_metric}{Metric or imperial units}
 
@@ -21,7 +19,7 @@ forecast10day(location, date_fmt = "pretty", use_metric = TRUE,
 \item{message}{if TRUE print out requested URL}
 }
 \value{
-tbl_df with date, high and low temp,
+tbl_df with date (in posix format), high and low temp,
         conditions, precipitation, rain, snow,
         max and avg wind speed, max/min and avg humidity
 }

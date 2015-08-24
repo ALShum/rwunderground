@@ -4,13 +4,11 @@
 \alias{hourly}
 \title{Hourly forecast for the next 24 hours.}
 \usage{
-hourly(location, date_fmt = "pretty", use_metric = TRUE,
-  key = get_api_key(), raw = FALSE, message = TRUE)
+hourly(location, use_metric = TRUE, key = get_api_key(), raw = FALSE,
+  message = TRUE)
 }
 \arguments{
 \item{location}{location set by set_location}
-
-\item{date_fmt}{date format to return}
 
 \item{use_metric}{Metric or imperial units}
 
