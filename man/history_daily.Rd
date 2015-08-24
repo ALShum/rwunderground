@@ -19,8 +19,6 @@ history_daily(location, date = "20150101", use_metric = TRUE,
 \item{raw}{if TRUE return raw httr object}
 
 \item{message}{if TRUE print out requested URL}
-
-\item{col_names}{date format to return}
 }
 \value{
 tbl_df of summarized weather

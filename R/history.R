@@ -2,7 +2,6 @@
 #' 
 #' @param location location set by set_location
 #' @param date Date as YYYYMMDD format
-#' @param col_names date format to return
 #' @param use_metric Metric or imperial units
 #' @param key weather underground API key
 #' @param raw if TRUE return raw httr object
@@ -74,7 +73,6 @@ history = function(location,
 #' 
 #' @param location location set by set_location
 #' @param date Date as YYYYMMDD format
-#' @param col_names date format to return
 #' @param use_metric Metric or imperial units
 #' @param key weather underground API key
 #' @param raw if TRUE return raw httr object
@@ -168,8 +166,10 @@ history_daily = function(location,
 #' Hourly weather data for specified date range. 
 #' 
 #' @param location location set by set_location
-#' @param date Date as YYYYMMDD format
-#' @param col_names date format to return
+#' @param date_start start date 
+#' @param date_end end date
+#' @param limit rate limit requests
+#' @param no_api bypass API and use URL requests
 #' @param use_metric Metric or imperial units
 #' @param key weather underground API key
 #' @param raw if TRUE return raw httr object

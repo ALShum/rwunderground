@@ -19,8 +19,6 @@ history(location, date = "20150101", use_metric = FALSE,
 \item{raw}{if TRUE return raw httr object}
 
 \item{message}{if TRUE print out requested URL}
-
-\item{col_names}{date format to return}
 }
 \value{
 tbl_df with date, temperature, dew point,

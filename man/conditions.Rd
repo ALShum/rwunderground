@@ -12,6 +12,8 @@ conditions(location, use_metric = FALSE, key = get_api_key(), raw = FALSE,
 \arguments{
 \item{location}{location set by set_location}
 
+\item{use_metric}{Metric or imperial units}
+
 \item{key}{weather underground API key}
 
 \item{raw}{if TRUE return raw httr object}

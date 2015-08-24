@@ -11,6 +11,14 @@ history_range(location, date_start = "20150101", date_end = "20150105",
 \arguments{
 \item{location}{location set by set_location}
 
+\item{date_start}{start date}
+
+\item{date_end}{end date}
+
+\item{limit}{rate limit requests}
+
+\item{no_api}{bypass API and use URL requests}
+
 \item{use_metric}{Metric or imperial units}
 
 \item{key}{weather underground API key}
@@ -18,10 +26,6 @@ history_range(location, date_start = "20150101", date_end = "20150105",
 \item{raw}{if TRUE return raw httr object}
 
 \item{message}{if TRUE print out requested URL}
-
-\item{date}{Date as YYYYMMDD format}
-
-\item{col_names}{date format to return}
 }
 \value{
 tbl_df with date, temperature, dew point,

@@ -11,6 +11,8 @@ current_hurricane(key = get_api_key(), use_metric = TRUE, raw = FALSE,
 \arguments{
 \item{key}{weather underground API key}
 
+\item{use_metric}{Metric or imperial units}
+
 \item{raw}{if TRUE return raw httr object}
 
 \item{message}{if TRUE print out requested URL}

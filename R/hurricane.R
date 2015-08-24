@@ -1,6 +1,7 @@
 #' Current hurricane - within the US only.
 #' Note: all times in eastern
 #' @param key weather underground API key
+#' @param use_metric Metric or imperial units
 #' @param raw if TRUE return raw httr object
 #' @param message if TRUE print out requested URL
 #' @return Hurricane info

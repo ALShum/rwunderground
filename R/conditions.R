@@ -3,6 +3,7 @@
 #' and visibility.
 #'
 #' @param location location set by set_location
+#' @param use_metric Metric or imperial units
 #' @param key weather underground API key
 #' @param raw if TRUE return raw httr object
 #' @param message if TRUE print out requested URL
