@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/ALShum/rwunderground.svg)](https://travis-ci.org/ALShum/rwunderground)
+
 # Weather Underground R API
 
 This is an R interface to weather underground's [API](http://www.wunderground.com/weather/api).  
