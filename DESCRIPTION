@@ -1,6 +1,6 @@
 Package: rwunderground
 Type: Package
-Title: R interface to weather underground API
+Title: R Interface to Weather Underground API
 Version: 0.1.0
 Date: 2015-08-24
 Author: Alex Shum <alex@ALShum.com>
