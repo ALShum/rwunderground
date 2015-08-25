@@ -10,3 +10,5 @@ No ERRORs.  No WARNINGs.
 
 Only 1 NOTE pertaining about this package being a new submission.
 
+## Downstream dependencies
+There are currently no downstream dependencies for this package.
