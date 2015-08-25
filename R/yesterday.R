@@ -12,8 +12,14 @@
 #'         precipitation, condition, fog, rain, snow,
 #'         hail, thunder, tornado
 #' @export 
+#' @examples
+#' yesterday(set_location(territory = "Hawaii", city = "Honolulu"))
+#' yesterday(set_location(territory = "Iowa", city = "Iowa City"))
+#' yesterday(set_location(territory = "Iraq", city = "Baghdad"))
+#' yesterday(set_location(territory = "IR", city = "Tehran"), summary = TRUE)
+#'
 yesterday = function(location, 
-                   	 use_metric = TRUE, 
+                   	 use_metric = FALSE, 
                      key = get_api_key(), 
                      raw = FALSE, 
                      message = TRUE,

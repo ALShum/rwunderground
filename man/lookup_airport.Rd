@@ -19,4 +19,9 @@ data.frame of matching airport name and IATA/ICAO codes
 Lookup airport code (IATA and ICAO code).
 weatherunderground API might not recognize the IATA/ICAO code for smaller airports.
 }
+\examples{
+lookup_airport("Honolulu")
+lookup_airport("Pyongyang")
+lookup_airport("Portland", region = "Los_Angeles")
+}
 

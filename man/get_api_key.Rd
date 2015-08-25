@@ -12,4 +12,7 @@ API key
 \description{
 Returns the wunderground API key
 }
+\examples{
+get_api_key()
+}
 

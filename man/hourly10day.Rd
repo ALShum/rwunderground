@@ -4,8 +4,8 @@
 \alias{hourly10day}
 \title{Hourly forecast for the next 10 days.}
 \usage{
-hourly10day(location, use_metric = TRUE, key = get_api_key(), raw = FALSE,
-  message = TRUE)
+hourly10day(location, use_metric = FALSE, key = get_api_key(),
+  raw = FALSE, message = TRUE)
 }
 \arguments{
 \item{location}{location set by set_location}
@@ -26,5 +26,11 @@ tbl_df with date, temperature, dew point,
 }
 \description{
 Hourly forecast for the next 10 days.
+}
+\examples{
+hourly10day(set_location(territory = "Hawaii", city = "Honolulu"))
+hourly10day(set_location(airport_code = "SEA"))
+hourly10day(set_location(zip_code = "90210"))
+hourly10day(set_location(territory = "IR", city = "Tehran"))
 }
 

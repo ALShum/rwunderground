@@ -22,4 +22,10 @@ tbl_df with: location, moon phase, percent visible,
 \description{
 Moon phase, sunrise and sunset times for today.
 }
+\examples{
+astronomy(set_location(territory = "Hawaii", city = "Honolulu"))
+astronomy(set_location(airport_code = "SEA"))
+astronomy(set_location(zip_code = "90210"))
+astronomy(set_location(territory = "IR", city = "Tehran"))
+}
 

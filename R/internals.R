@@ -38,6 +38,7 @@ build_url = function(key = get_api_key(),
 #' Detect and stop for any wunderground request errors 
 #' 
 #' @param httr_parsed_req httr request object 
+#'
 stop_for_error = function(httr_parsed_req) {
   if(is.null(httr_parsed_req$response)) {
     stop("Unknown error: Server failed to provide response status")

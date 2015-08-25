@@ -10,8 +10,14 @@
 #'         humidity, windchill, heat index, real feel,
 #'         rain, snow, pop, mslp
 #' @export 
+#' @examples
+#' hourly(set_location(territory = "Hawaii", city = "Honolulu"))
+#' hourly(set_location(airport_code = "SEA"))
+#' hourly(set_location(zip_code = "90210"))
+#' hourly(set_location(territory = "IR", city = "Tehran"))
+#'
 hourly = function(location,
-                  use_metric = TRUE,
+                  use_metric = FALSE,
                   key = get_api_key(),
                   raw = FALSE,
                   message = TRUE) {
@@ -70,9 +76,15 @@ hourly = function(location,
 #'         condition, wind speed and direction, UV index,
 #'         humidity, windchill, heat index, real feel,
 #'         rain, snow, pop, mslp
-#' @export 
+#' @export
+#' @examples
+#' hourly10day(set_location(territory = "Hawaii", city = "Honolulu"))
+#' hourly10day(set_location(airport_code = "SEA"))
+#' hourly10day(set_location(zip_code = "90210"))
+#' hourly10day(set_location(territory = "IR", city = "Tehran"))
+#'
 hourly10day = function(location,
-                  use_metric = TRUE,
+                  use_metric = FALSE,
                   key = get_api_key(),
                   raw = FALSE,
                   message = TRUE) {

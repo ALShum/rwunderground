@@ -12,4 +12,7 @@ data.frame of states with abbreviation and region
 \description{
 Returns a data.frame of valid states with abbreviations and regions
 }
+\examples{
+list_states()
+}
 

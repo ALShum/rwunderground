@@ -9,8 +9,13 @@
 #' @param message if TRUE print out requested URL
 #' @return tbl_df
 #' @export
+#' @examples
+#' planner(set_location(territory = "Hawaii", city = "Honolulu"), start_date = "0101", end_date = "0131")
+#' planner(set_location(territory = "Washington", city = "Seattle"), start_date = "01201", end_date = "1231")
+#' planner(set_location(territory = "Louisiana", city = "New Orleans"), start_date = "0501", end_date = "0531")
+#' 
 planner = function(location, 
-                   use_metric = TRUE,
+                   use_metric = FALSE,
                    start_date = "0501",
                    end_date = "0531",
                    key = get_api_key(), 

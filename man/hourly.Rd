@@ -4,7 +4,7 @@
 \alias{hourly}
 \title{Hourly forecast for the next 24 hours.}
 \usage{
-hourly(location, use_metric = TRUE, key = get_api_key(), raw = FALSE,
+hourly(location, use_metric = FALSE, key = get_api_key(), raw = FALSE,
   message = TRUE)
 }
 \arguments{
@@ -26,5 +26,11 @@ tbl_df with date, temperature, dew point,
 }
 \description{
 Hourly forecast for the next 24 hours.
+}
+\examples{
+hourly(set_location(territory = "Hawaii", city = "Honolulu"))
+hourly(set_location(airport_code = "SEA"))
+hourly(set_location(zip_code = "90210"))
+hourly(set_location(territory = "IR", city = "Tehran"))
 }
 

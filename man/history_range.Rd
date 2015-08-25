@@ -5,7 +5,7 @@
 \title{Hourly weather data for specified date range.}
 \usage{
 history_range(location, date_start = "20150101", date_end = "20150105",
-  limit = 10, no_api = FALSE, use_metric = TRUE, key = get_api_key(),
+  limit = 10, no_api = FALSE, use_metric = FALSE, key = get_api_key(),
   raw = FALSE, message = TRUE)
 }
 \arguments{
@@ -37,5 +37,11 @@ tbl_df with date, temperature, dew point,
 }
 \description{
 Hourly weather data for specified date range.
+}
+\examples{
+history_range(set_location(territory = "Hawaii", city = "Honolulu"), "20130101", "20130105")
+history_range(set_location(airport_code = "SEA"), "20130101", "20130105")
+history_range(set_location(zip_code = "90210"), "20130131", "20130205")
+history_range(set_location(territory = "IR", city = "Tehran"), "20140131", "20130205")
 }
 

@@ -8,7 +8,13 @@
 #' @return tbl_df with date (in posix format), high and low temp,
 #'         conditions, precipitation, rain, snow,
 #'         max and avg wind speed, max/min and avg humidity
-#' @export 
+#' @export
+#' @examples
+#' forecast3day(set_location(territory = "Hawaii", city = "Honolulu"))
+#' forecast3day(set_location(airport_code = "SEA"))
+#' forecast3day(set_location(zip_code = "90210"))
+#' forecast3day(set_location(territory = "IR", city = "Tehran"))
+#' 
 forecast3day = function(location, 
                     use_metric = FALSE,
                     key = get_api_key(), 
@@ -43,7 +49,7 @@ forecast3day = function(location,
   fcast = parsed_req$forecast$simpleforecast$forecastday
   df = lapply(fcast, function(x) {
     data.frame(
-        date = as.POSIXct(as.numeric(x$date$epoch), origin = "1970-01-01", tz = x$date$tz_short),
+        date = as.POSIXct(as.numeric(x$date$epoch), origin = "1970-01-01", tz = x$date$tz_long),
         temp_high = as.numeric(x$high[[tempCol]]),
         temp_low = as.numeric(x$low[[tempCol]]),
         cond = x$conditions,  ## multiple conditions unhandled
@@ -83,6 +89,12 @@ forecast3day = function(location,
 #'         conditions, precipitation, rain, snow,
 #'         max and avg wind speed, max/min and avg humidity
 #' @export 
+#' @examples
+#' forecast10day(set_location(territory = "Hawaii", city = "Honolulu"))
+#' forecast10day(set_location(airport_code = "SEA"))
+#' forecast10day(set_location(zip_code = "90210"))
+#' forecast10day(set_location(territory = "IR", city = "Tehran"))
+#'
 forecast10day = function(location, 
                          use_metric = FALSE,
                          key = get_api_key(), 
@@ -117,7 +129,7 @@ forecast10day = function(location,
   fcast = parsed_req$forecast$simpleforecast$forecastday
   df = lapply(fcast, function(x) {
     data.frame(
-         date = as.POSIXct(as.numeric(x$date$epoch), origin = "1970-01-01", tz = x$date$tz_short),
+         date = as.POSIXct(as.numeric(x$date$epoch), origin = "1970-01-01", tz = x$date$tz_long),
          temp_high = as.numeric(x$high[[tempCol]]),
          temp_low = as.numeric(x$low[[tempCol]]),
          cond = x$conditions,  ## multiple conditions unhandled

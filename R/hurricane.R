@@ -6,8 +6,11 @@
 #' @param message if TRUE print out requested URL
 #' @return Hurricane info
 #' @export
+#' @examples
+#' current_hurricane()
+#' 
 current_hurricane = function(key = get_api_key(), 
-                             use_metric = TRUE,
+                             use_metric = FALSE,
                              raw = FALSE,
                              message = TRUE) {
 

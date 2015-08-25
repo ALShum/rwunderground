@@ -2,6 +2,9 @@
 #' 
 #' @return API key
 #' @export 
+#' @examples
+#' get_api_key()
+#'
 get_api_key = function() {
   env = Sys.getenv('WUNDERGROUNDID')
   if(!identical(env, "")) return(env)
@@ -26,6 +29,9 @@ get_api_key = function() {
 #' @param key wunderground API key
 #' @return API key
 #' @export 
+#' @examples
+#' set_api_key("1a2b3c4d")
+#'
 set_api_key = function(key) {
   if(identical(key, "")) {
     stop("Invalid API key!", call. = FALSE)
@@ -38,7 +44,7 @@ set_api_key = function(key) {
 #' Detects if wunderground API key is set
 #'
 #' @return TRUE if API key set, otherwise FALSE
-#' @export
+#'
 has_api_key = function() {
   !identical(get_api_key, "")
 }

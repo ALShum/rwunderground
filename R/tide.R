@@ -7,6 +7,11 @@
 #' @param message if TRUE print out requested URL
 #' @return tbl_df with date, height and type
 #' @export
+#' @examples
+#' tide(set_location(territory = "Hawaii", city = "Honolulu"))
+#' tide(set_location(territory = "Washington", city = "Seattle"))
+#' tide(set_location(territory = "Louisiana", city = "New Orleans"))
+#' 
 tide = function(location, 
                 key = get_api_key(), 
                 raw = FALSE, 
@@ -60,6 +65,11 @@ tide = function(location,
 #' @param message if TRUE print out requested URL
 #' @return tbl_df with time (epoch) and height
 #' @export
+#' @examples
+#' rawtide(set_location(territory = "Hawaii", city = "Honolulu"))
+#' rawtide(set_location(territory = "Washington", city = "Seattle"))
+#' rawtide(set_location(territory = "Louisiana", city = "New Orleans"))
+#' 
 rawtide = function(location, 
                    key = get_api_key(), 
                    raw = FALSE, 

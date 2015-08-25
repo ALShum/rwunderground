@@ -7,6 +7,12 @@
 #' @return tbl_df with: location, moon phase, percent visible,
 #'         moon rise and set times, sun rise and set times.
 #' @export 
+#' @examples
+#' astronomy(set_location(territory = "Hawaii", city = "Honolulu"))
+#' astronomy(set_location(airport_code = "SEA"))
+#' astronomy(set_location(zip_code = "90210"))
+#' astronomy(set_location(territory = "IR", city = "Tehran"))
+#' 
 astronomy = function(location,
                      key = get_api_key(), 
                      raw = FALSE,

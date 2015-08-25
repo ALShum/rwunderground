@@ -28,4 +28,10 @@ Current conditions including current temperature, weather condition,
 humidity, wind, feels-like, temperature, barometric pressure,
 and visibility.
 }
+\examples{
+conditions(set_location(territory = "Hawaii", city = "Honolulu"))
+conditions(set_location(airport_code = "SEA"))
+conditions(set_location(zip_code = "90210"))
+conditions(set_location(territory = "IR", city = "Tehran"))
+}
 

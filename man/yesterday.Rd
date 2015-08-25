@@ -4,7 +4,7 @@
 \alias{yesterday}
 \title{Weather data for yesterday}
 \usage{
-yesterday(location, use_metric = TRUE, key = get_api_key(), raw = FALSE,
+yesterday(location, use_metric = FALSE, key = get_api_key(), raw = FALSE,
   message = TRUE, summary = FALSE)
 }
 \arguments{
@@ -29,5 +29,11 @@ tbl_df with date, temperature, dew point,
 }
 \description{
 Weather data for yesterday
+}
+\examples{
+yesterday(set_location(territory = "Hawaii", city = "Honolulu"))
+yesterday(set_location(territory = "Iowa", city = "Iowa City"))
+yesterday(set_location(territory = "Iraq", city = "Baghdad"))
+yesterday(set_location(territory = "IR", city = "Tehran"), summary = TRUE)
 }
 

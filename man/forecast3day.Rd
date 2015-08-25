@@ -26,4 +26,10 @@ tbl_df with date (in posix format), high and low temp,
 \description{
 Forecast for the next 3 days.
 }
+\examples{
+forecast3day(set_location(territory = "Hawaii", city = "Honolulu"))
+forecast3day(set_location(airport_code = "SEA"))
+forecast3day(set_location(zip_code = "90210"))
+forecast3day(set_location(territory = "IR", city = "Tehran"))
+}
 

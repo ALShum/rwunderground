@@ -23,4 +23,9 @@ tbl_df with time (epoch) and height
 Raw Tidal data with data every 5 minutes for US locations
 Tidal information only available for US cities.  Units are in feet.
 }
+\examples{
+rawtide(set_location(territory = "Hawaii", city = "Honolulu"))
+rawtide(set_location(territory = "Washington", city = "Seattle"))
+rawtide(set_location(territory = "Louisiana", city = "New Orleans"))
+}
 

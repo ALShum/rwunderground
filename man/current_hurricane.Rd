@@ -5,7 +5,7 @@
 \title{Current hurricane - within the US only.
 Note: all times in eastern}
 \usage{
-current_hurricane(key = get_api_key(), use_metric = TRUE, raw = FALSE,
+current_hurricane(key = get_api_key(), use_metric = FALSE, raw = FALSE,
   message = TRUE)
 }
 \arguments{
@@ -23,5 +23,8 @@ Hurricane info
 \description{
 Current hurricane - within the US only.
 Note: all times in eastern
+}
+\examples{
+current_hurricane()
 }
 

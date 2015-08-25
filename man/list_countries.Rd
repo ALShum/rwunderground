@@ -12,4 +12,7 @@ data.frame of valid country names with iso codes
 \description{
 Returns a data.frame of valid countries with iso abbreviations and region
 }
+\examples{
+list_countries()
+}
 

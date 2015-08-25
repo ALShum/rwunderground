@@ -15,4 +15,7 @@ API key
 \description{
 Sets the wunderground API key
 }
+\examples{
+set_api_key("1a2b3c4d")
+}
 

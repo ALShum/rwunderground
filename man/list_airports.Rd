@@ -12,4 +12,7 @@ data.frame of airport codes with country and city
 \description{
 Returns a data.frame of valid airport codes (ICAO and IATA).
 }
+\examples{
+list_airports()
+}
 

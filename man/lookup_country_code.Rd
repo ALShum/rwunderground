@@ -19,4 +19,8 @@ data.frame of country codes
 Lookup ISO country code
 weatherunderground API doesn't recognize iso codes uniformly for every country.name
 }
+\examples{
+lookup_country_code("Korea")
+lookup_country_code("Guinea", region = "Africa")
+}
 
