@@ -7,8 +7,9 @@
 #' @return Hurricane info
 #' @export
 #' @examples
+#' \dontrun{
 #' current_hurricane()
-#' 
+#' }
 current_hurricane = function(key = get_api_key(), 
                              use_metric = FALSE,
                              raw = FALSE,

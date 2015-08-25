@@ -25,6 +25,8 @@ Current hurricane - within the US only.
 Note: all times in eastern
 }
 \examples{
+\dontrun{
 current_hurricane()
+}
 }
 
