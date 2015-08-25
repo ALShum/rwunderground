@@ -213,7 +213,7 @@ history_range = function(location,
                    message = TRUE) {
   
   if(no_api) {
-    ##TODO
+    warning("no_api: this feature is not yet working")
   }
 
   date_start = as.Date(date_start, "%Y%m%d")

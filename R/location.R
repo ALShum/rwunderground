@@ -1,5 +1,10 @@
 #' Returns a data.frame of valid airport codes (ICAO and IATA).
 #'
+#' This dataset is from the openflights.org airport database.  It can be
+#' found at \url{http://openflights.org/data.html#airport}.  This data
+#' is provided under the open database license -- more information can
+#' be found here: \url{http://opendatacommons.org/licenses/odbl/1.0/}.
+#' 
 #' @return data.frame of airport codes with country and city
 #' @export
 #' @examples
@@ -7,7 +12,7 @@
 #' list_airports()
 #' }
 list_airports = function() {
-  airport_data = read.csv(system.file("extdata/airport_data.csv", package = "rwunderground"), header=T, stringsAsFactor = FALSE)
+  airport_data = utils::read.csv(system.file("extdata/airport_data.csv", package = "rwunderground"), header=T, stringsAsFactor = FALSE)
   return(airport_data)
 }
 
@@ -20,7 +25,9 @@ list_airports = function() {
 #' list_states()
 #' }
 list_states = function() {
-  return(data.frame(abbr = state.abb, name = state.name, region = state.region))
+  return(data.frame(abbr = datasets::state.abb, 
+                    name = datasets::state.name, 
+                    region = datasets::state.region))
 }
 
 #' Returns a data.frame of valid countries with iso abbreviations and region

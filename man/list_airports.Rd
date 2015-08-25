@@ -10,7 +10,10 @@ list_airports()
 data.frame of airport codes with country and city
 }
 \description{
-Returns a data.frame of valid airport codes (ICAO and IATA).
+This dataset is from the openflights.org airport database.  It can be
+found at \url{http://openflights.org/data.html#airport}.  This data
+is provided under the open database license -- more information can
+be found here: \url{http://opendatacommons.org/licenses/odbl/1.0/}.
 }
 \examples{
 \dontrun{

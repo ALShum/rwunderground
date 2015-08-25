@@ -1,16 +1,16 @@
 Package: rwunderground
 Type: Package
 Title: R interface to weather underground API
-Version: 0.0.1
+Version: 0.1.0
 Date: 2015-08-24
 Author: Alex Shum <alex@ALShum.com>
 Maintainer: Alex Shum <alex@ALShum.com>
 Description: Tools for getting historical weather information and forecasts from weather underground API.
+URL: https://github.com/ALShum/rwunderground
+BugReports: https://github.com/alshum/rwunderground/issues
 License: GPL (>= 2)
 Imports: 
 	httr,
 	dplyr,
 	countrycode
-Suggests: 
-    knitr
-VignetteBuilder: knitr
+LazyData: TRUE
