@@ -29,11 +29,13 @@ tbl_df
 Weather summary based on historical information between the specified dates
 }
 \examples{
+\dontrun{
 planner(set_location(territory = "Hawaii", city = "Honolulu"),
         start_date = "0101", end_date = "0131")
 planner(set_location(territory = "Washington", city = "Seattle"),
         start_date = "01201", end_date = "1231")
 planner(set_location(territory = "Louisiana", city = "New Orleans"),
         start_date = "0501", end_date = "0531")
+}
 }
 

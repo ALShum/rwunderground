@@ -10,10 +10,11 @@
 #'		   lon, last updated, image URL and cam URL.
 #' @export
 #' @examples
+#' \dontrun{
 #' webcam(set_location(territory = "Hawaii", city = "Honolulu"))
 #' webcam(set_location(territory = "Iowa", city = "Iowa City"))
 #' webcam(set_location(territory = "Iraq", city = "Baghdad"))
-#' 
+#' }
 webcam = function(location, 
                   key = get_api_key(), 
                   raw = FALSE,

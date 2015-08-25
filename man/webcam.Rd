@@ -26,8 +26,10 @@ Returns locations of personal weather stations along with URLs for
 their webcam images
 }
 \examples{
+\dontrun{
 webcam(set_location(territory = "Hawaii", city = "Honolulu"))
 webcam(set_location(territory = "Iowa", city = "Iowa City"))
 webcam(set_location(territory = "Iraq", city = "Baghdad"))
+}
 }
 

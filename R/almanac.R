@@ -11,11 +11,12 @@
 #'         avg_high, record high, avg_low, record low.
 #' @export 
 #' @examples
+#' \dontrun{
 #' almanac(set_location(territory = "Hawaii", city = "Honolulu"))
 #' almanac(set_location(airport_code = "SEA"))
 #' almanac(set_location(zip_code = "90210"))
 #' almanac(set_location(territory = "IR", city = "Tehran"))
-#' 
+#' }
 almanac = function(location, 
                    use_metric = FALSE, 
                    key = get_api_key(), 

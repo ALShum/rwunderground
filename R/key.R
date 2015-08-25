@@ -3,8 +3,9 @@
 #' @return API key
 #' @export 
 #' @examples
+#' \dontrun{
 #' get_api_key()
-#'
+#' }
 get_api_key = function() {
   env = Sys.getenv('WUNDERGROUNDID')
   if(!identical(env, "")) return(env)
@@ -30,8 +31,9 @@ get_api_key = function() {
 #' @return API key
 #' @export 
 #' @examples
+#' \dontrun{
 #' set_api_key("1a2b3c4d")
-#'
+#' }
 set_api_key = function(key) {
   if(identical(key, "")) {
     stop("Invalid API key!", call. = FALSE)

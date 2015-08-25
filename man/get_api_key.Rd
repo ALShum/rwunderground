@@ -13,6 +13,8 @@ API key
 Returns the wunderground API key
 }
 \examples{
+\dontrun{
 get_api_key()
+}
 }
 

@@ -13,6 +13,8 @@ data.frame of airport codes with country and city
 Returns a data.frame of valid airport codes (ICAO and IATA).
 }
 \examples{
+\dontrun{
 list_airports()
+}
 }
 

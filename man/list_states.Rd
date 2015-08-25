@@ -13,6 +13,8 @@ data.frame of states with abbreviation and region
 Returns a data.frame of valid states with abbreviations and regions
 }
 \examples{
+\dontrun{
 list_states()
+}
 }
 

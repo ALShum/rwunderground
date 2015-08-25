@@ -27,9 +27,11 @@ tbl_df of nearby weather stations with:
 Lists nearby weather stations for a given location
 }
 \examples{
+\dontrun{
 geolookup(set_location(territory = "Hawaii", city = "Honolulu"))
 geolookup(set_location(airport_code = "SEA"))
 geolookup(set_location(zip_code = "90210"))
 geolookup(set_location(territory = "IR", city = "Tehran"))
+}
 }
 

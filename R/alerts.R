@@ -8,11 +8,12 @@
 #' @return A string containing alert type, message, start time and expiration.
 #' @export 
 #' @examples
+#' \dontrun{
 #' alerts(set_location(territory = "Hawaii", city = "Honolulu"))
 #' alerts(set_location(airport_code = "SEA"))
 #' alerts(set_location(zip_code = "90210"))
 #' alerts(set_location(territory = "IR", city = "Tehran"))
-#'
+#' }
 alerts = function(location, 
                   key = get_api_key(), 
                   raw = FALSE, 

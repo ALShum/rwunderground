@@ -10,11 +10,12 @@
 #' @return tbl_df with conditions
 #' @export 
 #' @examples
+#' \dontrun{
 #' conditions(set_location(territory = "Hawaii", city = "Honolulu"))
 #' conditions(set_location(airport_code = "SEA"))
 #' conditions(set_location(zip_code = "90210"))
 #' conditions(set_location(territory = "IR", city = "Tehran"))
-#' 
+#' }
 conditions = function(location, 
                       use_metric = FALSE,
                       key = get_api_key(), 

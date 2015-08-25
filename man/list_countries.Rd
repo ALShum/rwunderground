@@ -13,6 +13,8 @@ data.frame of valid country names with iso codes
 Returns a data.frame of valid countries with iso abbreviations and region
 }
 \examples{
+\dontrun{
 list_countries()
+}
 }
 

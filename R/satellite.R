@@ -7,10 +7,11 @@
 #' @return URL to satellite imagery
 #' @export
 #' @examples
+#' \dontrun{
 #' satellite(set_location(territory = "Hawaii", city = "Honolulu"))
 #' satellite(set_location(territory = "Washington", city = "Seattle"))
 #' satellite(set_location(territory = "Louisiana", city = "New Orleans"))
-#' 
+#' }
 satellite = function(location, 
                      key = get_api_key(), 
                      raw = FALSE,

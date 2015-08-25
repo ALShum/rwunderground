@@ -31,9 +31,11 @@ tbl_df with date, temperature, dew point,
 Weather data for yesterday
 }
 \examples{
+\dontrun{
 yesterday(set_location(territory = "Hawaii", city = "Honolulu"))
 yesterday(set_location(territory = "Iowa", city = "Iowa City"))
 yesterday(set_location(territory = "Iraq", city = "Baghdad"))
 yesterday(set_location(territory = "IR", city = "Tehran"), summary = TRUE)
+}
 }
 

@@ -11,11 +11,12 @@
 #'         rain, snow, pop, mslp
 #' @export 
 #' @examples
+#' \dontrun{
 #' hourly(set_location(territory = "Hawaii", city = "Honolulu"))
 #' hourly(set_location(airport_code = "SEA"))
 #' hourly(set_location(zip_code = "90210"))
 #' hourly(set_location(territory = "IR", city = "Tehran"))
-#'
+#' }
 hourly = function(location,
                   use_metric = FALSE,
                   key = get_api_key(),
@@ -78,11 +79,12 @@ hourly = function(location,
 #'         rain, snow, pop, mslp
 #' @export
 #' @examples
+#' \dontrun{
 #' hourly10day(set_location(territory = "Hawaii", city = "Honolulu"))
 #' hourly10day(set_location(airport_code = "SEA"))
 #' hourly10day(set_location(zip_code = "90210"))
 #' hourly10day(set_location(territory = "IR", city = "Tehran"))
-#'
+#' }
 hourly10day = function(location,
                   use_metric = FALSE,
                   key = get_api_key(),

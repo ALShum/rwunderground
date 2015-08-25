@@ -24,8 +24,10 @@ Tidal information for a location within the USA.
 Tidal information only available for US cities.  Units are in feet.
 }
 \examples{
+\dontrun{
 tide(set_location(territory = "Hawaii", city = "Honolulu"))
 tide(set_location(territory = "Washington", city = "Seattle"))
 tide(set_location(territory = "Louisiana", city = "New Orleans"))
+}
 }
 

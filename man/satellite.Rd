@@ -22,8 +22,10 @@ URL to satellite imagery
 Returns image URL for satellite imagery
 }
 \examples{
+\dontrun{
 satellite(set_location(territory = "Hawaii", city = "Honolulu"))
 satellite(set_location(territory = "Washington", city = "Seattle"))
 satellite(set_location(territory = "Louisiana", city = "New Orleans"))
+}
 }
 

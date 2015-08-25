@@ -13,11 +13,12 @@
 #'         hail, thunder, tornado
 #' @export 
 #' @examples
+#' \dontrun{
 #' yesterday(set_location(territory = "Hawaii", city = "Honolulu"))
 #' yesterday(set_location(territory = "Iowa", city = "Iowa City"))
 #' yesterday(set_location(territory = "Iraq", city = "Baghdad"))
 #' yesterday(set_location(territory = "IR", city = "Tehran"), summary = TRUE)
-#'
+#' }
 yesterday = function(location, 
                    	 use_metric = FALSE, 
                      key = get_api_key(), 

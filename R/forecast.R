@@ -10,11 +10,12 @@
 #'         max and avg wind speed, max/min and avg humidity
 #' @export
 #' @examples
+#' \dontrun{
 #' forecast3day(set_location(territory = "Hawaii", city = "Honolulu"))
 #' forecast3day(set_location(airport_code = "SEA"))
 #' forecast3day(set_location(zip_code = "90210"))
 #' forecast3day(set_location(territory = "IR", city = "Tehran"))
-#' 
+#' }
 forecast3day = function(location, 
                     use_metric = FALSE,
                     key = get_api_key(), 
@@ -90,11 +91,12 @@ forecast3day = function(location,
 #'         max and avg wind speed, max/min and avg humidity
 #' @export 
 #' @examples
+#' \dontrun{
 #' forecast10day(set_location(territory = "Hawaii", city = "Honolulu"))
 #' forecast10day(set_location(airport_code = "SEA"))
 #' forecast10day(set_location(zip_code = "90210"))
 #' forecast10day(set_location(territory = "IR", city = "Tehran"))
-#'
+#' }
 forecast10day = function(location, 
                          use_metric = FALSE,
                          key = get_api_key(), 

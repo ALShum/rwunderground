@@ -28,9 +28,11 @@ tbl_df with date, temperature, dew point,
 Hourly forecast for the next 24 hours.
 }
 \examples{
+\dontrun{
 hourly(set_location(territory = "Hawaii", city = "Honolulu"))
 hourly(set_location(airport_code = "SEA"))
 hourly(set_location(zip_code = "90210"))
 hourly(set_location(territory = "IR", city = "Tehran"))
+}
 }
 

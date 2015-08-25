@@ -30,9 +30,11 @@ as far as weather underground has data or from the national weather service
 going back 30 years.
 }
 \examples{
+\dontrun{
 almanac(set_location(territory = "Hawaii", city = "Honolulu"))
 almanac(set_location(airport_code = "SEA"))
 almanac(set_location(zip_code = "90210"))
 almanac(set_location(territory = "IR", city = "Tehran"))
+}
 }
 

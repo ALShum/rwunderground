@@ -16,6 +16,8 @@ API key
 Sets the wunderground API key
 }
 \examples{
+\dontrun{
 set_api_key("1a2b3c4d")
+}
 }
 

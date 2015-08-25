@@ -10,11 +10,12 @@
 #'         dist (in either mi or km)
 #' @export
 #' @examples
+#' \dontrun{
 #' geolookup(set_location(territory = "Hawaii", city = "Honolulu"))
 #' geolookup(set_location(airport_code = "SEA"))
 #' geolookup(set_location(zip_code = "90210"))
 #' geolookup(set_location(territory = "IR", city = "Tehran"))
-#'
+#' }
 geolookup = function(location, 
                      use_metric = FALSE,
                      key = get_api_key(), 

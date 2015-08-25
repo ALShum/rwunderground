@@ -20,7 +20,9 @@ Lookup ISO country code
 weatherunderground API doesn't recognize iso codes uniformly for every country.name
 }
 \examples{
+\dontrun{
 lookup_country_code("Korea")
 lookup_country_code("Guinea", region = "Africa")
+}
 }
 

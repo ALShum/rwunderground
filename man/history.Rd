@@ -31,9 +31,11 @@ tbl_df with date, temperature, dew point,
 Hourly weather data for specified date.
 }
 \examples{
+\dontrun{
 history(set_location(territory = "Hawaii", city = "Honolulu"), "20130101")
 history(set_location(airport_code = "SEA"), "20130101")
 history(set_location(zip_code = "90210"), "20130131")
 history(set_location(territory = "IR", city = "Tehran"), "20140131")
+}
 }
 

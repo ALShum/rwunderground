@@ -3,7 +3,9 @@
 #' @return data.frame of airport codes with country and city
 #' @export
 #' @examples
+#' \dontrun{
 #' list_airports()
+#' }
 list_airports = function() {
   airport_data = read.csv(system.file("extdata/airport_data.csv", package = "rwunderground"), header=T, stringsAsFactor = FALSE)
   return(airport_data)
@@ -14,7 +16,9 @@ list_airports = function() {
 #' @return data.frame of states with abbreviation and region
 #' @export
 #' @examples
+#' \dontrun{
 #' list_states()
+#' }
 list_states = function() {
   return(data.frame(abbr = state.abb, name = state.name, region = state.region))
 }
@@ -24,7 +28,9 @@ list_states = function() {
 #' @return data.frame of valid country names with iso codes
 #' @export
 #' @examples
+#' \dontrun{
 #' list_countries()
+#' }
 list_countries = function() {
   country_data = countrycode::countrycode_data[, c("country.name", "iso2c", "region")]
   country_data = dplyr::filter(country_data, !is.na(country_data$region))
@@ -40,10 +46,11 @@ list_countries = function() {
 #' @return data.frame of matching airport name and IATA/ICAO codes
 #' @export
 #' @examples
+#' \dontrun{
 #' lookup_airport("Honolulu")
 #' lookup_airport("Pyongyang")
 #' lookup_airport("Portland", region = "Los_Angeles")
-#'
+#' }
 lookup_airport = function(location, region = NULL) {
   airports = list_airports()
   if(!is.null(region)) {
@@ -68,9 +75,10 @@ lookup_airport = function(location, region = NULL) {
 #' @return data.frame of country codes
 #' @export 
 #' @examples
+#' \dontrun{
 #' lookup_country_code("Korea")
 #' lookup_country_code("Guinea", region = "Africa")
-#' 
+#' }
 lookup_country_code = function(name, region = NULL) {
   countries = list_countries()
   if(!is.null(region)) {
