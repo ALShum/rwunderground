@@ -47,7 +47,8 @@ tide = function(location,
     )
   })
 
-  dplyr::filter(dplyr::bind_rows(df), !is.na(height))
+  tide_df = dplyr::bind_rows(df)
+  dplyr::filter(tide_df, !is.na(tide_df$height))
 }
 
 #' Raw Tidal data with data every 5 minutes for US locations 

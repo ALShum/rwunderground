@@ -70,5 +70,6 @@ geolookup = function(location,
   })
   pws_df = dplyr::bind_rows(pws_df)
 
-  dplyr::filter(dplyr::rbind_list(airport_df, pws_df), !is.na(lat) | !is.na(lon))
+  geo_df = dplyr::rbind_list(airport_df, pws_df)
+  dplyr::filter(geo_df, !is.na(geo_df$lat) | !is.na(geo_df$lon))
 }
