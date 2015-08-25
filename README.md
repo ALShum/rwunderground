@@ -61,6 +61,9 @@ If no argument is provided to set_location then by default the nearest weather s
 * `webcam`: live webcam image URLS
 * `yesterday`: historical weather information for yesterday
 
+### Supporting Functions
+* `lookup_airport`: Look up airport codes if you plan on looking up weather data using airport locations.
+
 ## History
 After a location is set, weather history is available using `history`.
 
