@@ -5,8 +5,8 @@ Version: 0.1.0
 Date: 2015-08-24
 Author: Alex Shum <alex@ALShum.com>
 Maintainer: Alex Shum <alex@ALShum.com>
-Description: Tools for getting historical weather information and forecasts from weather underground API.
-URL: https://github.com/ALShum/rwunderground
+Description: Tools for getting historical weather information and forecasts from wunderground.com.  Historical weather and forecast data includes, but is not limited to, temperature, humidity, windchill, wind speed, dew point, heat index.  Additionally, the weather underground weather API also includes information on sunrise/sunset, tidal conditions, satellite/webcam imagery, weather alerts, hurricane alerts and historical record high/low temperatures.
+URL: https://github.com/ALShum/rwunderground, http://www.wunderground.com/weather/api
 BugReports: https://github.com/alshum/rwunderground/issues
 License: GPL (>= 2)
 Imports: 

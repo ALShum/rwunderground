@@ -1,4 +1,4 @@
-Initial submission of rwunderground package.
+Resubmit: as per comments, updated DESCRIPTION file to include links to wunderground's API page as well as a more lengthy description on the type of data available.
 
 ## Test environments
 * Locally: OS X, R 3.2.2
