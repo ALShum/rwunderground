@@ -9,7 +9,9 @@ has functions that follow the [online api](http://www.wunderground.com/weather/a
 
 ## Install and Setup
 
-To install please use `devtools`.  If you don't have devtools install using `install.packages("devtools")`.  Afterwards install `rwunderground` using devtools: `devtools::install_github("ALShum/rwunderground")`.
+This package is officially on CRAN; install using `install.packages("rwunderground")`.
+
+To install the latest version please use `devtools`.  If you don't have devtools install using `install.packages("devtools")`.  Afterwards install `rwunderground` using devtools: `devtools::install_github("ALShum/rwunderground")`.
 
 Once you have your API key as indicated above you can set the key in R using: `rwunderground::set_api_key("YOUR KEY")`.  You only have to do this once as the key should save in your local .Renviron file.
 
