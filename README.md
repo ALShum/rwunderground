@@ -86,6 +86,8 @@ To get the 10 day forecast and 10 day hourly forecast for Honolulu, Hawaii:
 `hourly10day(set_location(territory = "Hawaii", city = "Honolulu"))`
 
 ## Planner
+Note that dates for this must be in MMDD form:
+`planner(set_location(territory = "IR", city = "Tehran"), start_date = "0101", end_date = "0131")`
 
 ## Tide information
 Tide high/low forecasts are available using `tide` and hourly tide forecasts available using `rawtide`.
