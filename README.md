@@ -96,3 +96,9 @@ To get the high/low tide information for Honolulu, Hawaii:
 
 `tide(set_location(territory = "Hawaii", city = "Honolulu"))`
 `rawtide(set_location(territory = "Hawaii", city = "Honolulu"))`
+
+## Weather Alerts
+Weather alerts are available as plain text.
+
+Weather Alerts for Honolulu, Hawaii:
+`alerts(set_location(territory = "Hawaii", city = "Honolulu"))`
