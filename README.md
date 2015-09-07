@@ -4,7 +4,7 @@
 
 This is an R interface to weather underground's [API](http://www.wunderground.com/weather/api).  
 In order to use this library please [register](http://www.wunderground.com/weather/api/d/login.html) for an API key.
-The free-tier should be sufficient if you aren't calling the API more than a 500 times per day.  This package
+The free-tier should be sufficient if you aren't calling the API more than a 500 times per day.  Please note that the free tier also limits requests to 10 per minute.  If you are grabbing weather for a large date range using `history_range` then by default `limit = 10` will limit the calls to a maximum of 10 per minute.  This package
 has functions that follow the [online api](http://www.wunderground.com/weather/api/d/docs).
 
 ## Install and Setup
