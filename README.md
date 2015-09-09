@@ -16,7 +16,7 @@ To install the latest version please use `devtools`.  If you don't have devtools
 Once you have your API key as indicated above you can set the key in R using: `rwunderground::set_api_key("YOUR KEY")`.  You only have to do this once as the key should save in your local .Renviron file.
 
 ## Locations
-For any of the API functions you must first specify a location -- the first argument of all the API functions for locations.  Locations can be specified by the airport code, zip code, personal weather station ID or simply by specifying state and city (if in US) or country and city (if outside US).  The `set_location` function will validate locations and format things correctly or you can use a (correctly formatted) string.
+For any of the API functions you must first specify a location -- the first argument of all the API functions is a location.  Locations can be specified by the airport code, zip code, personal weather station ID or simply by specifying state and city (if in US) or country and city (if outside US).  The `set_location` function will validate locations and format things correctly or you can use a (correctly formatted) string.
 
 ### Locations by country/state/city
 Setting the location to Honolulu, HI:
@@ -46,6 +46,7 @@ If you don't know the airport code you can look them up using `lookup_airport`:
 If no argument is provided to set_location then by default the nearest weather station will be used.  You can also specify location based on lat/lon or personal weather station ID.
 
 ## Package Functionality Summary
+Note: by default units are in imperial (temperature is F, windspeed in MPH etc.) -- sorry rest of the world!  To use metric, you can set `use_metric = TRUE` for many of the functions.
 
 ### Main Functions
 * `history`, `history_daily`, `history_range`: weather history functions
