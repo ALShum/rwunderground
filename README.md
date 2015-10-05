@@ -13,7 +13,7 @@ This package is officially on CRAN; install using `install.packages("rwundergrou
 
 To install the latest version please use `devtools`.  If you don't have devtools install using `install.packages("devtools")`.  Afterwards install `rwunderground` using devtools: `devtools::install_github("ALShum/rwunderground")`.
 
-Once you have your API key as indicated above you can set the key in R using: `rwunderground::set_api_key("YOUR KEY")`.  You only have to do this once as the key should save in your local .Renviron file.
+Once you have your API key as indicated above you can set the key in R using: `rwunderground::set_api_key("YOUR KEY")`.  You only have to do this once per R session.  Alternatively you can save the key in your local .Renviron file by adding the line `WUNDERGROUNDID = 'your key here'`.
 
 ## Locations
 For any of the API functions you must first specify a location -- the first argument of all the API functions is a location.  Locations can be specified by the airport code, zip code, personal weather station ID or simply by specifying state and city (if in US) or country and city (if outside US).  The `set_location` function will validate locations and format things correctly or you can use a (correctly formatted) string.
