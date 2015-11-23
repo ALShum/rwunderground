@@ -60,7 +60,7 @@ Note: by default units are in imperial (temperature is F, windspeed in MPH etc.)
 * `astronomy`: sunrise/sunset and moonrise/moonset
 * `conditions`: current weather conditions
 * `geolookup`: weather station lookup
-* `hurricane`: current hurricane information
+* `current_hurricane`: current hurricane information
 * `satellite`: satellite image URLs
 * `tide`, `rawtide`: tide forecasts
 * `webcam`: live webcam image URLS
