@@ -43,7 +43,7 @@ If you don't know the airport code you can look them up using `lookup_airport`:
 `set_location(zip_code = "96813")`
 
 ### Locations by lat/long
-`set_location(lat_long = "50,-100"`
+`set_location(lat_long = "50,-100")`
 Note that coordinates should be comma separated.
 
 ### Other
