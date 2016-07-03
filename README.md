@@ -42,6 +42,10 @@ If you don't know the airport code you can look them up using `lookup_airport`:
 ### Locations by zip code
 `set_location(zip_code = "96813")`
 
+### Locations by lat/long
+`set_location(lat_long = "50,-100"`
+Note that coordinates should be comma separated.
+
 ### Other
 If no argument is provided to set_location then by default the nearest weather station will be used.  You can also specify location based on lat/lon or personal weather station ID.
 
