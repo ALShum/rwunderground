@@ -14,3 +14,4 @@ Imports:
 	dplyr,
 	countrycode
 LazyData: TRUE
+RoxygenNote: 6.0.1
