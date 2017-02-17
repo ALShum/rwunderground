@@ -93,7 +93,7 @@ lookup_country_code = function(name, region = NULL) {
     countries = countries[found_region, ]
   }
   
-  found = grep(name, countries$country.name, ignore.case=TRUE)
+  found = grep(name, countries$country.name.en, ignore.case=TRUE)
   
   return(countries[found, ])
 }
@@ -110,9 +110,9 @@ is_valid_territory = function(name) {
   
   if(name %in% tolower(states$abbr)) return(TRUE)
   if(name %in% tolower(states$name)) return(TRUE)
-  if(name %in% tolower(states$country.name)) return(TRUE)
+  if(name %in% tolower(states$country.name.en)) return(TRUE)
   if(name %in% tolower(states$iso2c)) return(TRUE)
-  if(name %in% tolower(countries$country.name)) return(TRUE)
+  if(name %in% tolower(countries$country.name.en)) return(TRUE)
   if(name %in% tolower(countries$iso2c)) return(TRUE)
   
   return(FALSE)
