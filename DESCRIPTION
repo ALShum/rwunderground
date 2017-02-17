@@ -2,7 +2,7 @@ Package: rwunderground
 Type: Package
 Title: R Interface to Weather Underground API
 Version: 0.1.5
-Date: 2015-08-24
+Date: 2017-02-16
 Author: Alex Shum <alex@ALShum.com>
 Maintainer: Alex Shum <alex@ALShum.com>
 Description: Tools for getting historical weather information and forecasts from wunderground.com.  Historical weather and forecast data includes, but is not limited to, temperature, humidity, windchill, wind speed, dew point, heat index.  Additionally, the weather underground weather API also includes information on sunrise/sunset, tidal conditions, satellite/webcam imagery, weather alerts, hurricane alerts and historical record high/low temperatures.
