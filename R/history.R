@@ -245,5 +245,5 @@ history_range = function(location,
     return(history_list)
   }
 
-  dplyr::rbind_all(history_list)
+  dplyr::bind_rows(history_list)
 }
