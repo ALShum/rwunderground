@@ -40,4 +40,3 @@ set_location(autoip = "172.227.205.140")
 set_location()
 
 }
-
