@@ -143,7 +143,7 @@ is_valid_airport = function(name) {
 #' @param city city name 
 #' @param airport_code IATA/ICAO airport code 
 #' @param PWS_id personal weather station ID 
-#' @param lat_long latitude and longitude
+#' @param lat_long latitude and longitude, as a comma-separated string
 #' @param autoip location based on IP
 #' @return formatted and validated location string
 #' @export
@@ -153,6 +153,7 @@ is_valid_airport = function(name) {
 #' set_location(territory = "Kenya", city = "Mombasa")
 #' set_location(airport_code = "SEA")
 #' set_location(PWS_id = "KMNCHASK10")
+#' set_location(lat_long="40.6892,-74.0445")
 #' set_location(autoip = "172.227.205.140")
 #' set_location()
 #' 
