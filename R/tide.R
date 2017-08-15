@@ -53,7 +53,7 @@ tide = function(location,
     )
   })
 
-  tide_df = dplyr::bind_rows(df)
+  tide_df = dplyr::tbl_df(dplyr::bind_rows(df))
   dplyr::filter(tide_df, !is.na(tide_df$height))
 }
 
@@ -112,5 +112,5 @@ rawtide = function(location,
     )
   })
 
-  dplyr::bind_rows(df)
+  dplyr::tbl_df(dplyr::bind_rows(df))
 }

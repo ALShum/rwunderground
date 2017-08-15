@@ -75,9 +75,9 @@ forecast3day = function(location,
           stringsAsFactors = FALSE
     )
   })
-  
-  dplyr::bind_rows(df)
-} 
+
+  dplyr::tbl_df(dplyr::bind_rows(df))
+}
 
 #' Forecast for the next 10 days.
 #' 
@@ -157,5 +157,5 @@ forecast10day = function(location,
     )
   })
 
-  dplyr::bind_rows(df)
+  dplyr::tbl_df(dplyr::bind_rows(df))
 }

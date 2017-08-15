@@ -40,7 +40,7 @@ hourly = function(location,
 
   units = ifelse(use_metric, "metric", "english")    
   df = lapply(hourly_forecast, function(x) {
-    data.frame(
+    dplyr::tibble(
          date = as.POSIXct(as.numeric(x$FCTTIME$epoch),
           origin = "1970-01-01", tz = strsplit(x$FCTTIME$pretty, split = " ")[[1]][3]),
          temp = as.numeric(x$temp[[units]]),
@@ -56,9 +56,8 @@ hourly = function(location,
          rain = as.numeric(x$qpf[[units]]),
          snow = as.numeric(x$snow[[units]]),
          pop = as.numeric(x$pop),
-         mslp = as.numeric(x$mslp[[units]]),
-          stringsAsFactors = FALSE
-         )
+         mslp = as.numeric(x$mslp[[units]])
+    )
   })
 
   encode_NA(
@@ -108,7 +107,7 @@ hourly10day = function(location,
 
   units = ifelse(use_metric, "metric", "english")    
   df = lapply(hourly_forecast, function(x){
-    data.frame(
+    dplyr::tibble(
          date = as.POSIXct(as.numeric(x$FCTTIME$epoch),
           origin = "1970-01-01", tz = strsplit(x$FCTTIME$pretty, split = " ")[[1]][3]),
          temp = as.numeric(x$temp[[units]]),
@@ -124,9 +123,8 @@ hourly10day = function(location,
          rain = as.numeric(x$qpf[[units]]),
          snow = as.numeric(x$snow[[units]]),
          pop = as.numeric(x$pop),
-         mslp = as.numeric(x$mslp[[units]]),
-          stringsAsFactors = FALSE
-         )
+         mslp = as.numeric(x$mslp[[units]])
+    )
   })
 
   encode_NA(

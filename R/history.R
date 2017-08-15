@@ -72,7 +72,7 @@ history = function(location,
   })
 
   encode_NA(
-    dplyr::bind_rows(lapply(df, data.frame, stringsAsFactors = FALSE))
+    dplyr::bind_rows(lapply(df, dplyr::as_tibble))
   )
 }
 
@@ -245,5 +245,5 @@ history_range = function(location,
     return(history_list)
   }
 
-  dplyr::bind_rows(history_list)
+  dplyr::tbl_df(dplyr::bind_rows(history_list))
 }
