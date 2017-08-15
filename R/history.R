@@ -223,9 +223,9 @@ history_range = function(location,
 
   history_list = 
   lapply(date_range, function(x) {
-    if(!is.null(limit) &
-      length(date_range) > limit & 
-      which(x == date_range) > 0 & 
+    if(!is.null(limit) &&
+      length(date_range) > limit && 
+      which(x == date_range) > 0 && 
       which(x == date_range) %% limit == 0) {
 
       if(message) {
