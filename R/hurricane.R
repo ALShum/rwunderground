@@ -10,11 +10,11 @@
 #' \dontrun{
 #' current_hurricane()
 #' }
-current_hurricane = function(key = get_api_key(),
-                             use_metric = FALSE,
-                             raw = FALSE,
-                             message = TRUE) {
-  parsed_req = wunderground_request(
+current_hurricane <- function(key = get_api_key(),
+                              use_metric = FALSE,
+                              raw = FALSE,
+                              message = TRUE) {
+  parsed_req <- wunderground_request(
     request_type = "currenthurricane",
     location = "view",
     key = key,
@@ -29,17 +29,17 @@ current_hurricane = function(key = get_api_key(),
     stop("Cannot parse hurricane information")
   }
 
-  hurricane = parsed_req$currenthurricane
+  hurricane <- parsed_req$currenthurricane
 
   if (use_metric) {
-    spd = "Kph"
-    pres = "mb"
+    spd <- "Kph"
+    pres <- "mb"
   } else {
-    spd = "Mph"
-    pres = "inches"
+    spd <- "Mph"
+    pres <- "inches"
   } # spd also available but not used: Kts
 
-  df = lapply(hurricane, function(x) {
+  df <- lapply(hurricane, function(x) {
     data.frame(
       name = x$stormInfo$stormName_Nice,
       time = as.POSIXct(as.numeric(x$Current$Time$epoch), origin = "1970-01-01", tz = "EST"),

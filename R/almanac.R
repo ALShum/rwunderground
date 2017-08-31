@@ -17,12 +17,12 @@
 #' almanac(set_location(zip_code = "90210"))
 #' almanac(set_location(territory = "IR", city = "Tehran"))
 #' }
-almanac = function(location,
-                   use_metric = FALSE,
-                   key = get_api_key(),
-                   raw = FALSE,
-                   message = TRUE) {
-  parsed_req = wunderground_request(
+almanac <- function(location,
+                    use_metric = FALSE,
+                    key = get_api_key(),
+                    raw = FALSE,
+                    message = TRUE) {
+  parsed_req <- wunderground_request(
     request_type = "almanac",
     location = location,
     key = key,
@@ -43,14 +43,14 @@ almanac = function(location,
     stop(paste0("No almanac available for this location: ", location))
   }
 
-  almanac = parsed_req$almanac
+  almanac <- parsed_req$almanac
 
   # checks to make sure almanac is structured correctly
   if (!all(c("airport_code", "temp_high", "temp_low") %in% names(almanac))) {
     stop(paste0("Invalid structure for alamanac for this location: "), location)
   }
 
-  tempCol = ifelse(use_metric, "C", "F")
+  tempCol <- ifelse(use_metric, "C", "F")
 
   return(dplyr::tbl_df(data.frame(
     location = location,

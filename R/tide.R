@@ -13,11 +13,11 @@
 #' tide(set_location(territory = "Washington", city = "Seattle"))
 #' tide(set_location(territory = "Louisiana", city = "New Orleans"))
 #' }
-tide = function(location,
-                key = get_api_key(),
-                raw = FALSE,
-                message = TRUE) {
-  parsed_req = wunderground_request(
+tide <- function(location,
+                 key = get_api_key(),
+                 raw = FALSE,
+                 message = TRUE) {
+  parsed_req <- wunderground_request(
     request_type = "tide",
     location = location,
     key = key,
@@ -32,9 +32,9 @@ tide = function(location,
     stop(paste0("Cannot parse tide information from JSON for: ", location))
   }
 
-  tide = parsed_req$tide
+  tide <- parsed_req$tide
 
-  tide_info = tide$tideInfo[[1]]
+  tide_info <- tide$tideInfo[[1]]
   if (all(tide_info == "")) stop(paste0("Tide info not available for: ", location))
   if (length(tide$tideSummary) == 0) stop(paste0("Tide info not available for: ", location))
   if (message) {
@@ -42,10 +42,10 @@ tide = function(location,
   }
 
   ## summary stats unused (min/max tide for day)
-  tide_summary_stats = tide$tideSummaryStats
-  tide_summary = tide$tideSummary
+  tide_summary_stats <- tide$tideSummaryStats
+  tide_summary <- tide$tideSummary
 
-  df = lapply(tide_summary, function(x) {
+  df <- lapply(tide_summary, function(x) {
     data.frame(
       date = as.POSIXct(as.numeric(x$date$epoch), origin = "1970-01-01", tz = x$date$tzname),
       height = as.numeric(gsub("ft", "", x$data$height)),
@@ -54,7 +54,7 @@ tide = function(location,
     )
   })
 
-  tide_df = dplyr::tbl_df(dplyr::bind_rows(df))
+  tide_df <- dplyr::tbl_df(dplyr::bind_rows(df))
   dplyr::filter(tide_df, !is.na(tide_df$height))
 }
 
@@ -73,11 +73,11 @@ tide = function(location,
 #' rawtide(set_location(territory = "Washington", city = "Seattle"))
 #' rawtide(set_location(territory = "Louisiana", city = "New Orleans"))
 #' }
-rawtide = function(location,
-                   key = get_api_key(),
-                   raw = FALSE,
-                   message = TRUE) {
-  parsed_req = wunderground_request(
+rawtide <- function(location,
+                    key = get_api_key(),
+                    raw = FALSE,
+                    message = TRUE) {
+  parsed_req <- wunderground_request(
     request_type = "rawtide",
     location = location,
     key = key,
@@ -92,9 +92,9 @@ rawtide = function(location,
     stop(paste0("Cannot parse tide information from JSON for: ", location))
   }
 
-  rawtide = parsed_req$rawtide
+  rawtide <- parsed_req$rawtide
 
-  tide_info = rawtide$tideInfo[[1]]
+  tide_info <- rawtide$tideInfo[[1]]
   if (all(tide_info == "")) stop(paste0("Tide info not available for: ", location))
   if (length(rawtide$rawTideObs) == 0) stop(paste0("Tide info not available for: ", location))
   if (message) {
@@ -102,11 +102,11 @@ rawtide = function(location,
   }
 
   ## summary stats unused (min/max tide for day)
-  rawtide_summary_stats = rawtide$rawTideStats
-  rawtide_summary = rawtide$rawTideObs
+  rawtide_summary_stats <- rawtide$rawTideStats
+  rawtide_summary <- rawtide$rawTideObs
 
-  tz = rawtide$tideInfo[[1]]$tzname
-  df = lapply(rawtide_summary, function(x) {
+  tz <- rawtide$tideInfo[[1]]$tzname
+  df <- lapply(rawtide_summary, function(x) {
     data.frame(
       date = as.POSIXct(x$epoch, origin = "1970-01-01", tz = tz),
       height = x$height,

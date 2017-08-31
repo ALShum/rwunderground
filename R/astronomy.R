@@ -14,11 +14,11 @@
 #' astronomy(set_location(zip_code = "90210"))
 #' astronomy(set_location(territory = "IR", city = "Tehran"))
 #' }
-astronomy = function(location,
-                     key = get_api_key(),
-                     raw = FALSE,
-                     message = TRUE) {
-  parsed_req = wunderground_request(
+astronomy <- function(location,
+                      key = get_api_key(),
+                      raw = FALSE,
+                      message = TRUE) {
+  parsed_req <- wunderground_request(
     request_type = "astronomy",
     location = location,
     key = key,
@@ -33,8 +33,8 @@ astronomy = function(location,
     stop(paste0("Unable to parse astronomy JSON for this location: ", location))
   }
 
-  moon = parsed_req$moon_phase
-  sun = parsed_req$sun_phase
+  moon <- parsed_req$moon_phase
+  sun <- parsed_req$sun_phase
   return(dplyr::tbl_df(data.frame(
     location = location,
     date = Sys.Date(),

@@ -16,12 +16,12 @@
 #' geolookup(set_location(zip_code = "90210"))
 #' geolookup(set_location(territory = "IR", city = "Tehran"))
 #' }
-geolookup = function(location,
-                     use_metric = FALSE,
-                     key = get_api_key(),
-                     raw = FALSE,
-                     message = TRUE) {
-  parsed_req = wunderground_request(
+geolookup <- function(location,
+                      use_metric = FALSE,
+                      key = get_api_key(),
+                      raw = FALSE,
+                      message = TRUE) {
+  parsed_req <- wunderground_request(
     request_type = "geolookup",
     location = location,
     key = key,
@@ -36,19 +36,19 @@ geolookup = function(location,
     stop(paste0("Cannot parse geography information for: ", location))
   }
 
-  loc = parsed_req$location
+  loc <- parsed_req$location
   if (message) {
     print(paste0(loc$country_iso3166, ", ", loc$state, " ", loc$city))
     print(paste0("tz: ", loc$tz_long))
     print(paste0("lat/long: ", loc$lat, "/", loc$lon))
   }
 
-  ws = loc$nearby_weather_stations
-  airport = ws$airport$station
-  pws = ws$pws$station
+  ws <- loc$nearby_weather_stations
+  airport <- ws$airport$station
+  pws <- ws$pws$station
 
-  units = ifelse(use_metric, "km", "mi")
-  airport_df = lapply(airport, function(x) {
+  units <- ifelse(use_metric, "km", "mi")
+  airport_df <- lapply(airport, function(x) {
     data.frame(
       type = "airport",
       city = x$city,
@@ -60,10 +60,10 @@ geolookup = function(location,
       stringsAsFactors = FALSE
     )
   })
-  airport_df = dplyr::bind_rows(airport_df)
-  airport_df$dist = NA
+  airport_df <- dplyr::bind_rows(airport_df)
+  airport_df$dist <- NA
 
-  pws_df = lapply(pws, function(x) {
+  pws_df <- lapply(pws, function(x) {
     data.frame(
       type = "pws",
       city = x$city,
@@ -77,6 +77,6 @@ geolookup = function(location,
     )
   })
 
-  geo_df = dplyr::tbl_df(dplyr::bind_rows(airport_df, pws_df))
+  geo_df <- dplyr::tbl_df(dplyr::bind_rows(airport_df, pws_df))
   dplyr::filter(geo_df, !is.na(geo_df$lat) | !is.na(geo_df$lon))
 }

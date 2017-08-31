@@ -19,13 +19,13 @@
 #' yesterday(set_location(territory = "Iraq", city = "Baghdad"))
 #' yesterday(set_location(territory = "IR", city = "Tehran"), summary = TRUE)
 #' }
-yesterday = function(location,
-                     use_metric = FALSE,
-                     key = get_api_key(),
-                     raw = FALSE,
-                     message = TRUE,
-                     summary = FALSE) {
-  parsed_req = wunderground_request(
+yesterday <- function(location,
+                      use_metric = FALSE,
+                      key = get_api_key(),
+                      raw = FALSE,
+                      message = TRUE,
+                      summary = FALSE) {
+  parsed_req <- wunderground_request(
     request_type = "yesterday",
     location = location,
     key = key,
@@ -40,11 +40,11 @@ yesterday = function(location,
     stop(paste0("Cannot parse yesterday's weather information for: ", location))
   }
 
-  hist = parsed_req$history
-  suffix = ifelse(use_metric, "m", "i")
+  hist <- parsed_req$history
+  suffix <- ifelse(use_metric, "m", "i")
   if (summary) {
-    ds = hist$dailysummary[[1]]
-    df = data.frame(
+    ds <- hist$dailysummary[[1]]
+    df <- data.frame(
       date = as.POSIXct(
         paste0(
           ds$date$year, "-", ds$date$mon, "-", ds$date$mday, " ",
@@ -106,7 +106,7 @@ yesterday = function(location,
     )
   }
 
-  df = lapply(hist$observations, function(x) {
+  df <- lapply(hist$observations, function(x) {
     data.frame(
       date = as.POSIXct(
         paste0(

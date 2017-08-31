@@ -16,12 +16,12 @@
 #' forecast3day(set_location(zip_code = "90210"))
 #' forecast3day(set_location(territory = "IR", city = "Tehran"))
 #' }
-forecast3day = function(location,
-                        use_metric = FALSE,
-                        key = get_api_key(),
-                        raw = FALSE,
-                        message = TRUE) {
-  parsed_req = wunderground_request(
+forecast3day <- function(location,
+                         use_metric = FALSE,
+                         key = get_api_key(),
+                         raw = FALSE,
+                         message = TRUE) {
+  parsed_req <- wunderground_request(
     request_type = "forecast",
     location = location,
     key = key,
@@ -37,19 +37,19 @@ forecast3day = function(location,
   }
 
   if (use_metric) {
-    tempCol = "celsius"
-    amtCol = "mm"
-    amtCol2 = "cm"
-    spdCol = "kph"
+    tempCol <- "celsius"
+    amtCol <- "mm"
+    amtCol2 <- "cm"
+    spdCol <- "kph"
   } else {
-    tempCol = "fahrenheit"
-    amtCol = "in"
-    amtCol2 = "in"
-    spdCol = "mph"
+    tempCol <- "fahrenheit"
+    amtCol <- "in"
+    amtCol2 <- "in"
+    spdCol <- "mph"
   }
 
-  fcast = parsed_req$forecast$simpleforecast$forecastday
-  df = lapply(fcast, function(x) {
+  fcast <- parsed_req$forecast$simpleforecast$forecastday
+  df <- lapply(fcast, function(x) {
     data.frame(
       date = as.POSIXct(as.numeric(x$date$epoch), origin = "1970-01-01", tz = x$date$tz_long),
       temp_high = as.numeric(x$high[[tempCol]]),
@@ -98,12 +98,12 @@ forecast3day = function(location,
 #' forecast10day(set_location(zip_code = "90210"))
 #' forecast10day(set_location(territory = "IR", city = "Tehran"))
 #' }
-forecast10day = function(location,
-                         use_metric = FALSE,
-                         key = get_api_key(),
-                         raw = FALSE,
-                         message = TRUE) {
-  parsed_req = wunderground_request(
+forecast10day <- function(location,
+                          use_metric = FALSE,
+                          key = get_api_key(),
+                          raw = FALSE,
+                          message = TRUE) {
+  parsed_req <- wunderground_request(
     request_type = "forecast10day",
     location = location,
     key = key,
@@ -119,19 +119,19 @@ forecast10day = function(location,
   }
 
   if (use_metric) {
-    tempCol = "celsius"
-    amtCol = "mm"
-    amtCol2 = "cm"
-    spdCol = "kph"
+    tempCol <- "celsius"
+    amtCol <- "mm"
+    amtCol2 <- "cm"
+    spdCol <- "kph"
   } else {
-    tempCol = "fahrenheit"
-    amtCol = "in"
-    amtCol2 = "in"
-    spdCol = "mph"
+    tempCol <- "fahrenheit"
+    amtCol <- "in"
+    amtCol2 <- "in"
+    spdCol <- "mph"
   }
 
-  fcast = parsed_req$forecast$simpleforecast$forecastday
-  df = lapply(fcast, function(x) {
+  fcast <- parsed_req$forecast$simpleforecast$forecastday
+  df <- lapply(fcast, function(x) {
     data.frame(
       date = as.POSIXct(as.numeric(x$date$epoch), origin = "1970-01-01", tz = x$date$tz_long),
       temp_high = as.numeric(x$high[[tempCol]]),

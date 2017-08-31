@@ -11,8 +11,8 @@
 #' \dontrun{
 #' list_airports()
 #' }
-list_airports = function() {
-  airport_data = utils::read.csv(system.file("extdata/airport_data.csv", package = "rwunderground"), header = T, stringsAsFactor = FALSE)
+list_airports <- function() {
+  airport_data <- utils::read.csv(system.file("extdata/airport_data.csv", package = "rwunderground"), header = T, stringsAsFactor = FALSE)
   return(airport_data)
 }
 
@@ -24,7 +24,7 @@ list_airports = function() {
 #' \dontrun{
 #' list_states()
 #' }
-list_states = function() {
+list_states <- function() {
   return(data.frame(
     abbr = datasets::state.abb,
     name = datasets::state.name,
@@ -40,9 +40,9 @@ list_states = function() {
 #' \dontrun{
 #' list_countries()
 #' }
-list_countries = function() {
-  country_data = countrycode::countrycode_data[, c("country.name.en", "iso2c", "region")]
-  country_data = dplyr::filter(country_data, !is.na(country_data$region))
+list_countries <- function() {
+  country_data <- countrycode::countrycode_data[, c("country.name.en", "iso2c", "region")]
+  country_data <- dplyr::filter(country_data, !is.na(country_data$region))
 
   return(country_data)
 }
@@ -60,14 +60,14 @@ list_countries = function() {
 #' lookup_airport("Pyongyang")
 #' lookup_airport("Portland", region = "Los_Angeles")
 #' }
-lookup_airport = function(location, region = NULL) {
-  airports = list_airports()
+lookup_airport <- function(location, region = NULL) {
+  airports <- list_airports()
   if (!is.null(region)) {
-    found_region = grep(region, airports$region, ignore.case = TRUE)
-    airports = airports[found_region, ]
+    found_region <- grep(region, airports$region, ignore.case = TRUE)
+    airports <- airports[found_region, ]
   }
 
-  found = unique(
+  found <- unique(
     c(
       grep(location, airports$airport_name, ignore.case = TRUE),
       grep(location, airports$city, ignore.case = TRUE),
@@ -90,14 +90,14 @@ lookup_airport = function(location, region = NULL) {
 #' lookup_country_code("Korea")
 #' lookup_country_code("Guinea", region = "Africa")
 #' }
-lookup_country_code = function(name, region = NULL) {
-  countries = list_countries()
+lookup_country_code <- function(name, region = NULL) {
+  countries <- list_countries()
   if (!is.null(region)) {
-    found_region = grep(region, countries$region, ignore.case = TRUE)
-    countries = countries[found_region, ]
+    found_region <- grep(region, countries$region, ignore.case = TRUE)
+    countries <- countries[found_region, ]
   }
 
-  found = grep(name, countries$country.name.en, ignore.case = TRUE)
+  found <- grep(name, countries$country.name.en, ignore.case = TRUE)
 
   return(countries[found, ])
 }
@@ -107,10 +107,10 @@ lookup_country_code = function(name, region = NULL) {
 #' @param name Name of state or country
 #' @return TRUE if valid state or country otherwise FALSE
 #'
-is_valid_territory = function(name) {
-  name = tolower(name)
-  states = list_states()
-  countries = list_countries()
+is_valid_territory <- function(name) {
+  name <- tolower(name)
+  states <- list_states()
+  countries <- list_countries()
 
   if (name %in% tolower(states$abbr)) return(TRUE)
   if (name %in% tolower(states$name)) return(TRUE)
@@ -127,9 +127,9 @@ is_valid_territory = function(name) {
 #' @param name Airport code either IATA or ICAO
 #' @return TRUE if valid otherwise FALSE
 #'
-is_valid_airport = function(name) {
-  name = tolower(name)
-  airports = list_airports()
+is_valid_airport <- function(name) {
+  name <- tolower(name)
+  airports <- list_airports()
 
   if (name %in% tolower(airports$IATA)) return(TRUE)
   if (name %in% tolower(airports$ICAO)) return(TRUE)
@@ -161,20 +161,20 @@ is_valid_airport = function(name) {
 #' set_location(autoip = "172.227.205.140")
 #' set_location()
 #'
-set_location = function(zip_code = NULL,
-                        territory = NULL, city = NULL,
-                        airport_code = NULL,
-                        PWS_id = NULL,
-                        lat_long = NULL,
-                        autoip = NULL) {
-  params = as.list(environment())
+set_location <- function(zip_code = NULL,
+                         territory = NULL, city = NULL,
+                         airport_code = NULL,
+                         PWS_id = NULL,
+                         lat_long = NULL,
+                         autoip = NULL) {
+  params <- as.list(environment())
   if (xor(!is.null(territory), !is.null(city))) {
     warning("set_location: Specify both state/country and city")
   }
   if (!is.null(territory) & !is.null(city)) {
     if (!is_valid_territory(territory)) warning("set_location: Invalid state/country")
-    territory = gsub(" ", "_", territory)
-    city = gsub(" ", "_", city)
+    territory <- gsub(" ", "_", territory)
+    city <- gsub(" ", "_", city)
     return(paste(territory, city, sep = "/"))
   }
   else if (!is.null(zip_code)) {

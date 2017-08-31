@@ -14,12 +14,12 @@
 #' alerts(set_location(zip_code = "90210"))
 #' alerts(set_location(territory = "IR", city = "Tehran"))
 #' }
-alerts = function(location,
-                  key = get_api_key(),
-                  raw = FALSE,
-                  raw_JSON = FALSE,
-                  message = TRUE) {
-  parsed_req = wunderground_request(
+alerts <- function(location,
+                   key = get_api_key(),
+                   raw = FALSE,
+                   raw_JSON = FALSE,
+                   message = TRUE) {
+  parsed_req <- wunderground_request(
     request_type = "alerts",
     location = location,
     key = key,
@@ -39,17 +39,17 @@ alerts = function(location,
     return(paste0("No alerts found at this location: ", location))
   }
 
-  zone = parsed_req$query_zone
-  alerts = parsed_req$alerts
+  zone <- parsed_req$query_zone
+  alerts <- parsed_req$alerts
   if (is.null(zone) | is.null(alerts)) {
     stop("Unable to parse zone or alert information from JSON")
   }
 
-  alert_status = ""
+  alert_status <- ""
 
   # Europe
   if (zone == "999") {
-    alert_status = sapply(alerts, function(x) {
+    alert_status <- sapply(alerts, function(x) {
       if (is.null(x$wtype_meteoalarm_name) |
         is.null(x$level_meteoalarm_description) |
         is.null(x$date) |
@@ -68,7 +68,7 @@ alerts = function(location,
 
   # USA
   else {
-    alert_status = sapply(alerts, function(x) {
+    alert_status <- sapply(alerts, function(x) {
       if (is.null(x$description) |
         is.null(x$message) |
         is.null(x$date) |

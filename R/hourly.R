@@ -17,12 +17,12 @@
 #' hourly(set_location(zip_code = "90210"))
 #' hourly(set_location(territory = "IR", city = "Tehran"))
 #' }
-hourly = function(location,
-                  use_metric = FALSE,
-                  key = get_api_key(),
-                  raw = FALSE,
-                  message = TRUE) {
-  parsed_req = wunderground_request(
+hourly <- function(location,
+                   use_metric = FALSE,
+                   key = get_api_key(),
+                   raw = FALSE,
+                   message = TRUE) {
+  parsed_req <- wunderground_request(
     request_type = "hourly",
     location = location,
     key = key,
@@ -37,10 +37,10 @@ hourly = function(location,
     stop(paste0("Cannot parse hourly forecast for: ", location))
   }
 
-  hourly_forecast = parsed_req$hourly_forecast
+  hourly_forecast <- parsed_req$hourly_forecast
 
-  units = ifelse(use_metric, "metric", "english")
-  df = lapply(hourly_forecast, function(x) {
+  units <- ifelse(use_metric, "metric", "english")
+  df <- lapply(hourly_forecast, function(x) {
     dplyr::tibble(
       date = as.POSIXct(
         as.numeric(x$FCTTIME$epoch),
@@ -87,12 +87,12 @@ hourly = function(location,
 #' hourly10day(set_location(zip_code = "90210"))
 #' hourly10day(set_location(territory = "IR", city = "Tehran"))
 #' }
-hourly10day = function(location,
-                       use_metric = FALSE,
-                       key = get_api_key(),
-                       raw = FALSE,
-                       message = TRUE) {
-  parsed_req = wunderground_request(
+hourly10day <- function(location,
+                        use_metric = FALSE,
+                        key = get_api_key(),
+                        raw = FALSE,
+                        message = TRUE) {
+  parsed_req <- wunderground_request(
     request_type = "hourly10day",
     location = location,
     key = key,
@@ -107,10 +107,10 @@ hourly10day = function(location,
     stop(paste0("Cannot parse hourly forecast for: ", location))
   }
 
-  hourly_forecast = parsed_req$hourly_forecast
+  hourly_forecast <- parsed_req$hourly_forecast
 
-  units = ifelse(use_metric, "metric", "english")
-  df = lapply(hourly_forecast, function(x) {
+  units <- ifelse(use_metric, "metric", "english")
+  df <- lapply(hourly_forecast, function(x) {
     dplyr::tibble(
       date = as.POSIXct(
         as.numeric(x$FCTTIME$epoch),

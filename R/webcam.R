@@ -15,11 +15,11 @@
 #' webcam(set_location(territory = "Iowa", city = "Iowa City"))
 #' webcam(set_location(territory = "Iraq", city = "Baghdad"))
 #' }
-webcam = function(location,
-                  key = get_api_key(),
-                  raw = FALSE,
-                  message = TRUE) {
-  parsed_req = wunderground_request(
+webcam <- function(location,
+                   key = get_api_key(),
+                   raw = FALSE,
+                   message = TRUE) {
+  parsed_req <- wunderground_request(
     request_type = "webcams",
     location = location,
     key = key,
@@ -35,8 +35,8 @@ webcam = function(location,
     stop(paste0("Unable to parse webcam JSON for this location: ", location))
   }
 
-  webcams = parsed_req$webcams
-  df = lapply(webcams, function(x) {
+  webcams <- parsed_req$webcams
+  df <- lapply(webcams, function(x) {
     data.frame(
       handle = x$handle,
       station_id = x$assoc_station_id,

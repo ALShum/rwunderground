@@ -18,14 +18,14 @@
 #' planner(set_location(territory = "Louisiana", city = "New Orleans"),
 #'         start_date = "0501", end_date = "0531")
 #' }
-planner = function(location,
-                   use_metric = FALSE,
-                   start_date = "0501",
-                   end_date = "0531",
-                   key = get_api_key(),
-                   raw = FALSE,
-                   message = TRUE) {
-  parsed_req = wunderground_request(
+planner <- function(location,
+                    use_metric = FALSE,
+                    start_date = "0501",
+                    end_date = "0531",
+                    key = get_api_key(),
+                    raw = FALSE,
+                    message = TRUE) {
+  parsed_req <- wunderground_request(
     request_type = "planner",
     location = location,
     date = paste0(start_date, end_date),
@@ -41,15 +41,15 @@ planner = function(location,
     stop(paste0("Cannot parse historical information for: ", location))
   }
 
-  planner = parsed_req$trip
+  planner <- parsed_req$trip
 
   if (message) {
     print(planner$title)
   }
-  units_deg = ifelse(use_metric, "C", "F")
-  units_len = ifelse(use_metric, "cm", "in")
+  units_deg <- ifelse(use_metric, "C", "F")
+  units_len <- ifelse(use_metric, "cm", "in")
 
-  df = data.frame(
+  df <- data.frame(
     airport = planner$airport_code,
     temp_high_min = as.numeric(planner$temp_high$min[[units_deg]]),
     temp_high_avg = as.numeric(planner$temp_high$avg[[units_deg]]),
@@ -70,8 +70,8 @@ planner = function(location,
     stringsAsFactors = FALSE
   )
 
-  chance_of = planner$chance_of
-  chance = data.frame(
+  chance_of <- planner$chance_of
+  chance <- data.frame(
     chance_humid = chance_of$chanceofhumidday$percentage,
     chance_temp_ovr60 = chance_of$tempoversixty$percentage,
     chance_part_cloudy = chance_of$chanceofpartlycloudyday$percentage,

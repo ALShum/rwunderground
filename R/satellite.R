@@ -12,11 +12,11 @@
 #' satellite(set_location(territory = "Washington", city = "Seattle"))
 #' satellite(set_location(territory = "Louisiana", city = "New Orleans"))
 #' }
-satellite = function(location,
-                     key = get_api_key(),
-                     raw = FALSE,
-                     message = TRUE) {
-  parsed_req = wunderground_request(
+satellite <- function(location,
+                      key = get_api_key(),
+                      raw = FALSE,
+                      message = TRUE) {
+  parsed_req <- wunderground_request(
     request_type = "satellite",
     location = location,
     key = key,
@@ -31,7 +31,7 @@ satellite = function(location,
     stop(paste0("Unable to parse satellite information from JSON for: ", location))
   }
 
-  satellite = parsed_req$satellite
+  satellite <- parsed_req$satellite
   return(c(
     satellite$image_url,
     satellite$image_url_ir4,

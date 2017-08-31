@@ -16,12 +16,12 @@
 #' conditions(set_location(zip_code = "90210"))
 #' conditions(set_location(territory = "IR", city = "Tehran"))
 #' }
-conditions = function(location,
-                      use_metric = FALSE,
-                      key = get_api_key(),
-                      raw = FALSE,
-                      message = TRUE) {
-  parsed_req = wunderground_request(
+conditions <- function(location,
+                       use_metric = FALSE,
+                       key = get_api_key(),
+                       raw = FALSE,
+                       message = TRUE) {
+  parsed_req <- wunderground_request(
     request_type = "conditions",
     location = location,
     key = key,
@@ -36,7 +36,7 @@ conditions = function(location,
     stop(paste0("Unable to  parse conditions for this location: ", location))
   }
 
-  cond = parsed_req$current_observation
+  cond <- parsed_req$current_observation
 
   if (message) {
     print(paste0("Conditions for: ", cond$display_location$full))
@@ -46,20 +46,20 @@ conditions = function(location,
   }
 
   if (use_metric) {
-    degree = "c"
-    speed = "kph"
-    pres = "mb"
-    dist = "km"
-    precip = "metric"
+    degree <- "c"
+    speed <- "kph"
+    pres <- "mb"
+    dist <- "km"
+    precip <- "metric"
   } else {
-    degree = "f"
-    speed = "mph"
-    pres = "in"
-    dist = "mi"
-    precip = "in"
+    degree <- "f"
+    speed <- "mph"
+    pres <- "in"
+    dist <- "mi"
+    precip <- "in"
   }
 
-  df = data.frame(
+  df <- data.frame(
     weather = cond$weather,
     temp = as.numeric(cond[[paste0("temp_", degree)]]),
     pct_humidity = as.numeric(gsub("%", "", cond$relative_humidity)),

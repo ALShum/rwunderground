@@ -19,13 +19,13 @@
 #' history(set_location(zip_code = "90210"), "20130131")
 #' history(set_location(territory = "IR", city = "Tehran"), "20140131")
 #' }
-history = function(location,
-                   date = "20150101",
-                   use_metric = FALSE,
-                   key = get_api_key(),
-                   raw = FALSE,
-                   message = TRUE) {
-  parsed_req = wunderground_request(
+history <- function(location,
+                    date = "20150101",
+                    use_metric = FALSE,
+                    key = get_api_key(),
+                    raw = FALSE,
+                    message = TRUE) {
+  parsed_req <- wunderground_request(
     request_type = "history",
     location = location,
     date = date,
@@ -41,10 +41,10 @@ history = function(location,
     stop(paste0("Cannot parse history data for: ", location))
   }
 
-  hist = parsed_req$history
+  hist <- parsed_req$history
 
-  suffix = ifelse(use_metric, "m", "i")
-  df = lapply(hist$observations, function(x) {
+  suffix <- ifelse(use_metric, "m", "i")
+  df <- lapply(hist$observations, function(x) {
     list(
       date = as.POSIXct(
         paste0(
@@ -96,13 +96,13 @@ history = function(location,
 #' history_daily(set_location(zip_code = "90210"), "20130131")
 #' history_daily(set_location(territory = "IR", city = "Tehran"), "20140131")
 #' }
-history_daily = function(location,
-                         date = "20150101",
-                         use_metric = FALSE,
-                         key = get_api_key(),
-                         raw = FALSE,
-                         message = TRUE) {
-  parsed_req = wunderground_request(
+history_daily <- function(location,
+                          date = "20150101",
+                          use_metric = FALSE,
+                          key = get_api_key(),
+                          raw = FALSE,
+                          message = TRUE) {
+  parsed_req <- wunderground_request(
     request_type = "history",
     location = location,
     date = date,
@@ -118,11 +118,11 @@ history_daily = function(location,
     stop(paste0("Cannot parse history data for: ", location))
   }
 
-  hist = parsed_req$history
+  hist <- parsed_req$history
 
-  suffix = ifelse(use_metric, "m", "i")
-  ds = hist$dailysummary[[1]]
-  df = data.frame(
+  suffix <- ifelse(use_metric, "m", "i")
+  ds <- hist$dailysummary[[1]]
+  df <- data.frame(
     date = as.POSIXct(
       paste0(
         ds$date$year, "-", ds$date$mon, "-",
@@ -208,27 +208,27 @@ history_daily = function(location,
 #' history_range(set_location(zip_code = "90210"), "20130131", "20130205")
 #' history_range(set_location(territory = "IR", city = "Tehran"), "20140131", "20140202")
 #' }
-history_range = function(location,
-                         date_start = "20150101",
-                         date_end = "20150105",
-                         limit = 10,
-                         no_api = FALSE, # get data from URL instead of API
-                         use_metric = FALSE,
-                         key = get_api_key(),
-                         raw = FALSE,
-                         message = TRUE) {
+history_range <- function(location,
+                          date_start = "20150101",
+                          date_end = "20150105",
+                          limit = 10,
+                          no_api = FALSE, # get data from URL instead of API
+                          use_metric = FALSE,
+                          key = get_api_key(),
+                          raw = FALSE,
+                          message = TRUE) {
   if (no_api) {
     warning("no_api: this feature is not yet working")
   }
 
-  date_start = as.Date(date_start, "%Y%m%d")
-  date_end = as.Date(date_end, "%Y%m%d")
-  date_range = format(
+  date_start <- as.Date(date_start, "%Y%m%d")
+  date_end <- as.Date(date_end, "%Y%m%d")
+  date_range <- format(
     seq.Date(date_start, date_end, "day"),
     format = "%Y%m%d"
   )
 
-  history_list =
+  history_list <-
   lapply(date_range, function(x) {
     if (!is.null(limit) &&
       length(date_range) > limit &&
