@@ -11,38 +11,39 @@
 #' @export
 #' @examples
 #' \dontrun{
-#' planner(set_location(territory = "Hawaii", city = "Honolulu"), 
+#' planner(set_location(territory = "Hawaii", city = "Honolulu"),
 #'         start_date = "0101", end_date = "0131")
-#' planner(set_location(territory = "Washington", city = "Seattle"), 
+#' planner(set_location(territory = "Washington", city = "Seattle"),
 #'         start_date = "01201", end_date = "1231")
-#' planner(set_location(territory = "Louisiana", city = "New Orleans"), 
+#' planner(set_location(territory = "Louisiana", city = "New Orleans"),
 #'         start_date = "0501", end_date = "0531")
 #' }
-planner = function(location, 
+planner = function(location,
                    use_metric = FALSE,
                    start_date = "0501",
                    end_date = "0531",
-                   key = get_api_key(), 
+                   key = get_api_key(),
                    raw = FALSE,
                    message = TRUE) {
-
-  parsed_req = wunderground_request(request_type = "planner",
-                                    location = location,
-                                    date = paste0(start_date, end_date), 
-                                    key = key,
-                                    message = message)   
-  if(raw) {
+  parsed_req = wunderground_request(
+    request_type = "planner",
+    location = location,
+    date = paste0(start_date, end_date),
+    key = key,
+    message = message
+  )
+  if (raw) {
     return(parsed_req)
   }
   stop_for_error(parsed_req)
 
-  if(!("trip" %in% names(parsed_req))) {
+  if (!("trip" %in% names(parsed_req))) {
     stop(paste0("Cannot parse historical information for: ", location))
-  }  
+  }
 
   planner = parsed_req$trip
 
-  if(message) {
+  if (message) {
     print(planner$title)
   }
   units_deg = ifelse(use_metric, "C", "F")
@@ -66,7 +67,7 @@ planner = function(location,
     dewpt_low_avg = as.numeric(planner$dewpoint_low$avg[[units_deg]]),
     dewpt_low_max = as.numeric(planner$dewpoint_low$max[[units_deg]]),
     cloud = planner$cloud_cover,
-      stringsAsFactors = FALSE
+    stringsAsFactors = FALSE
   )
 
   chance_of = planner$chance_of
@@ -89,9 +90,9 @@ planner = function(location,
     chance_temp_ovr_freeze = chance_of$tempoverfreezing$percentage,
     chance_hail = chance_of$chanceofhailday$percentage,
     chance_of_snow = chance_of$chanceofsnowday$percentage,
-      stringsAsFactors = FALSE
+    stringsAsFactors = FALSE
   )
 
-  
+
   return(dplyr::tbl_df(data.frame(df, chance)))
 }

@@ -1,5 +1,5 @@
-#' Current conditions including current temperature, weather condition, 
-#' humidity, wind, feels-like, temperature, barometric pressure, 
+#' Current conditions including current temperature, weather condition,
+#' humidity, wind, feels-like, temperature, barometric pressure,
 #' and visibility.
 #'
 #' @param location location set by set_location
@@ -8,7 +8,7 @@
 #' @param raw if TRUE return raw httr object
 #' @param message if TRUE print out requested URL
 #' @return tbl_df with conditions
-#' @export 
+#' @export
 #' @examples
 #' \dontrun{
 #' conditions(set_location(territory = "Hawaii", city = "Honolulu"))
@@ -16,34 +16,36 @@
 #' conditions(set_location(zip_code = "90210"))
 #' conditions(set_location(territory = "IR", city = "Tehran"))
 #' }
-conditions = function(location, 
+conditions = function(location,
                       use_metric = FALSE,
-                      key = get_api_key(), 
+                      key = get_api_key(),
                       raw = FALSE,
                       message = TRUE) {
-  parsed_req = wunderground_request(request_type = "conditions",
-                                    location = location, 
-                                    key = key,
-                                    message = message)
-  if(raw) {
+  parsed_req = wunderground_request(
+    request_type = "conditions",
+    location = location,
+    key = key,
+    message = message
+  )
+  if (raw) {
     return(parsed_req)
   }
   stop_for_error(parsed_req)
 
-  if(!("current_observation" %in% names(parsed_req))) {
+  if (!("current_observation" %in% names(parsed_req))) {
     stop(paste0("Unable to  parse conditions for this location: ", location))
   }
 
   cond = parsed_req$current_observation
 
-  if(message) {
-    print(paste0('Conditions for: ', cond$display_location$full))
-    print(paste0('Observed at: ', cond$observation_location$full))
-    print(paste0('Station id: ', cond$station_id))
-    print(paste0('Time: ', cond$observation_time))
+  if (message) {
+    print(paste0("Conditions for: ", cond$display_location$full))
+    print(paste0("Observed at: ", cond$observation_location$full))
+    print(paste0("Station id: ", cond$station_id))
+    print(paste0("Time: ", cond$observation_time))
   }
 
-  if(use_metric) {
+  if (use_metric) {
     degree = "c"
     speed = "kph"
     pres = "mb"

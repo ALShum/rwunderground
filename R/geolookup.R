@@ -16,27 +16,28 @@
 #' geolookup(set_location(zip_code = "90210"))
 #' geolookup(set_location(territory = "IR", city = "Tehran"))
 #' }
-geolookup = function(location, 
+geolookup = function(location,
                      use_metric = FALSE,
-                     key = get_api_key(), 
-                     raw = FALSE, 
+                     key = get_api_key(),
+                     raw = FALSE,
                      message = TRUE) {
-  
-  parsed_req = wunderground_request(request_type = "geolookup",
-                                    location = location, 
-                                    key = key,
-                                    message = message)
-  if(raw) {
+  parsed_req = wunderground_request(
+    request_type = "geolookup",
+    location = location,
+    key = key,
+    message = message
+  )
+  if (raw) {
     return(parsed_req)
   }
   stop_for_error(parsed_req)
 
-  if(!("location" %in% names(parsed_req))) {
+  if (!("location" %in% names(parsed_req))) {
     stop(paste0("Cannot parse geography information for: ", location))
   }
 
   loc = parsed_req$location
-  if(message) {
+  if (message) {
     print(paste0(loc$country_iso3166, ", ", loc$state, " ", loc$city))
     print(paste0("tz: ", loc$tz_long))
     print(paste0("lat/long: ", loc$lat, "/", loc$lon))
@@ -56,7 +57,7 @@ geolookup = function(location,
       id = x$icao,
       lat = as.numeric(x$lat),
       lon = as.numeric(x$lon),
-        stringsAsFactors = FALSE
+      stringsAsFactors = FALSE
     )
   })
   airport_df = dplyr::bind_rows(airport_df)
@@ -72,7 +73,7 @@ geolookup = function(location,
       lat = as.numeric(x$lat),
       lon = as.numeric(x$lon),
       dist = x[[paste0("distance_", units)]],
-        stringsAsFactors = FALSE
+      stringsAsFactors = FALSE
     )
   })
 

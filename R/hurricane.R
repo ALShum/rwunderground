@@ -10,33 +10,34 @@
 #' \dontrun{
 #' current_hurricane()
 #' }
-current_hurricane = function(key = get_api_key(), 
+current_hurricane = function(key = get_api_key(),
                              use_metric = FALSE,
                              raw = FALSE,
                              message = TRUE) {
-
-  parsed_req = wunderground_request(request_type = "currenthurricane",
-                                    location = "view", 
-                                    key = key,
-                                    message = message)   
-  if(raw) {
+  parsed_req = wunderground_request(
+    request_type = "currenthurricane",
+    location = "view",
+    key = key,
+    message = message
+  )
+  if (raw) {
     return(parsed_req)
   }
   stop_for_error(parsed_req)
 
-  if(!("currenthurricane" %in% names(parsed_req))) {
+  if (!("currenthurricane" %in% names(parsed_req))) {
     stop("Cannot parse hurricane information")
   }
 
   hurricane = parsed_req$currenthurricane
 
-  if(use_metric) {
+  if (use_metric) {
     spd = "Kph"
     pres = "mb"
   } else {
     spd = "Mph"
     pres = "inches"
-  } #spd also available but not used: Kts
+  } # spd also available but not used: Kts
 
   df = lapply(hurricane, function(x) {
     data.frame(
@@ -59,7 +60,7 @@ current_hurricane = function(key = get_api_key(),
         NA,
         as.numeric(x$Current$Pressure[[pres]])
       ),
-        stringsAsFactors = FALSE
+      stringsAsFactors = FALSE
     )
   })
 
