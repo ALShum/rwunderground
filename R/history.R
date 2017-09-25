@@ -44,6 +44,8 @@ history <- function(location,
   hist <- parsed_req$history
 
   suffix <- ifelse(use_metric, "m", "i")
+  as.numeric.nonempty <- function(x) {ifelse(length(x)>0, as.numeric(x), NA_real_)
+  nonempty <- function(x) {ifelse(length(x)>0, x, NA)                                    
   df <- lapply(hist$observations, function(x) {
     list(
       date = as.POSIXct(
@@ -53,24 +55,24 @@ history <- function(location,
         ),
         tz = x$date$tzname
       ),
-      temp = as.numeric(x[[paste0("temp", suffix)]]),
-      dew_pt = as.numeric(x[[paste0("dewpt", suffix)]]),
-      hum = as.numeric(x$hum),
-      wind_spd = as.numeric(x[[paste0("wspd", suffix)]]),
-      wind_gust = as.numeric(x[[paste0("wgust", suffix)]]),
-      dir = x$wdire,
-      vis = as.numeric(x[[paste0("vis", suffix)]]),
-      pressure = as.numeric(x[[paste0("pressure", suffix)]]),
-      wind_chill = as.numeric(x[[paste0("windchill", suffix)]]),
-      heat_index = as.numeric(x[[paste0("heatindex", suffix)]]),
-      precip = as.numeric(x[[paste0("precip", suffix)]]),
-      cond = x$conds,
-      fog = as.numeric(x$fog),
-      rain = as.numeric(x$rain),
-      snow = as.numeric(x$snow),
-      hail = as.numeric(x$hail),
-      thunder = as.numeric(x$thunder),
-      tornado = as.numeric(x$tornado)
+      temp = as.numeric.nonempty(x[[paste0("temp", suffix)]]),
+      dew_pt = as.numeric.nonempty(x[[paste0("dewpt", suffix)]]),
+      hum = as.numeric.nonempty(x$hum),
+      wind_spd = as.numeric.nonempty(x[[paste0("wspd", suffix)]]),
+      wind_gust = as.numeric.nonempty(x[[paste0("wgust", suffix)]]),
+      dir = nonempty(x$wdire),
+      vis = as.numeric.nonempty(x[[paste0("vis", suffix)]]),
+      pressure = as.numeric.nonempty(x[[paste0("pressure", suffix)]]),
+      wind_chill = as.numeric.nonempty(x[[paste0("windchill", suffix)]]),
+      heat_index = as.numeric.nonempty(x[[paste0("heatindex", suffix)]]),
+      precip = as.numeric.nonempty(x[[paste0("precip", suffix)]]),
+      cond = nonempty(x$conds),
+      fog = as.numeric.nonempty(x$fog),
+      rain = as.numeric.nonempty(x$rain),
+      snow = as.numeric.nonempty(x$snow),
+      hail = as.numeric.nonempty(x$hail),
+      thunder = as.numeric.nonempty(x$thunder),
+      tornado = as.numeric.nonempty(x$tornado)
     )
   })
 
