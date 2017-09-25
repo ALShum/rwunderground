@@ -44,8 +44,8 @@ history <- function(location,
   hist <- parsed_req$history
 
   suffix <- ifelse(use_metric, "m", "i")
-  as.numeric.nonempty <- function(x) {ifelse(length(x)>0, as.numeric(x), NA_real_)
-  nonempty <- function(x) {ifelse(length(x)>0, x, NA)                                    
+  as.numeric.nonempty <- function(x) {ifelse(length(x)>0, as.numeric(x), NA_real_)}
+  nonempty <- function(x) {ifelse(length(x)>0, x, NA)}                                   
   df <- lapply(hist$observations, function(x) {
     list(
       date = as.POSIXct(
