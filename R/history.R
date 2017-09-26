@@ -230,7 +230,74 @@ history_range <- function(location,
                           raw = FALSE,
                           message = TRUE) {
   if (no_api) {
-    warning("no_api: this feature is not yet working")
+    request_url = paste0("https://api-ak.wunderground.com/api/606f3f6977348613/history_",
+                         date_start,
+                         date_end,
+                         "/q/",
+                         location,
+                         ".json"
+    )
+    request_results = httr::GET(request_url)
+    parsed_req = httr::content(request_results,
+                               type = "application/json")
+    if (raw) {
+      return(parsed_req)
+    }
+    stop_for_error(parsed_req)
+    if (!("history" %in% names(parsed_req))) {
+      stop(paste0("Cannot parse history data for: ", location))
+    }
+    hist = parsed_req$history
+    suffix = ifelse(use_metric, "m", "i")
+    df = lapply(hist$observations, function(x) {
+      list(
+        date = as.POSIXct(
+          paste0(
+            x$date$year,
+            "-",
+            x$date$mon,
+            "-",
+            x$date$mday,
+            " ",
+            x$date$hour,
+            ":",
+            x$date$min
+          ),
+          tz = x$date$tzname
+        ),
+        temp = measurement_exists(x[[paste0("temp",
+                                            suffix)]]),
+        dew_pt = measurement_exists(x[[paste0("dewpt",
+                                              suffix)]]),
+        hum = measurement_exists(x$hum),
+        wind_spd = measurement_exists(x[[paste0("wspd",
+                                                suffix)]]),
+        wind_gust = measurement_exists(x[[paste0("wgust",
+                                                 suffix)]]),
+        dir = measurement_exists(x$wdire,
+                                 class = "character"),
+        vis = measurement_exists(x[[paste0("vis",
+                                           suffix)]]),
+        pressure = measurement_exists(x[[paste0("pressure",
+                                                suffix)]]),
+        wind_chill = measurement_exists(x[[paste0("windchill",
+                                                  suffix)]]),
+        heat_index = measurement_exists(x[[paste0("heatindex",
+                                                  suffix)]]),
+        precip = measurement_exists(x[[paste0("precip",
+                                              suffix)]]),
+        cond = measurement_exists(x$conds,
+                                  class = "character"),
+        fog = measurement_exists(x$fog),
+        rain = measurement_exists(x$rain),
+        snow = measurement_exists(x$snow),
+        hail = measurement_exists(x$hail),
+        thunder = measurement_exists(x$thunder),
+        tornado = measurement_exists(x$tornado)
+      )
+    })
+    df_out = encode_NA(dplyr::bind_rows(lapply(df, data.frame, stringsAsFactors = FALSE)))
+    return(df_out)
   }
 
   date_start <- as.Date(date_start, "%Y%m%d")
