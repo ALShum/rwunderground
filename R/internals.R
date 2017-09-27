@@ -115,3 +115,14 @@ nonempty <- function(x) {
   ifelse(length(x)>0, x, NA)
 }                                   
 
+#' Check if a variable exists for a PWS. If not set the value to -9999
+#' 
+#' @param x the value to check
+#' @param class a character given the desired class for the variable 
+measurement_exists <- function(x, class = "numeric") {
+  val <- ifelse(is.null(x),
+                -9999,
+                x)
+  do.call(paste0("as.", class),
+          list(val))
+  }
