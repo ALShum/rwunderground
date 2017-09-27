@@ -96,3 +96,22 @@ encode_NA <- function(df) {
 
   df
 }
+
+#' as.numeric with special handling for length 0 (NULL) objects
+#'
+#' @param x the object to cast as numeric
+#' @return value of type double
+#'
+as.numeric.nonempty <- function(x) {
+  ifelse(length(x)>0, as.numeric(x), NA_real_)
+}
+
+#' return object, or NA for length 0 (NULL) objects
+#'
+#' @param x the object to cast as numeric
+#' @return value of type double
+#'
+nonempty <- function(x) {
+  ifelse(length(x)>0, x, NA)
+}                                   
+
