@@ -237,6 +237,9 @@ history_range <- function(location,
                          location,
                          ".json"
     )
+    if (message) {
+      print(paste0("Requesting: ", request_url))
+    }
     request_results = httr::GET(request_url)
     parsed_req = httr::content(request_results,
                                type = "application/json")
