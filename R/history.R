@@ -85,9 +85,13 @@ history <- function(location,
     )
   })
 
-  encode_NA(
-    dplyr::bind_rows(lapply(df, dplyr::as_tibble))
-  )
+  if (length(df) > 0) {
+    encode_NA(
+      dplyr::bind_rows(lapply(df, dplyr::as_tibble))
+    )
+  } else {
+    return(NULL)
+  }
 }
 
 #' Summarized weather data for specified date.

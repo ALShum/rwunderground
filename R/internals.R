@@ -97,6 +97,24 @@ encode_NA <- function(df) {
   df
 }
 
+#' as.numeric with special handling for length 0 (NULL) objects
+#'
+#' @param x the object to cast as numeric
+#' @return value of type double
+#'
+as.numeric.nonempty <- function(x) {
+  ifelse(length(x)>0, as.numeric(x), NA_real_)
+}
+
+#' return object, or NA for length 0 (NULL) objects
+#'
+#' @param x the object to cast as numeric
+#' @return value of type double
+#'
+nonempty <- function(x) {
+  ifelse(length(x)>0, x, NA)
+}                                   
+
 #' Check if a variable exists for a PWS. If not set the value to -9999
 #' 
 #' @param x the value to check
