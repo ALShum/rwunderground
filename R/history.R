@@ -43,6 +43,14 @@ history <- function(location,
 
   hist <- parsed_req$history
 
+  if(length(hist$observations) == 0){
+    stop(paste0("No observations were returned for ",
+                location,
+                " on ",
+                date)
+    )
+  }
+  
   suffix <- ifelse(use_metric, "m", "i")
   df <- lapply(hist$observations, function(x) {
     list(
@@ -255,15 +263,20 @@ history_range <- function(location,
       }
       Sys.sleep(60)
     }
-    history(
-      location = location,
-      date = x,
-      use_metric = use_metric,
-      raw = raw,
-      key = key,
-      message = message
+    try(
+      history(
+        location = location,
+        date = x,
+        use_metric = use_metric,
+        raw = raw,
+        key = key,
+        message = message
+      )
     )
   })
+  
+  history_list <- 
+    history_list[which(sapply(history_list, class) != "try-error")]
 
   if (raw) {
     return(history_list)
