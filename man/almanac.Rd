@@ -21,7 +21,7 @@ almanac(location, use_metric = FALSE, key = get_api_key(), raw = FALSE,
 \item{message}{if TRUE print out requested URL}
 }
 \value{
-tbl_df with columns: location, airport, 
+tbl_df with columns: location, airport,
         avg_high, record high, avg_low, record low.
 }
 \description{

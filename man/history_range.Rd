@@ -15,7 +15,7 @@ history_range(location, date_start = "20150101", date_end = "20150105",
 
 \item{date_end}{end date}
 
-\item{limit}{Maximum number of API requests per minute, 
+\item{limit}{Maximum number of API requests per minute,
 NULL to have no limits}
 
 \item{no_api}{bypass API and use URL requests}
@@ -30,7 +30,7 @@ NULL to have no limits}
 }
 \value{
 tbl_df with date, temperature, dew point,
-        humidity, wind speed, gust and direction, 
+        humidity, wind speed, gust and direction,
         visibility, pressure, wind chill, heat index,
         precipitation, condition, fog, rain, snow,
         hail, thunder, tornado

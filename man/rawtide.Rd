@@ -2,7 +2,7 @@
 % Please edit documentation in R/tide.R
 \name{rawtide}
 \alias{rawtide}
-\title{Raw Tidal data with data every 5 minutes for US locations 
+\title{Raw Tidal data with data every 5 minutes for US locations
 Tidal information only available for US cities.  Units are in feet.}
 \usage{
 rawtide(location, key = get_api_key(), raw = FALSE, message = TRUE)
@@ -20,7 +20,7 @@ rawtide(location, key = get_api_key(), raw = FALSE, message = TRUE)
 tbl_df with time (epoch) and height
 }
 \description{
-Raw Tidal data with data every 5 minutes for US locations 
+Raw Tidal data with data every 5 minutes for US locations
 Tidal information only available for US cities.  Units are in feet.
 }
 \examples{

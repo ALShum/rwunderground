@@ -22,7 +22,7 @@ history(location, date = "20150101", use_metric = FALSE,
 }
 \value{
 tbl_df with date, temperature, dew point,
-        humidity, wind speed, gust and direction, 
+        humidity, wind speed, gust and direction,
         visibility, pressure, wind chill, heat index,
         precipitation, condition, fog, rain, snow,
         hail, thunder, tornado

@@ -2,8 +2,8 @@
 % Please edit documentation in R/conditions.R
 \name{conditions}
 \alias{conditions}
-\title{Current conditions including current temperature, weather condition, 
-humidity, wind, feels-like, temperature, barometric pressure, 
+\title{Current conditions including current temperature, weather condition,
+humidity, wind, feels-like, temperature, barometric pressure,
 and visibility.}
 \usage{
 conditions(location, use_metric = FALSE, key = get_api_key(), raw = FALSE,
@@ -24,8 +24,8 @@ conditions(location, use_metric = FALSE, key = get_api_key(), raw = FALSE,
 tbl_df with conditions
 }
 \description{
-Current conditions including current temperature, weather condition, 
-humidity, wind, feels-like, temperature, barometric pressure, 
+Current conditions including current temperature, weather condition,
+humidity, wind, feels-like, temperature, barometric pressure,
 and visibility.
 }
 \examples{

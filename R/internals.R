@@ -93,6 +93,7 @@ wunderground_request <- function(request_type,
 encode_NA <- function(df) {
   df[df == -9999] <- NA
   df[df == -999] <- NA
+  df[df == -99] <- NA
 
   df
 }

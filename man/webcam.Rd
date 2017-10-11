@@ -19,7 +19,7 @@ webcam(location, key = get_api_key(), raw = FALSE, message = TRUE)
 \value{
 tbl_df of weather stations including:
 		   handle, id, city, state, country, tz, lat,
-	   lon, last updated, image URL and cam URL.
+		   lon, last updated, image URL and cam URL.
 }
 \description{
 Returns locations of personal weather stations along with URLs for
