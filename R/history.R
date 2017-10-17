@@ -148,6 +148,11 @@ history_daily <- function(location,
   hist <- parsed_req$history
 
   suffix <- ifelse(use_metric, "m", "i")
+  
+  if (length(hist$dailysummary) == 0) {
+    stop(paste0("Daily summary for ", location, " does not exist."))
+  }
+  
   ds <- hist$dailysummary[[1]]
   df <- data.frame(
     date = as.POSIXct(
