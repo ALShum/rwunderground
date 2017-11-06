@@ -126,4 +126,104 @@ measurement_exists <- function(x, class = "numeric") {
                 x)
   do.call(paste0("as.", class),
           list(val))
+}
+
+#' Return POSIXct time from 7 variables
+#' 
+#' @param y vector of years
+#' @param m vector of months
+#' @param d vector of days
+#' @param hr vector of hours
+#' @param mn vector of minutes
+#' @param sec vector of seconds
+#' @param tz vector of timezones
+#' @return POSIXct time assuming vectors sorted by true chronological order,
+#'     at least for the hour that "occurs twice", once with Daylight Time, 
+#'     then again with Standard Time.  If there are no nonmonotonicities in 
+#'     the times, all times in this hour will be assumed to be Daylight Time
+#' 
+dst_POSIXct <- function(y,m,d,hr,mn,sec,tz) {
+  
+  if (length(unique(y))>1) stop("all obs in call to st_POSIXct need same year")
+  if (length(unique(m))>1) stop("all obs in call to st_POSIXct need same month")
+  if (length(unique(d))>1) stop("all obs in call to st_POSIXct need same day")
+  if (length(unique(tz))>1) stop("all obs in call to st_POSIXct need same tz")
+ 
+  if (!is_fall_back_day(y[1],m[1],d[1],tz[1])) {
+    return(as.POSIXct(
+      paste0(y, "-", m, "-", d, " ", hr, ":", mn, ":", sec),
+      tz = tz[1]) 
+    )
+  }  else {
+    hhmm.repeat.start <- dst_repeat_starttime(y=y[1],m=m[1],d=d[1],tz=tz[1])["start"]
+    hhmm.repeat.stop  <- dst_repeat_starttime(y=y[1],m=m[1],d=d[1],tz=tz[1])["stop"]
+    times.lt <- as.POSIXlt(paste0(y,"-",m,"-",d," ",hr,":",mn,":",sec),tz=tz[1])
+    times.num <- 100*as.numeric(hr)+as.numeric(mn)
+    times.in.window <- (times.num >= hhmm.repeat.start) &
+                       (times.num <  hhmm.repeat.stop)
+    
+    nonmono.out <- sum( (times.num <= c(-Inf,times.num[-length(times.num)])) &
+                         !times.in.window )
+    if (nonmono.out > 0) 
+      warning(paste0(nonmono.out," nonmonotonicities outside interval",
+                     y[1],"-",m[1],"-",d[1]))
+    
+    nonmono <- (times.num <= c(-Inf,times.num[-length(times.num)])) &
+                  times.in.window
+    if (sum(nonmono) > 1) 
+      warning(paste0("multiple nonmonotonicities inside interval ",
+                                            y[1],"-",m[1],"-",d[1]))
+    times.lt[(times.in.window)&(cumsum(nonmono)==0)]$isdst <- TRUE
+    times.lt[(times.in.window)&(cumsum(nonmono)>0)]$isdst <- FALSE
+   
+    return(as.POSIXct(times.lt))
   }
+}
+#' Check if Year, Month, Day, TZ is a transition from Daylight to Standard Time
+#' 
+#' @param y the year
+#' @param m the month
+#' @param d the day
+#' @param tz the timezone
+#' @return logical
+#' 
+
+is_fall_back_day <- function(y,m,d,tz) {
+  curday <- as.POSIXct(paste0(y,"-",m,"-",d," 00:00"),tz=tz)
+  nextday <- as.POSIXct(paste0(y,"-",m,"-",d," 00:00"),tz=tz) +
+    lubridate::days(x=1)
+  dstday <- lubridate::dst(curday)
+  dstnext <- lubridate::dst(nextday)
+  return( dstday & !dstnext )  #transition from dst sometime during day
+}
+
+#' Given a tz name, find the bounds of the interval where hh:mm does not 
+#'   uniquely determine an instant in time without also knowing whether 
+#'   DST is in effect.  Assumes that DST transitions happen on hour
+#'   boundaries, which is true almost everywhere, and that the wall clock 
+#'   shifts back and repeats exactly 1 hour.
+#'   This relies on R and the OS to properly manage DST in all timezones.
+#' 
+#' @param y the year
+#' @param m the month
+#' @param d the day
+#' @param tz the timezone
+#' @return list of two integer betweeen 0000 and 2359, hhmm format. 
+#'   the first integer is the beginning of the interval of clock times which
+#'   correspond to 2 separate instants of time, the second is the end of that
+#' 
+dst_repeat_starttime <- function(y,m,d,tz){
+  if (length(y)>1) stop("error in call to dst_repeat_starttime - year")
+  if (length(m)>1) stop("error in call to dst_repeat_starttime - month")
+  if (length(d)>1) stop("error in call to dst_repeat_starttime - day")
+  if (length(tz)>1) stop("error in call to dst_repeat_starttime - tz")
+  if (!is_fall_back_day(y,m,d,tz)) 
+        stop(paste0("dst_starttime - no transition on ",y,"-",m,"-",d))  
+  # stick with lubridate definition of dst, rather than in 
+    hhmm.repeat.start <- 
+      100*(sum(lubridate::dst(
+        as.POSIXct(paste0(y,"-",m,"-",d," ",seq(0,23),":00:00"),tz=tz))) - 1)
+     hhmm.repeat.stop <- hhmm.repeat.start + 100
+  
+  return(list(start=hhmm.repeat.start,stop=hhmm.repeat.stop))
+}
