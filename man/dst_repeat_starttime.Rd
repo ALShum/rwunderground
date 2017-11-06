@@ -4,7 +4,9 @@
 \alias{dst_repeat_starttime}
 \title{Given a tz name, find the bounds of the interval where hh:mm does not 
   uniquely determine an instant in time without also knowing whether 
-  DST is in effect.  Assumes that DST transitions happen on hour
+  DST is in effect.  
+  
+  Assumes that DST transitions happen on hour
   boundaries, which is true almost everywhere, and that the wall clock 
   shifts back and repeats exactly 1 hour.
   This relies on R and the OS to properly manage DST in all timezones.}
@@ -21,14 +23,16 @@ dst_repeat_starttime(y, m, d, tz)
 \item{tz}{the timezone}
 }
 \value{
-list of two integer betweeen 0000 and 2359, hhmm format. 
+list of two integers betweeen 0000 and 2359, hhmm format. 
   the first integer is the beginning of the interval of clock times which
   correspond to 2 separate instants of time, the second is the end of that
 }
 \description{
 Given a tz name, find the bounds of the interval where hh:mm does not 
   uniquely determine an instant in time without also knowing whether 
-  DST is in effect.  Assumes that DST transitions happen on hour
+  DST is in effect.  
+  
+  Assumes that DST transitions happen on hour
   boundaries, which is true almost everywhere, and that the wall clock 
   shifts back and repeats exactly 1 hour.
   This relies on R and the OS to properly manage DST in all timezones.
