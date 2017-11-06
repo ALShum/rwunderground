@@ -2,16 +2,7 @@
 % Please edit documentation in R/internals.R
 \name{dst_POSIXct}
 \alias{dst_POSIXct}
-\title{Return POSIXct time from 7 variables
-   In areas with a Daylight Saving/Standard time switch that
-   occurs twice annually, the year has one 23 hour day and one 25 hour
-   day, if by day we mean "an ordered set of all instants in time which
-   are assigned the same date".  In the US/Los_Angeles timezone, there
-   is one day in the spring where are no valid times between the moment
-   before 02:00:00 and 03:00:00.  Similarly, there is one day in the 
-   fall where there are two instants described by all times between 
-   01:00:00 and 01:59:00, first as a set of PDT times, then as a set
-   of PST times.  as.POSIXct doesn't handle this last case well.}
+\title{Return POSIXct time from 7 variables.}
 \usage{
 dst_POSIXct(y, m, d, hr, mn, sec, tz)
 }
@@ -37,14 +28,16 @@ POSIXct time assuming vectors sorted by true chronological order,
    the times, all times in this hour will be assumed to be Daylight Time.
 }
 \description{
-Return POSIXct time from 7 variables
-   In areas with a Daylight Saving/Standard time switch that
-   occurs twice annually, the year has one 23 hour day and one 25 hour
-   day, if by day we mean "an ordered set of all instants in time which
-   are assigned the same date".  In the US/Los_Angeles timezone, there
-   is one day in the spring where are no valid times between the moment
-   before 02:00:00 and 03:00:00.  Similarly, there is one day in the 
-   fall where there are two instants described by all times between 
-   01:00:00 and 01:59:00, first as a set of PDT times, then as a set
-   of PST times.  as.POSIXct doesn't handle this last case well.
+In locations with a Daylight Saving/Standard
+   time change that occurs twice annually, the year has one 23 hour day 
+   and one 25 hour day, if by day we mean "an ordered set of all instants
+   in time which are assigned the same date".  In the US/Los_Angeles 
+   timezone, there is one day in the spring where are no valid times 
+   between the moment before 02:00:00 and 03:00:00.  Similarly, there
+   is one day in the fall where there are two instants described by all
+   times between 01:00:00 and 01:59:59, first as a set of PDT times, then
+   as a set of PST times.  \code{as.POSIXct()} doesn't handle this case well.
+   Times inside this region are assigned to DST until the sequence of
+   clock times has a time which is the same or earlier than its predecessor,
+   and all subsequent ambiguous times are assigned to Standard Time.
 }

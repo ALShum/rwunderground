@@ -2,14 +2,7 @@
 % Please edit documentation in R/internals.R
 \name{dst_repeat_starttime}
 \alias{dst_repeat_starttime}
-\title{Given a tz name, find the bounds of the interval where hh:mm does not 
-  uniquely determine an instant in time without also knowing whether 
-  DST is in effect.  
-  
-  Assumes that DST transitions happen on hour
-  boundaries, which is true almost everywhere, and that the wall clock 
-  shifts back and repeats exactly 1 hour.
-  This relies on R and the OS to properly manage DST in all timezones.}
+\title{Find the text to POSIXct ambiguous interval.}
 \usage{
 dst_repeat_starttime(y, m, d, tz)
 }
@@ -26,14 +19,12 @@ dst_repeat_starttime(y, m, d, tz)
 list of two integers betweeen 0000 and 2359, hhmm format. 
   the first integer is the beginning of the interval of clock times which
   correspond to 2 separate instants of time, the second is the end of that
+  interval.  The left endpoint is ambiguous, the right endpoint is not
+  since it maps only to Standard Time.
 }
 \description{
-Given a tz name, find the bounds of the interval where hh:mm does not 
-  uniquely determine an instant in time without also knowing whether 
-  DST is in effect.  
-  
-  Assumes that DST transitions happen on hour
-  boundaries, which is true almost everywhere, and that the wall clock 
-  shifts back and repeats exactly 1 hour.
-  This relies on R and the OS to properly manage DST in all timezones.
+Assumes that DST transitions happen on hour boundaries, which is true
+   almost everywhere, and that the wall clock shifts back and repeats 
+   exactly 1 hour, again true almost everywhere. This code relies on R 
+   and the OS to properly manage DST in all timezones.
 }

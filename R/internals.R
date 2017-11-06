@@ -128,17 +128,20 @@ measurement_exists <- function(x, class = "numeric") {
           list(val))
 }
 
-#' Return POSIXct time from 7 variables
-#'    In areas with a Daylight Saving/Standard time switch that
-#'    occurs twice annually, the year has one 23 hour day and one 25 hour
-#'    day, if by day we mean "an ordered set of all instants in time which
-#'    are assigned the same date".  In the US/Los_Angeles timezone, there
-#'    is one day in the spring where are no valid times between the moment
-#'    before 02:00:00 and 03:00:00.  Similarly, there is one day in the 
-#'    fall where there are two instants described by all times between 
-#'    01:00:00 and 01:59:00, first as a set of PDT times, then as a set
-#'    of PST times.  as.POSIXct doesn't handle this last case well.
-#' 
+#' Return POSIXct time from 7 variables.
+#'
+#'    In locations with a Daylight Saving/Standard
+#'    time change that occurs twice annually, the year has one 23 hour day 
+#'    and one 25 hour day, if by day we mean "an ordered set of all instants
+#'    in time which are assigned the same date".  In the US/Los_Angeles 
+#'    timezone, there is one day in the spring where are no valid times 
+#'    between the moment before 02:00:00 and 03:00:00.  Similarly, there
+#'    is one day in the fall where there are two instants described by all
+#'    times between 01:00:00 and 01:59:59, first as a set of PDT times, then
+#'    as a set of PST times.  \code{as.POSIXct()} doesn't handle this case well.
+#'    Times inside this region are assigned to DST until the sequence of
+#'    clock times has a time which is the same or earlier than its predecessor,
+#'    and all subsequent ambiguous times are assigned to Standard Time.
 #' 
 #' @param y vector of years
 #' @param m vector of months
@@ -192,7 +195,7 @@ dst_POSIXct <- function(y,m,d,hr,mn,sec,tz) {
     return(as.POSIXct(times.lt))
   }
 }
-#' Check if Year, Month, Day, TZ is a transition from Daylight to Standard Time
+#' Check if a date is a "fall back" transition from DST.
 #' 
 #' @param y the year
 #' @param m the month
@@ -214,14 +217,12 @@ is_fall_back_day <- function(y,m,d,tz) {
   return( dstday & !dstnext )  #transition from dst sometime during day
 }
 
-#' Given a tz name, find the bounds of the interval where hh:mm does not 
-#'   uniquely determine an instant in time without also knowing whether 
-#'   DST is in effect.  
-#'   
-#'   Assumes that DST transitions happen on hour
-#'   boundaries, which is true almost everywhere, and that the wall clock 
-#'   shifts back and repeats exactly 1 hour.
-#'   This relies on R and the OS to properly manage DST in all timezones.
+#' Find the text to POSIXct ambiguous interval.
+#'
+#'    Assumes that DST transitions happen on hour boundaries, which is true
+#'    almost everywhere, and that the wall clock shifts back and repeats 
+#'    exactly 1 hour, again true almost everywhere. This code relies on R 
+#'    and the OS to properly manage DST in all timezones.
 #' 
 #' @param y the year
 #' @param m the month
@@ -230,6 +231,8 @@ is_fall_back_day <- function(y,m,d,tz) {
 #' @return list of two integers betweeen 0000 and 2359, hhmm format. 
 #'   the first integer is the beginning of the interval of clock times which
 #'   correspond to 2 separate instants of time, the second is the end of that
+#'   interval.  The left endpoint is ambiguous, the right endpoint is not
+#'   since it maps only to Standard Time.
 #' 
 dst_repeat_starttime <- function(y,m,d,tz){
   if (length(y)>1) stop("error in call to dst_repeat_starttime - year")

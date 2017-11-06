@@ -2,7 +2,7 @@
 % Please edit documentation in R/internals.R
 \name{is_fall_back_day}
 \alias{is_fall_back_day}
-\title{Check if Year, Month, Day, TZ is a transition from Daylight to Standard Time}
+\title{Check if a date is a "fall back" transition from DST.}
 \usage{
 is_fall_back_day(y, m, d, tz)
 }
@@ -19,5 +19,5 @@ is_fall_back_day(y, m, d, tz)
 logical
 }
 \description{
-Check if Year, Month, Day, TZ is a transition from Daylight to Standard Time
+Check if a date is a "fall back" transition from DST.
 }
