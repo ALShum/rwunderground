@@ -138,7 +138,7 @@ measurement_exists <- function(x, class = "numeric") {
 #'    between the moment before 02:00:00 and 03:00:00.  Similarly, there
 #'    is one day in the fall where there are two instants described by all
 #'    times between 01:00:00 and 01:59:59, first as a set of PDT times, then
-#'    as a set of PST times.  \code{as.POSIXct()} doesn't handle this case well.
+#'    as a set of PST times. \code{as.POSIXct()} doesn't handle this case well.
 #'    Times inside this region are assigned to DST until the sequence of
 #'    clock times has a time which is the same or earlier than its predecessor,
 #'    and all subsequent ambiguous times are assigned to Standard Time.
@@ -157,10 +157,14 @@ measurement_exists <- function(x, class = "numeric") {
 #'     
 dst_POSIXct <- function(y,m,d,hr,mn,sec,tz) {
   
-  if (length(unique(y))>1) stop("all obs in call to dst_POSIXct need same year")
-  if (length(unique(m))>1) stop("all obs in call to dst_POSIXct need same month")
-  if (length(unique(d))>1) stop("all obs in call to dst_POSIXct need same day")
-  if (length(unique(tz))>1) stop("all obs in call to dst_POSIXct need same tz")
+  if (length(unique(y))>1) 
+    stop("all obs in call to dst_POSIXct need same year")
+  if (length(unique(m))>1) 
+    stop("all obs in call to dst_POSIXct need same month")
+  if (length(unique(d))>1) 
+    stop("all obs in call to dst_POSIXct need same day")
+  if (length(unique(tz))>1) 
+    stop("all obs in call to dst_POSIXct need same tz")
  
   if (!is_fall_back_day(y[1],m[1],d[1],tz[1])) {
     return(as.POSIXct(
@@ -168,29 +172,46 @@ dst_POSIXct <- function(y,m,d,hr,mn,sec,tz) {
       tz = tz[1]) 
     )
   }  else {
-    hhmm.repeat.start <- dst_repeat_starttime(y=y[1],m=m[1],d=d[1],tz=tz[1])["start"]
-    hhmm.repeat.stop  <- dst_repeat_starttime(y=y[1],m=m[1],d=d[1],tz=tz[1])["stop"]
-    times.lt <- as.POSIXlt(paste0(y,"-",m,"-",d," ",hr,":",mn,":",sec),tz=tz[1])
+    hhmm.repeat.start <- 
+      dst_repeat_starttime(y=y[1],m=m[1],d=d[1],tz=tz[1])["start"]
+    hhmm.repeat.stop  <- 
+      dst_repeat_starttime(y=y[1],m=m[1],d=d[1],tz=tz[1])["stop"]
+    times.lt <- 
+      as.POSIXlt(paste0(y,"-",m,"-",d," ",hr,":",mn,":",sec),tz=tz[1])
     times.num <- 100*as.numeric(hr)+as.numeric(mn)
     times.in.window <- (times.num >= hhmm.repeat.start) &
                        (times.num <  hhmm.repeat.stop)
     
-    nonmono.out <- sum( (times.num <= c(-Inf,times.num[-length(times.num)])) &
-                         !times.in.window )
-    if (nonmono.out > 0) 
-      warning(paste0(nonmono.out," nonmonotonicities outside interval on ",
+    nonmono.out <- 
+      sum( (times.num <= c(-Inf,times.num[-length(times.num)])) & 
+                          !times.in.window )
+    nonmono.out.tiesok <- 
+      sum( (times.num < c(-Inf,times.num[-length(times.num)])) &
+                          !times.in.window )
+    if (nonmono.out.tiesok>0) 
+      warning(paste0(nonmono.out.tiesok,
+                     " strict time decreases outside interval on ",
                      y[1],"-",m[1],"-",d[1]))
     
     nonmono <- (times.num <= c(-Inf,times.num[-length(times.num)])) &
-                  times.in.window
+                      times.in.window
+    nonmono.tiesok <- (times.num < c(-Inf,times.num[-length(times.num)])) &
+                      times.in.window
     if (sum(nonmono) == 0) 
-      warning(paste0("no nonmonotonicities inside interval, all default to DST ",
+      warning(paste0("no nonmonotonicities inside interval, all set to DST ",
                      y[1],"-",m[1],"-",d[1]))
-    if (sum(nonmono) > 1) 
-      warning(paste0("multiple nonmonotonicities inside interval on ",
-                                            y[1],"-",m[1],"-",d[1]))
-    times.lt[(times.in.window)&(cumsum(nonmono)==0)]$isdst <- TRUE
-    times.lt[(times.in.window)&(cumsum(nonmono)>0)]$isdst <- FALSE
+    if (sum(nonmono.tiesok) > 1) 
+      warning(paste0("multiple nonmonotonicities (excluding ties)",
+                     " inside interval on ",y[1],"-",m[1],"-",d[1]))
+    if ((sum(nonmono.tiesok) == 1) & (sum(nonmono) > 1) & 
+        (nonmono.out.tiesok == 0)) {
+      # ignore ties if that gives exactly one nonmono and it is in the interval
+      times.lt[(times.in.window)&(cumsum(nonmono.tiesok)==0)]$isdst <- TRUE
+      times.lt[(times.in.window)&(cumsum(nonmono.tiesok)>0)]$isdst <- FALSE
+    } else {
+      times.lt[(times.in.window)&(cumsum(nonmono)==0)]$isdst <- TRUE
+      times.lt[(times.in.window)&(cumsum(nonmono)>0)]$isdst <- FALSE
+    }
    
     return(as.POSIXct(times.lt))
   }

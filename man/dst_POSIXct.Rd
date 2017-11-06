@@ -36,7 +36,7 @@ In locations with a Daylight Saving/Standard
    between the moment before 02:00:00 and 03:00:00.  Similarly, there
    is one day in the fall where there are two instants described by all
    times between 01:00:00 and 01:59:59, first as a set of PDT times, then
-   as a set of PST times.  \code{as.POSIXct()} doesn't handle this case well.
+   as a set of PST times. \code{as.POSIXct()} doesn't handle this case well.
    Times inside this region are assigned to DST until the sequence of
    clock times has a time which is the same or earlier than its predecessor,
    and all subsequent ambiguous times are assigned to Standard Time.
