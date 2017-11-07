@@ -17,6 +17,7 @@ License: GPL (>= 2)
 Imports: 
 	httr,
 	dplyr,
-	countrycode
+	countrycode,
+	lubridate
 LazyData: TRUE
 RoxygenNote: 6.0.1

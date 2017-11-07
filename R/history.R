@@ -25,6 +25,10 @@ history <- function(location,
                     key = get_api_key(),
                     raw = FALSE,
                     message = TRUE) {
+  
+  ###  make the R checker happy
+  hour <- year <- mon <- mday <- hr <- mn <- tz <- NULL
+  
   parsed_req <- wunderground_request(
     request_type = "history",
     location = location,
@@ -54,13 +58,12 @@ history <- function(location,
   suffix <- ifelse(use_metric, "m", "i")
   df <- lapply(hist$observations, function(x) {
     list(
-      date = as.POSIXct(
-        paste0(
-          x$date$year, "-", x$date$mon, "-",
-          x$date$mday, " ", x$date$hour, ":", x$date$min
-        ),
-        tz = x$date$tzname
-      ),
+      year = x$date$year,
+      mon = x$date$mon,
+      mday = x$date$mday, 
+      hour = x$date$hour,
+      min = x$date$min,
+      tz = x$date$tzname,
       temp = measurement_exists(x[[paste0("temp",
                                           suffix)]]),
       dew_pt = measurement_exists(x[[paste0("dewpt",
@@ -96,11 +99,12 @@ history <- function(location,
       tornado = measurement_exists(x$tornado)
     )
   })
-
+  df <- encode_NA(dplyr::bind_rows(lapply(df, dplyr::as_tibble)))
   if (length(df) > 0) {
-    encode_NA(
-      dplyr::bind_rows(lapply(df, dplyr::as_tibble))
-    )
+    df$date <- dst_POSIXct(y=df$year,m=df$mon,d=df$mday,
+                           hr=df$hour,mn=df$min,sec="00",tz=df$tz)
+    df <- df[,c("date",setdiff(names(df),"date"))]
+    return(dplyr::select(df,-year,-mon,-mday,-hour,-min,-tz))
   } else {
     return(NULL)
   }
