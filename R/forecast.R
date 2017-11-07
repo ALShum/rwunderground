@@ -52,32 +52,32 @@ forecast3day <- function(location,
   df <- lapply(fcast, function(x) {
     data.frame(
       date = as.POSIXct(as.numeric(x$date$epoch), origin = "1970-01-01", tz = x$date$tz_long),
-      temp_high = as.numeric(x$high[[tempCol]]),
-      temp_low = as.numeric(x$low[[tempCol]]),
-      cond = x$conditions, ## multiple conditions unhandled
-      p_precip = x$pop,
-      rain_allday = x$qpf_allday[[amtCol]],
-      rain_day = ifelse(is.null(x$qpf_day[[amtCol]]),
-        NA,
-        x$qpf_day[[amtCol]]
-      ),
-      rain_night = x$qpf_night[[amtCol]],
-      snow_allday = x$snow_allday[[amtCol2]],
-      snow_day = ifelse(is.null(x$snow_day[[amtCol2]]),
-        NA,
-        x$snow_day[[amtCol2]]
-      ),
-      snow_night = x$snow_night[[amtCol2]],
-      max_wind = paste(x$maxwind[[spdCol]], x$maxwind$dir, sep = " "),
-      ave_wind = paste(x$avewind[[spdCol]], x$avewind$dir, sep = " "),
-      max_humid = x$maxhumidity,
-      min_humid = x$minhumidity,
-      ave_humidity = x$avehumidity,
+      temp_high = measurement_exists(as.numeric(x$high[[tempCol]])),
+      temp_low = measurement_exists(as.numeric(x$low[[tempCol]])),
+      cond = measurement_exists(x$conditions, class = "character"), ## multiple conditions unhandled
+      p_precip = measurement_exists(x$pop),
+      rain_allday = measurement_exists(x$qpf_allday[[amtCol]]),
+      rain_day = measurement_exists(x$qpf_day[[amtCol]]),
+      rain_night = measurement_exists(x$qpf_night[[amtCol]]),
+      snow_allday = measurement_exists(x$snow_allday[[amtCol2]]),
+      snow_day = measurement_exists(x$snow_day[[amtCol2]]),
+      snow_night = measurement_exists(x$snow_night[[amtCol2]]),
+      max_wind = measurement_exists(paste(x$maxwind[[spdCol]], x$maxwind$dir, sep = " "), class = "character"),
+      ave_wind = measurement_exists(paste(x$avewind[[spdCol]], x$avewind$dir, sep = " "), class = "character"),
+      max_humid = measurement_exists(x$maxhumidity),
+      min_humid = measurement_exists(x$minhumidity),
+      ave_humidity = measurement_exists(x$avehumidity),
       stringsAsFactors = FALSE
     )
   })
-
-  dplyr::tbl_df(dplyr::bind_rows(df))
+  
+  df <- encode_NA(dplyr::bind_rows(lapply(df, dplyr::as_tibble)))
+  
+  if (length(df) > 0) {
+    return(df)
+  } else {
+    return(NULL)
+  }
 }
 
 #' Forecast for the next 10 days.
@@ -134,30 +134,30 @@ forecast10day <- function(location,
   df <- lapply(fcast, function(x) {
     data.frame(
       date = as.POSIXct(as.numeric(x$date$epoch), origin = "1970-01-01", tz = x$date$tz_long),
-      temp_high = as.numeric(x$high[[tempCol]]),
-      temp_low = as.numeric(x$low[[tempCol]]),
-      cond = x$conditions, ## multiple conditions unhandled
-      p_precip = x$pop,
-      rain_allday = x$qpf_allday[[amtCol]],
-      rain_day = ifelse(is.null(x$qpf_day[[amtCol]]),
-        NA,
-        x$qpf_day[[amtCol]]
-      ),
-      rain_night = x$qpf_night[[amtCol]],
-      snow_allday = x$snow_allday[[amtCol2]],
-      snow_day = ifelse(is.null(x$snow_day[[amtCol2]]),
-        NA,
-        x$snow_day[[amtCol2]]
-      ),
-      snow_night = x$snow_night[[amtCol2]],
-      max_wind = paste(x$maxwind[[spdCol]], x$maxwind$dir, sep = " "),
-      ave_wind = paste(x$avewind[[spdCol]], x$avewind$dir, sep = " "),
-      max_humid = x$maxhumidity,
-      min_humid = x$minhumidity,
-      ave_humidity = x$avehumidity,
+      temp_high = measurement_exists(as.numeric(x$high[[tempCol]])),
+      temp_low = measurement_exists(as.numeric(x$low[[tempCol]])),
+      cond = measurement_exists(x$conditions, class = "character"), ## multiple conditions unhandled
+      p_precip = measurement_exists(x$pop),
+      rain_allday = measurement_exists(x$qpf_allday[[amtCol]]),
+      rain_day = measurement_exists(x$qpf_day[[amtCol]]),
+      rain_night = measurement_exists(x$qpf_night[[amtCol]]),
+      snow_allday = measurement_exists(x$snow_allday[[amtCol2]]),
+      snow_day = measurement_exists(x$snow_day[[amtCol2]]),
+      snow_night = measurement_exists(x$snow_night[[amtCol2]]),
+      max_wind = measurement_exists(paste(x$maxwind[[spdCol]], x$maxwind$dir, sep = " "), class = "character"),
+      ave_wind = measurement_exists(paste(x$avewind[[spdCol]], x$avewind$dir, sep = " "), class = "character"),
+      max_humid = measurement_exists(x$maxhumidity),
+      min_humid = measurement_exists(x$minhumidity),
+      ave_humidity = measurement_exists(x$avehumidity),
       stringsAsFactors = FALSE
     )
   })
 
-  dplyr::tbl_df(dplyr::bind_rows(df))
+  df <- encode_NA(dplyr::bind_rows(lapply(df, dplyr::as_tibble)))
+  
+  if (length(df) > 0) {
+    return(df)
+  } else {
+    return(NULL)
+  }
 }
