@@ -100,6 +100,12 @@ history <- function(location,
     )
   })
   df <- encode_NA(dplyr::bind_rows(lapply(df, dplyr::as_tibble)))
+  testdate <- paste0(df$year,df$mon,df$mday)
+  if (sum(testdate!=date)>0) {
+    print(paste0("dropping ",sum(testdate!=date),
+                   " returned observations not on ", date))
+    df <- df[testdate==date,]
+  }
   if (length(df) > 0) {
     df$date <- dst_POSIXct(y=df$year,m=df$mon,d=df$mday,
                            hr=df$hour,mn=df$min,sec="00",tz=df$tz)
