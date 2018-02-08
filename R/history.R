@@ -99,7 +99,7 @@ history <- function(location,
       tornado = measurement_exists(x$tornado)
     )
   })
-  df <- encode_NA(dplyr::bind_rows(lapply(df, dplyr::as_tibble)))
+  df <- encode_NA(dplyr::bind_rows(lapply(df, tibble::as_tibble)))
   testdate <- paste0(df$year,df$mon,df$mday)
   if (sum(testdate!=date)>0) {
     print(paste0("dropping ",sum(testdate!=date),

@@ -71,7 +71,7 @@ forecast3day <- function(location,
     )
   })
   
-  df <- encode_NA(dplyr::bind_rows(lapply(df, dplyr::as_tibble)))
+  df <- encode_NA(dplyr::bind_rows(lapply(df, tibble::as_tibble)))
   
   if (length(df) > 0) {
     return(df)
@@ -153,7 +153,7 @@ forecast10day <- function(location,
     )
   })
 
-  df <- encode_NA(dplyr::bind_rows(lapply(df, dplyr::as_tibble)))
+  df <- encode_NA(dplyr::bind_rows(lapply(df, tibble::as_tibble)))
   
   if (length(df) > 0) {
     return(df)

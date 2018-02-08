@@ -18,6 +18,7 @@ Imports:
 	httr,
 	dplyr,
 	countrycode,
-	lubridate
+	lubridate,
+	tibble
 LazyData: TRUE
 RoxygenNote: 6.0.1
