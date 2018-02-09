@@ -41,7 +41,7 @@ list_states <- function() {
 #' list_countries()
 #' }
 list_countries <- function() {
-  country_data <- countrycode::countrycode_data[, c("country.name.en", "iso2c", "region")]
+  country_data <- countrycode::codelist[, c("country.name.en", "iso2c", "region")]
   country_data <- dplyr::filter(country_data, !is.na(country_data$region))
 
   return(country_data)
