@@ -36,15 +36,21 @@ list_states <- function() {
 #'
 #' @return data.frame of valid country names with iso codes
 #' @export
+#' @importFrom utils packageVersion
 #' @examples
 #' \dontrun{
 #' list_countries()
 #' }
 list_countries <- function() {
-  country_data <- countrycode::codelist[, c("country.name.en", "iso2c", "region")]
-  country_data <- dplyr::filter(country_data, !is.na(country_data$region))
+    if (packageVersion("countrycode") > "0.19") {
+        country_data <- countrycode::codelist[, c("country.name.en", "iso2c", "region")]
+    } else {
+        country_data <- countrycode::countrycode_data[, c("country.name.en", "iso2c", "region")]
+    }
+    
+    country_data <- dplyr::filter(country_data, !is.na(country_data$region))
 
-  return(country_data)
+    return(country_data)
 }
 
 #' Lookup airport code (IATA and ICAO code).
