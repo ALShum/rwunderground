@@ -17,7 +17,7 @@ License: GPL (>= 2)
 Imports: 
 	httr,
 	dplyr,
-	countrycode (>= 1.0.0),
+	countrycode,
 	lubridate,
 	tibble
 LazyData: TRUE
