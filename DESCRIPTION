@@ -1,8 +1,8 @@
 Package: rwunderground
 Type: Package
 Title: R Interface to Weather Underground API
-Version: 0.1.7
-Date: 2017-11-11
+Version: 0.1.8
+Date: 2018-05-01
 Author: Alex Shum <alex@ALShum.com>
 Maintainer: Eric Hare <eric@omnianalytics.io>
 Description: Tools for getting historical weather information and forecasts 
